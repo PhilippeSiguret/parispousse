@@ -97,9 +97,7 @@
         Remove comment tags below to add a search box at the top of your pull-out menu.
       {% endcomment %}
 
-      {% comment %}
       {% include 'search-bar', search_btn_style: 'btn--secondary', search_bar_location: 'search-bar--drawer' %}
-      {% endcomment %}
 
       <!-- begin mobile-nav -->
       <ul class="mobile-nav">
@@ -208,15 +206,16 @@
                 </button>
               </div>
             </div>
-            <div class="grid__item large--one-third medium-down--one-half">
+            <div class="grid__item large--one-sixth medium-down--hide"></div>
+            <div class="grid__item large--two-thirds medium-down--one-half">
               {% comment %}
                 Use the uploaded logo from theme settings if enabled.
                 Site name gets precedence with H1 tag on homepage, div on other pages.
               {% endcomment %}
               {% if template == 'index' %}
-                <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                <h1 class="site-header__logo large--center" itemscope itemtype="http://schema.org/Organization">
               {% else %}
-                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                <div class="h1 site-header__logo large--center" itemscope itemtype="http://schema.org/Organization">
               {% endif %}
                 {% if settings.logo_use_image %}
                   {% comment %}
@@ -239,8 +238,9 @@
               {% else %}
                 </div>
               {% endif %}
+              </h1>
             </div>
-            <div class="grid__item large--two-thirds large--text-right medium-down--hide">
+            <div class="grid__item large--one-sixth large--text-right medium-down--hide">
               {% comment %}
                 List out your main-menu linklist (default)
 
@@ -256,7 +256,68 @@
                     <span class="fallback-text">{{ 'general.drawers.navigation' | t }}</span>
                   </button>
                 </li>
-                {% for link in linklists.main-menu.links %}
+                {% if shop.customer_accounts_enabled %}
+                  <li class="site-nav__item site-nav__expanded-item">
+                    <a class="site-nav__link site-nav__link--icon" href="/account">
+                      <span class="icon-fallback-text">
+                        <span class="icon icon-customer" aria-hidden="true"></span>
+                        <span class="fallback-text">
+                          {% if customer %}
+                            {{ 'layout.customer.account' | t }}
+                          {% else %}
+                            {{ 'layout.customer.log_in' | t }}
+                          {% endif %}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                {% endif %}
+
+                {% comment %}
+                Uncomment code below to add a search icon
+
+                Change search_modal to true if you'd prefer the search icon
+                to toggle a modal ('popup') instead of linking to the search page.
+                {% endcomment %}
+
+                {% assign search_modal = true %}
+                <li class="site-nav__item">
+                  <a href="/search" class="site-nav__link site-nav__link--icon{% if search_modal %} js-toggle-search-modal{% endif %}" data-mfp-src="#SearchModal">
+                    <span class="icon-fallback-text">
+                      <span class="icon icon-search" aria-hidden="true"></span>
+                      <span class="fallback-text">{{ 'general.search.title' | t }}</span>
+                    </span>
+                  </a>
+                </li>
+
+                <li class="site-nav__item">
+                  <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-right" aria-controls="CartDrawer">
+                    <span class="icon-fallback-text">
+                      <span class="icon icon-cart" aria-hidden="true"></span>
+                      <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                    </span>
+                    <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                  </a>
+                </li>
+
+              </ul>
+              <!-- //site-nav -->
+            </div>
+            <div class="grid__item large--hide one-quarter">
+              <div class="site-nav--mobile text-right">
+                <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-cart" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                </a>
+              </div>
+            </div>
+                   </div>
+   <div class="grid--full grid--table">
+            <div class="grid__item medium-down--hide text-center" style="border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6;">
+              {% for link in linklists.main-menu.links %}
                   {% comment %}
                     Create a dropdown menu by naming a linklist the same as a link in the parent nav
 
@@ -284,68 +345,8 @@
                     </li>
                   {% endif %}
                 {% endfor %}
-
-                {% if shop.customer_accounts_enabled %}
-                  <li class="site-nav__item site-nav__expanded-item">
-                    <a class="site-nav__link site-nav__link--icon" href="/account">
-                      <span class="icon-fallback-text">
-                        <span class="icon icon-customer" aria-hidden="true"></span>
-                        <span class="fallback-text">
-                          {% if customer %}
-                            {{ 'layout.customer.account' | t }}
-                          {% else %}
-                            {{ 'layout.customer.log_in' | t }}
-                          {% endif %}
-                        </span>
-                      </span>
-                    </a>
-                  </li>
-                {% endif %}
-
-                {% comment %}
-                Uncomment code below to add a search icon
-
-                Change search_modal to true if you'd prefer the search icon
-                to toggle a modal ('popup') instead of linking to the search page.
-                {% endcomment %}
-
-                {% comment %}
-                {% assign search_modal = false %}
-                <li class="site-nav__item">
-                  <a href="/search" class="site-nav__link site-nav__link--icon{% if search_modal %} js-toggle-search-modal{% endif %}" data-mfp-src="#SearchModal">
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-search" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ 'general.search.title' | t }}</span>
-                    </span>
-                  </a>
-                </li>
-                {% endcomment %}
-
-                <li class="site-nav__item">
-                  <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-right" aria-controls="CartDrawer">
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-cart" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                    </span>
-                    <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
-                  </a>
-                </li>
-
-              </ul>
-              <!-- //site-nav -->
             </div>
-            <div class="grid__item large--hide one-quarter">
-              <div class="site-nav--mobile text-right">
-                <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">
-                  <span class="icon-fallback-text">
-                    <span class="icon icon-cart" aria-hidden="true"></span>
-                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                  </span>
-                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
-                </a>
-              </div>
             </div>
-          </div>
 
           {% comment %}
             Remove comment tags below to add a search box to your header.
