@@ -1352,9 +1352,14 @@ a {
 .text-link {
   color: $colorLink;
 
+
   &:hover {
     color: $colorLinkHover;
   }
+}
+
+#home-products .text-link {
+    border-bottom: none;
 }
 
 .return-link {
@@ -2835,6 +2840,10 @@ button.mfp-arrow {
     opacity: 0.9;
     @include transition(opacity 0.15s ease-in);
 
+
+
+
+
     /*================ Remove hover in IE8 and below ================*/
     .lt-ie9 & {
       @include transform('none');
@@ -2882,6 +2891,10 @@ button.mfp-arrow {
 .grid-product__title {
   @include bodyFontItalic;
   font-size: em(floor($baseFontSize * 1.25));  //20px based on 16px base font size
+}
+
+#home-products a {
+  color: #000;
 }
 
 .grid-product__vendor {
