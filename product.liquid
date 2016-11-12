@@ -22,13 +22,17 @@
         {% comment %}
           Display rest of product images, not repeating the featured one
         {% endcomment %}
-        {% for image in product.images %}
-          {% unless image contains featured_image %}
-            <div class="product-single__photo-wrapper">
-              <img class="product-single__photo" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
-            </div>
-          {% endunless %}
-        {% endfor %}
+          <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
+              {% for image in product.images %}
+                {% unless image contains featured_image %}
+                  <li class="grid__item one-quarter medium-down--one-third">
+                    <div class="product-single__photo-wrapper">
+                      <img class="product-single__photo" src="{{ image.src | img_url: 'small' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+                    </div>
+                  </li>
+                {% endunless %}
+              {% endfor %}
+          </ul>
       </div>
     </div>
 
@@ -164,3 +168,6 @@
 </script>
 
 {% include 'related-products' %}
+
+
+
