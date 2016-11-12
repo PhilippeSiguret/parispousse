@@ -54,17 +54,15 @@
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
 
-
-  <!-- Custom Code → Philippe Siguret  ================================================== -->
-   <!-- Get SmartLook ================================================== -->
-        <script type="text/javascript">
-            window.smartlook||(function(d) {
-            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-            c.charset='utf-8';c.src='//rec.smartlook.com/recorder.js';h.appendChild(c);
-            })(document);
-            smartlook('init', '02c53ec9d65d70e69ab5c17a8b8d38d2118f945b');
-        </script>
+  <!-- Get SmartLook ================================================== -->
+    <script type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='//rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', '02c53ec9d65d70e69ab5c17a8b8d38d2118f945b');
+    </script>
 
 
   <!-- Boostrap ================================================== -->
@@ -72,6 +70,10 @@
     {{ 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js' | script_tag }}
     {{ 'https://cdn.rawgit.com/HubSpot/tether/master/dist/js/tether.min.js' | script_tag }}
     {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js' | script_tag }}
+
+  <!-- FontAwesome ================================================== -->
+    {{ 'https://use.fontawesome.com/9136507be2.js' | script_tag }}
+
 
 </head>
 
@@ -467,20 +469,26 @@
             {% assign num_footer_columns = num_footer_columns | plus: 1 %}
           {% endif %}
 
-          {% case num_footer_columns %}
-            {% when 0 %}
-            {% when 1 %}
-              {% assign footer_column_width = '' %}
-            {% when 2 %}
-              {% assign footer_column_width = 'one-half small--one-whole' %}
-            {% when 3 %}
-              {% assign footer_column_width = 'one-third small--one-whole' %}
-            {% when 4 %}
-              {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
-          {% endcase %}
+          {% comment %}
+          To activate auto footer colum, uncomment the next section
+          {% endcomment %}
+          {% comment %}
+            {% case num_footer_columns %}
+              {% when 0 %}
+              {% when 1 %}
+                {% assign footer_column_width = '' %}
+              {% when 2 %}
+                {% assign footer_column_width = 'one-half small--one-whole' %}
+              {% when 3 %}
+                {% assign footer_column_width = 'one-third small--one-whole' %}
+              {% when 4 %}
+                {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+            {% endcase %}
+          {% endcomment %}
 
           {% if linklists.footer.links.size > 0 %}
-            <div class="grid__item {{ footer_column_width }}">
+            <div class="grid__item one-quarter small--one-whole">
+              <h4>A propos</h4>
               <ul class="no-bullets site-footer__linklist">
                 {% for link in linklists.footer.links %}
 
@@ -489,20 +497,26 @@
           {% endcomment %}
           {% if extra_footer_linklist_column and forloop.index == footer_linklist_split %}
               </ul>
+
             </div>
-            <div class="grid__item {{ footer_column_width }}">
+            <div class="grid__item one-quarter small--one-whole">
+            <h4>A propos</h4>
               <ul class="no-bullets site-footer__linklist">
           {% endif %}
 
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
 
                 {% endfor %}
+                  <li>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</li>
+                  <li><i class="fa fa-lock" aria-hidden="true"></i> Paiements sécurisés</li>
+
               </ul>
             </div>
           {% endif %}
-
           {% if footer_social_enable %}
-            <div class="grid__item {{ footer_column_width }}">
+            <div class="grid__item one-quarter small--one-whole">
+              <h4>Suivez-nous</h4>
+                <p>Ajoutez-nous sur les réseaux sociaux pour faire respirer vos fils d'actus et mieux nous connaître</p>
                 <ul class="no-bullets social-icons">
                   {% if settings.social_facebook_link != blank %}
                     <li>
@@ -580,20 +594,34 @@
             </div>
           {% endif %}
 
-          <div class="grid__item {{ footer_column_width }} {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
-            <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}<br>{{ powered_by_link }}</p>
-            {% unless shop.enabled_payment_types == empty %}
-              <ul class="inline-list payment-icons">
-                {% for type in shop.enabled_payment_types %}
-                  <li>
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-{{ type }}" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
-                    </span>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endunless %}
+          <div class="grid__item one-half small--one-whole {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
+
+
+          <h4>Adoptons le design vivant</h4>
+          <p>Paris Pousse c'est le premier marché en ligne proposant une gamme poussée de plantes, pots et autres produits design qui touchent au végétal.
+          Notre équipe sélectionne  des potiers, des horticulteurs et des fabricants de confiance qui sortent des standards visibles dans votre jardinerie.
+          Ici, vous trouverez autant de pots en terre naturelle, que de légères suspensions, en passant par des végétaux “jungle” ou des terrariums.
+          En constante évolution, nous n'hésitons pas à nous nourrir des tendances scandinaves et américaines, tout en gardant notre touche et savoir faire “français”.
+          Paris Pousse poursuit un objectif simple : rendre les plantes et pots design abordables et donc accessible à tous.
+          </p>
+            {% comment %}
+              Delete the "comments" tags in order to show the payment stuff
+            {% endcomment %}
+
+            {% comment %}
+                {% unless shop.enabled_payment_types == empty %}
+                  <ul class="inline-list payment-icons">
+                    {% for type in shop.enabled_payment_types %}
+                      <li>
+                        <span class="icon-fallback-text">
+                          <span class="icon icon-{{ type }}" aria-hidden="true"></span>
+                          <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
+                        </span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endunless %}
+            {% endcomment %}
           </div>
         </div>
 
@@ -616,6 +644,15 @@
         timber.resetPasswordSuccess();
       });
     {% endif %}
+  </script>
+  {% comment %}
+      Popover Activation
+  {% endcomment %}
+
+  <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
   </script>
 
   {% if template contains 'index' and hero_enabled %}
