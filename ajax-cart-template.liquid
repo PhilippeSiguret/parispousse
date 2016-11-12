@@ -73,6 +73,13 @@
             <option value="17 décembre"{% if cart.attributes["A quelle date préférez-vous être livré?"] == "17 décembre" %} selected{% endif %}>17 décembre</option>
           </select>
         </p>
+        <p class="cart-attribute__field">
+            <label>Doit-on passer par un escalier pour accéder jusqu'à chez vous ? </label><br>
+            <select required class="required" id="doit-on-passer-par-un-escalier-pour-acceder-jusqua-chez-vous" name="attributes[Doit-on passer par un escalier pour accéder jusqu'à chez vous ? ]">
+              <option value="Oui"{% if cart.attributes["Doit-on passer par un escalier pour accéder jusqu'à chez vous ? "] == "Oui" %} selected{% endif %}>Oui</option>
+              <option value="Non"{% if cart.attributes["Doit-on passer par un escalier pour accéder jusqu'à chez vous ? "] == "Non" %} selected{% endif %}>Non</option>
+            </select>
+        </p>
       </div>
       <div class="ajaxcart__footer ajaxcart__footer--fixed">
         <div class="grid--full">
