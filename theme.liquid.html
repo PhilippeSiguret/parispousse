@@ -225,8 +225,10 @@
                   {% endcomment %}
                   {% assign logo_inverted_url = 'logo-inverted.png' | asset_url %}
                   <a href="/" itemprop="url" class="site-header__logo-link{% if settings.logo_use_inverted %} logo--has-inverted{% endif %}">
-                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="small--hide">
+                    <img src="https://cdn.shopify.com/s/files/1/1063/7402/t/2/assets/checkout_logo.png?18408082231618623106" alt="{{ shop.name }}" itemprop="logo" class="small--show medium--hide large--hide" style="max-width: 140px;">
                   </a>
+
                   {% if settings.logo_use_inverted %}
                     <a href="/" itemprop="url" class="logo--inverted">
                       <img src="{{ 'logo-inverted.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
@@ -251,13 +253,6 @@
               {% endcomment %}
               <!-- begin site-nav -->
               <ul class="site-nav" id="AccessibleNav">
-                <li class="site-nav__item site-nav--compress__menu">
-                  <button type="button" class="icon-fallback-text site-nav__link site-nav__link--icon js-drawer-open-left" aria-controls="NavDrawer">
-                    <span style="font-size: 19px;"> Menu   </span>
-                    <span class="icon icon-hamburger" aria-hidden="true"></span>
-                    <span class="fallback-text">{{ 'general.drawers.navigation' | t }}</span>
-                  </button>
-                </li>
                 {% if shop.customer_accounts_enabled %}
                   <li class="site-nav__item site-nav__expanded-item">
                     <a class="site-nav__link site-nav__link--icon" href="/account">
