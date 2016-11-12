@@ -16,7 +16,6 @@
 
       <form action="/cart" method="post" novalidate class="cart">
 
-
         <div class="cart__row medium-down--hide cart__header-labels">
           <div class="grid--full">
             <div class="grid__item large--two-fifths push--large--three-fifths">
@@ -148,30 +147,9 @@
                   </label>
               </p>
               <input type="submit" name="update" class="btn--secondary update-cart" value="{{ 'cart.general.update' | t }}">
-
-              {% comment %}
-              Voici le code à mettre pour réactiver la boutique
-
-                 <button type="submit" name="checkout" class="btn cart__checkout">
+              <button type="submit" name="checkout" class="btn cart__checkout">
                 {{ 'cart.general.checkout' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span>
               </button>
-
-
-              {% endcomment %}
-
-              <a class="typeform-share button"  style="
-    margin-left: 10%;
-    width: 81%;
-    text-align: center;
-    text-transform: uppercase;
-" href="https://philippesiguret.typeform.com/to/xSE2D1" data-mode="1" target="_blank">Réserver</a>
-<script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.rel='stylesheet';qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()</script>
-
-
-
-
-
-
               {% if additional_checkout_buttons %}
                 <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
               {% endif %}
@@ -179,7 +157,6 @@
           </div>
 
         </div>
-
       </form>
 
     {% else %}
