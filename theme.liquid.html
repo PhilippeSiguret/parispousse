@@ -364,44 +364,45 @@
         {{ content_for_layout }}
       </div>
     </main>
-
-    {% if settings.footer_newsletter_enable %}
-      <div class="newsletter">
-        <div class="wrapper">
-          {% comment %}
-
-            MailChimp is the go-to newsletter service for Shopify.
-            Use the link below to find your MailChimp "form action"
-            and insert it in your site settings.
-
-            MailChimp newsletter integration and requirement:
-             - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
-
-          {% endcomment %}
-          {% if settings.newsletter_form_action != blank %}
-            {% assign form_action = settings.newsletter_form_action %}
-          {% else %}
-            {% assign form_action = '#' %}
-          {% endif %}
-          <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
-            <label for="Email" class="newsletter__label hidden-label">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
-            <div class="input-group">
-              <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
-              <span class="input-group-btn">
-                <button type="submit" class="btn newsletter__submit" name="subscribe" id="Subscribe">
-                  <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
-                  <span class="newsletter__submit-text--small">
-                    <span class="icon icon-arrow-right" aria-hidden="true"></span>
-                  </span>
-                </button>
-              </span>
+ {% if settings.footer_newsletter_enable %}
+<div class="newsletter">
+    <div class="wrapper newsletter-wrapper" style="border-top: 1px solid #E6E6E6; padding-top: 22px; border-bottom: 1px solid #E6E6E6; padding-bottom: 20px;">
+        <div class="grid">
+            <div class="grid__item large--one-half text-center">
+              <div class="newsletter-suscribe">
+                  {% comment %} https://www.parispousse.fr/products_preview?cache=false&preview_key=f8ad1adf8a0971a94b27a50d433fd17c MailChimp is the go-to newsletter service for Shopify. Use the link below to find your MailChimp "form action" and insert it in your site settings. MailChimp newsletter integration and requirement: - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action {% endcomment %} {% if settings.newsletter_form_action != blank %} {% assign form_action = settings.newsletter_form_action %} {% else %} {% assign form_action = '#' %} {% endif %}
+                  <h4>Inscrivez-vous à notre newsletter et gagnez 10€</h4>
+                  <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+                      <label for="Email" class="newsletter__label hidden-label">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                      <div class="input-group">
+                          <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+                          <span class="input-group-btn">
+                              <button type="submit" class="btn newsletter__submit" name="subscribe" id="Subscribe">
+                                <span class="newsletter__submit-text--large">M'inscrire</span>
+                          <span class="newsletter__submit-text--small">
+                                  <span class="icon icon-arrow-right" aria-hidden="true"></span>
+                          </span>
+                          </button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
             </div>
-          </form>
+            <div class="grid__item large--one-half text-center">
+              <div class="social-suscribe">
+                  <h4 style="padding-bottom: 10px;">Rejoignez la famille Paris Pousse</h4>
+                  <a href="https://www.facebook.com/parispousse/" title="Paris Pousse sur Facebook" target="_blank" style="font-size: 1.5em; padding-right: 17px;">
+                      <span class="icon icon-facebook" aria-hidden="true"></span></a>
+                  <a href="https://www.instagram.com/parispousse/" title="Paris Pousse sur Instagram" target="_blank" style="font-size: 1.5em;">
+                      <span class="icon icon-instagram" aria-hidden="true"></span></a>
+              </div>
+            </div>
         </div>
-      </div>
-    {% endif %}
+    </div>
+</div>
+{% endif %}
 
-    <hr class="hr--large">
+
     <footer class="site-footer small--text-center" role="contentinfo">
       <div class="wrapper">
 
@@ -508,25 +509,8 @@
               </ul>
             </div>
           {% endif %}
-          {% if footer_social_enable %}
-            <div class="grid__item one-quarter small--one-whole">
-                <h4>Rejoindre la famille Paris Pousse</h4>
-                <ul class="no-bullets social-icons">
-                    <li>
-                        <a href="https://www.facebook.com/parispousse/" title="Paris Pousse sur Facebook" target="_blank">
-                            <span class="icon icon-facebook" aria-hidden="true"></span> Facebook
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/parispousse/" title="Paris Pousse sur Instagram" target="_blank">
-                            <span class="icon icon-instagram" aria-hidden="true"></span> Instagram
-                        </a>
-                    </li>
-                </ul>
-            </div>
-          {% endif %}
 
-          <div class="grid__item one-half small--one-whole {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
+          <div class="grid__item three-quarters small--one-whole {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
 
 
           <h4>Adoptons le design vivant</h4>

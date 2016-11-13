@@ -245,6 +245,7 @@ $colorLinkHover: $colorPrimary;
 
 // Text colors
 $colorTextBody: {{ settings.color_body_text }};
+$colorTextBodySoft: #E6E6E6;
 
 // Backgrounds
 $colorBody: {{ settings.color_body_bg }};
@@ -1135,8 +1136,19 @@ input[type="image"] {
 }
 
 /*================ Newsletter area ================*/
+
+.newsletter-suscribe {
+  border-right: 1px solid #E6E6E6;
+  padding-right: 21px;
+  input {
+    border: 1px solid #E6E6E6;
+  }
+
+
+
+}
 .newsletter {
-  background-color: $colorNewsletter;
+  background-color: $colorBody;
   padding: $gutter 0;
   margin-top: $gutter * 2;
 
@@ -1162,22 +1174,22 @@ input[type="image"] {
     appearance: textfield;
 
     &::-webkit-input-placeholder { /* WebKit browsers */
-      color: $colorTextBody;
+      color: $colorTextBodySoft;
       opacity: 1;
     }
 
     &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color: $colorTextBody;
+      color: $colorTextBodySoft;
       opacity:  1;
     }
 
     &::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color: $colorTextBody;
+      color: $colorTextBodySoft;
       opacity:  1;
     }
 
     &:-ms-input-placeholder { /* Internet Explorer 10+ */
-      color: $colorTextBody;
+      color: $colorTextBodySoft;
     }
 
     @include at-query($min, $postSmall) {
