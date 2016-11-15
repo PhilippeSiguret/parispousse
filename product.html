@@ -8,6 +8,7 @@
   {% assign current_variant = product.selected_or_first_available_variant %}
 
   <div class="grid product-single">
+  <div class="small--hide">
     <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center">
       <div class="product-single__photos">
         {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
@@ -15,24 +16,27 @@
         {% comment %}
           Display current variant image, or default first
         {% endcomment %}
-        <div class="product-single__photo-wrapper">
+        <div class="product-single__photo-wrapper" id="main-product-image">
           <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}"{% endif %} alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
         </div>
-
         {% comment %}
           Display rest of product images, not repeating the featured one
         {% endcomment %}
-          <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
-              {% for image in product.images %}
-                {% unless image contains featured_image %}
-                  <li class="grid__item one-quarter medium-down--one-third">
-                    <div class="product-single__photo-wrapper">
-                      <img class="product-single__photo" src="{{ image.src | img_url: 'small' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
-                    </div>
-                  </li>
-                {% endunless %}
-              {% endfor %}
-          </ul>
+
+        {% for image in product.images %}
+            <div class="product-single__photo-wrapper" id="thumbnails">
+              <a href="{{ image | product_img_url: 'large' }}" title="{{ product.title }}">
+                <img class="product-single__photo" src="{{ image.src | img_url: 'small' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+              </a>
+            </div>
+        {% endfor %}
+        {% for image in product.images %}
+            <div class="product-single__photo-wrapper" id="thumbnails">
+              <a href="{{ image | product_img_url: 'large' }}" title="{{ product.title }}">
+                <img class="product-single__photo" src="{{ image.src | img_url: 'small' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+              </a>
+            </div>
+        {% endfor %}
       </div>
     </div>
 
@@ -107,6 +111,27 @@
       </div>
       </div>
   </div>
+  <div class="medium--hide large--hide">
+    <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center">
+        <div class="product-single__photos">
+            {% assign featured_image = current_variant.featured_image | default: product.featured_image %} {% comment %} Display current variant image, or default first {% endcomment %}
+            <div class="product-single__photo-wrapper">
+                <img class="product-single__photo large--hide medium--hide" id="ProductPhotoImg" src="{{ featured_image | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}" {% endif %} alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+            </div>
+            {% comment %} Display rest of product images, not repeating the featured one {% endcomment %} {% for image in product.images %}
+            <div class="grid">
+
+             {% unless image contains featured_image %}
+            <div class="product-single__photo-wrapper">
+                <img class="product-single__photo large--hide medium--hide" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}" {% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+            </div>
+            {% endunless %} {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+
 
   {% if collection %}
     <hr class="hr--clear">
@@ -167,7 +192,21 @@
   });
 </script>
 
+<script type="text/javascript" >
+  $('#thumbnails a').click(function() {
+  var newImage = $(this).attr('href');
+  $( 'div#main-product-image img' ).attr({ src: newImage });
+  return false;
+  });
+</script>
+
+<style>
+  #thumbnails {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+</style>
+
 {% include 'related-products' %}
-
-
-
