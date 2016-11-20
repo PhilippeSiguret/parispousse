@@ -2410,6 +2410,7 @@ $slick-opacity-not-active: 0.25;
       max-height: $drawerHeaderHeight - ($gutter / 2); // account for border-box height
       margin-top: $gutter / 3;
       margin-bottom: $gutter / 3;
+      max-width: 100%;
     }
   }
 }
