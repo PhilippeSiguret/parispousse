@@ -811,12 +811,15 @@ tr:first-child td {
     bottom: 0;
     left: -15px;
     right: 15px;
-    border-bottom: 1px solid $colorBorder;
+    background-color: #fff;
+
   }
 
   &:first-child:after {
     left: 15px;
     right: -15px;
+    background-color: #fff;
+
   }
 }
 
@@ -2902,7 +2905,7 @@ button.mfp-arrow {
 
 .grid-product__title {
   @include bodyFontItalic;
-  font-size: em(floor($baseFontSize * 1.25));  //20px based on 16px base font size
+  font-size: 1em;  //20px based on 16px base font size
 }
 
 #home-products a {
@@ -2918,7 +2921,7 @@ button.mfp-arrow {
 
 .grid-product__price {
   @include accentFontStack;
-  font-size: em(14px);
+  font-size: 0.775em;
 }
 
 .grid-product__price-min {
