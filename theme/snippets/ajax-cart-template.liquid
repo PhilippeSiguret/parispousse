@@ -57,12 +57,22 @@
           </div>
         </div>
         {{/items}}
-
-        {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
+        <p class="text-center ajaxcart__note">Ardoises, galets, vaporisateur, engrais, etc.</p>
+        <a href="/collections/accessoires-1">
+            <div class="btn--secondary btn--full">
+              Compléter mon achat →
+            </div>
+        </a>
+        {% endraw %}
+        {% if settings.cart_notes_enable %}{% raw %}
+          <br>
+          <br>
+          <br>
           <div>
+          <div class="text-center">
             <label for="CartSpecialInstructions" class="ajaxcart__note">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
             <textarea name="note" class="input-full" id="CartSpecialInstructions">{{note}}</textarea>
-          </div>
+          </div></div>
         {% endraw %}{% endif %}{% raw %}
 
       </div>
