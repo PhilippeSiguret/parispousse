@@ -7,7 +7,7 @@
   and number of rows.
 {% endcomment %}
 
-{% assign number_of_related_products_per_row = 4 %}
+{% assign number_of_related_products_per_row = 3 %}
 {% assign number_of_rows = 1 %}
 
 {% comment %}
@@ -15,7 +15,8 @@
   Leave blank if you don't need one.
 {% endcomment %}
 
-{% assign heading = '' %}
+
+{% assign heading = 'Vous apprécieriez aussi' %}
 
 {% comment %}
   Set either or both to true, if you want
@@ -30,7 +31,7 @@
   Never pick related items from those.
 {% endcomment %}
 
-{% assign exclusions = 'frontpage,all' | split: ',' %}
+{% assign exclusions = 'frontpage,all,20' | split: ',' %}
 
 {% comment %}
   Looking for a relevant collection.
@@ -103,8 +104,10 @@
 
   {% unless related_items == blank %}
 
+
   <aside class="grid">
-    <div class="grid__item">
+  <hr class="hr--clear">
+      <div class="grid__item text-center">
       {% unless heading == blank %}
       <header class="section-header">
         <h2 class="section-header__title">{{ heading }}</h1>

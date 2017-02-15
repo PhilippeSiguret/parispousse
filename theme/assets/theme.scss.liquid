@@ -1,149 +1,11 @@
+
 /*============================================================================
-  Custom CSS by Philippe Siguret
+  Custom CSS is under the Shopify CSS for machine reading reasons
 ==============================================================================*/
-
-    /*================ Product V2   ================*/
-    /*===============================================*/
-
-.product-v2 {
-    #icone-line {
-      img {
-        max-height: 42px;
-        margin-left: -21px;
-        margin-top: -21px;
-        width: 42px;
-        height: 42px;
-      }
-    }
-    h1 {
-    text-align: center;
-    padding-top: -30px;
-    }
-    /*================ Composition   ================*/
-
-    h2 {
-    font-family: Open Sans;
-    text-transform: uppercase;
-    font-size: 22px;
-    }
-    h3 {
-    font-family: Open Sans;
-    text-transform: uppercase;
-    font-size: 18px;
-    }
-    .borderless {
-    border: none;
-    }
-    #pot, #livraison{
-    margin-top: 60px;
-    }
-    hr {
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0px;
-        width: 190px;
-        border-color: #D5D5D5;
-    }
-    .icones img{
-    max-height: 80px;
-    max-width: 40px;
-        }
-    table {
-     background-color: white;
-    }
-    .table > tbody > tr > td {
-     vertical-align: middle;
-    }
-
-    /*================ Product Box   ================*/
-
-    #product-box {
-        background-color: rgba(255,255,255,0.8);
-        width: 200px;
-        border: 1px solid #CCC;
-        position: absolute;
-        margin-top: 370px;
-        margin-left: 54%;
-        z-index: 55;
-        padding-top: 15px;
-        padding-bottom: 10px;
-    }
-
-    #AddToCart {
-        background-color: #1E824C;
-        width: 230px;
-        margin-left: -15px;
-    }
-
-    /*================ Architecte  ================*/
-
-    #architecte img {
-      border-radius: 50%;
-      max-width: 150px;
-    }
-
-    /*================ Product Slider  ================*/
-
-    #slider-products-v2 {
-      margin: 0px;
-      float: none;
-      display: block;
-      height: 495px;
-      position: relative;
-    }
-
-    #slider-products-v2 .carousel-indicators {
-        margin: 10px 0 0;
-        overflow: auto;
-        position: static;
-        text-align: left;
-        white-space: nowrap;
-        width: 100%;
-    }
-    #slider-products-v2 .carousel-indicators li {
-        background-color: transparent;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        display: inline-block;
-        height: auto;
-        margin: 0 !important;
-        width: auto;
-    }
-    #slider-products-v2 .carousel-indicators li img {
-        display: block;
-        opacity: 0.5;
-    }
-    #slider-products-v2 .carousel-indicators li.active img {
-        opacity: 1;
-    }
-    #slider-products-v2 .carousel-indicators li:hover img {
-        opacity: 0.75;
-    }
-    #slider-products-v2 .carousel-outer {
-        position: relative;
-    }
-
-    .hide-bullets {
-      list-style:none;
-      margin-top:30px;
-    }
-
-}
-
-/*================ Chatlio Widget  ================*/
-
-#chatlio-widget .chatlio-widget {
-  left: 30px;
-  right: inherit;
-}
-
-
 
 /*============================================================================
   Brooklyn by Shopify
 ==============================================================================*/
-
-
 
 /*================ Variables, theme settings, and Sass mixins from Timber ================*/
 /*============================================================================
@@ -3497,6 +3359,158 @@ button.mfp-arrow {
   .modern & {
     @include visuallyHidden;
   }
+}
+
+
+/*============================================================================
+  Custom CSS by Philippe Siguret
+==============================================================================*/
+
+
+ .newsletter {
+    padding-top: 0px;
+    margin-top: 0px;
+ }
+
+
+
+    /*================ Product V2   ================*/
+    /*===============================================*/
+
+.product-v2 {
+    #icone-line {
+      img {
+        max-height: 42px;
+        margin-left: -21px;
+        margin-top: -21px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+    h1 {
+    text-align: center;
+    padding-top: -30px;
+    }
+    /*================ Related Products   ================*/
+    .grid-product__image-link {
+        height: 150px;
+    }
+    /*================ Composition   ================*/
+
+    h2 {
+    font-family: Open Sans;
+    text-transform: uppercase;
+    font-size: 22px;
+    }
+    h3 {
+    font-family: Open Sans;
+    text-transform: uppercase;
+    font-size: 18px;
+    }
+    .borderless {
+    border: none;
+    }
+    #pot, #livraison{
+    margin-top: 60px;
+    }
+    hr {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+        width: 190px;
+        border-color: #D5D5D5;
+    }
+    .icones img{
+    max-height: 80px;
+    max-width: 40px;
+        }
+    table {
+     background-color: white;
+    }
+    .table > tbody > tr > td {
+     vertical-align: middle;
+    }
+
+    /*================ Product Box   ================*/
+
+    #product-box {
+        background-color: rgba(255,255,255,0.8);
+        width: 200px;
+        border: 1px solid #CCC;
+        position: absolute;
+        margin-top: 370px;
+        margin-left: 54%;
+        z-index: 55;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    #AddToCart {
+        background-color: #1E824C;
+        width: 230px;
+        margin-left: -15px;
+    }
+
+    /*================ Architecte  ================*/
+
+    #architecte img {
+      border-radius: 50%;
+      max-width: 150px;
+    }
+
+    /*================ Product Slider  ================*/
+
+    #slider-products-v2 {
+      margin: 0px;
+      float: none;
+      display: block;
+      height: 495px;
+      position: relative;
+    }
+
+    #slider-products-v2 .carousel-indicators {
+        margin: 10px 0 0;
+        overflow: auto;
+        position: static;
+        text-align: left;
+        white-space: nowrap;
+        width: 100%;
+    }
+    #slider-products-v2 .carousel-indicators li {
+        background-color: transparent;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+        display: inline-block;
+        height: auto;
+        margin: 0 !important;
+        width: auto;
+    }
+    #slider-products-v2 .carousel-indicators li img {
+        display: block;
+        opacity: 0.5;
+    }
+    #slider-products-v2 .carousel-indicators li.active img {
+        opacity: 1;
+    }
+    #slider-products-v2 .carousel-indicators li:hover img {
+        opacity: 0.75;
+    }
+    #slider-products-v2 .carousel-outer {
+        position: relative;
+    }
+
+    .hide-bullets {
+      list-style:none;
+      margin-top:30px;
+    }
+
+}
+
+/*================ Chatlio Widget  ================*/
+
+#chatlio-widget .chatlio-widget {
+  left: 30px;
+  right: inherit;
 }
 
 
