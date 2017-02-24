@@ -44,16 +44,21 @@
 
 /* Columns */
 .ais-page .ais-facets {
-  width: 25%;
+  width: 23%;
   float: left;
-  padding-right: 8px;
 }
 
 .ais-page .ais-block {
-  width: 75%;
+  width: 77%;
   float: right;
   padding-left: 8px;
 }
+
+.ais-menu--item div{
+  line-height: 0.5;
+}
+
+
 
 .ais-results-size-xs .ais-page .ais-facets,
 .ais-results-size-xs .ais-page .ais-block,
@@ -101,7 +106,7 @@
 
   margin-bottom: 16px;
 
-  color: #636363;
+  color: #000;
 }
 
 .ais-page .ais-facet a,
@@ -112,13 +117,10 @@
 }
 
 .ais-page .ais-facet--header {
-  padding: 6px 8px;
-
-  background: #f4f4f4;
-
+  padding: 10px 15px;
   font-size: 0.95em;
-  color: #757575;
   text-transform: uppercase;
+  box-shadow: 0px 14px 0px -13px #e0e0e0;
 }
 
 .ais-page .ais-facet--body {
@@ -290,7 +292,8 @@
   display: table;
   width: 100%;
 
-  border: 2px solid [[ colors.main ]];
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
 }
 
 .ais-page .ais-input--label {
@@ -482,12 +485,12 @@
   position: relative;
   float: left;
   margin: 8px 0 16px 0;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #fff;
   cursor: pointer;
 }
 
 .ais-page .ais-hit:hover {
-  border-color: [[ colors.main ]];
+  opacity: 0.8;
 }
 
 .ais-page .ais-hit--details * {
@@ -526,7 +529,7 @@
 }
 
 .ais-page .ais-hit--price-striked span {
-  color: [[ colors.main ]];
+  color: [[ colors.secondary ]];
 }
 
 .ais-page .ais-hit--price-discount {
@@ -574,12 +577,16 @@
   background-repeat: no-repeat;
 }
 
+.ais-hit--picture:hover{
+  background: url(https://cdn.shopify.com/s/files/1/1063/7402/files/test.png?2661308002490403543) no-repeat;
+  background-size: 100% 100%;
+}
+
 .ais-page .ais-results-as-list .ais-hit--details {
   margin-left: 160px; /* $img_size + 2 * $h_padding */
 }
 
 .ais-page .ais-results-as-block .ais-hit {
-  padding: 30px 25px; /* $v_padding $h_padding */
 
   text-align: center;
 }
@@ -587,13 +594,21 @@
 .ais-results-size-xs .ais-page .ais-results-as-block .ais-hit {
   width: 98%;
   margin-left: 2%;
+  height: 285px;
+  text-align: center;
 }
 
-.ais-results-size-sm .ais-page .ais-results-as-block .ais-hit,
+
 .ais-results-size-md .ais-page .ais-results-as-block .ais-hit {
-  width: 47.5%;
-  margin-left: 5%;
+  width: 33.33%;
+  height: 285px;
 }
+.ais-results-size-sm .ais-page .ais-results-as-block .ais-hit{
+  width: 50%;
+  height: 285px;
+
+}
+
 
 .ais-results-size-sm .ais-page .ais-results-as-block > div > div:nth-of-type(2n + 1) .ais-hit,
 .ais-results-size-md .ais-page .ais-results-as-block > div > div:nth-of-type(2n + 1) .ais-hit {
@@ -610,21 +625,15 @@
 }
 
 .ais-page .ais-results-as-block .ais-hit--picture {
-  position: absolute;
-  top: 30px; /* $v_padding */
-  left: 50%;
-  margin-left: -55px; /* -$img_size / 2 */
-
-  width: 110px; /* $img_size */
-  height: 110px; /* $img_size */
-
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  position: relative;
 }
 
 .ais-page .ais-results-as-block .ais-hit--details {
-  margin-top: 140px; /* $img_size + $v_padding */
+  margin-top: 0px; /* $img_size + $v_padding */
+  text-align: left;
+  position: absolute;
+  bottom: 0px;
+  max-width: 90%;
 }
 
 /* Pagination */

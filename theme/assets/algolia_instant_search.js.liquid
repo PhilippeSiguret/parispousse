@@ -113,7 +113,7 @@
     instant.search.addWidget(
       instantsearch.widgets.searchBox({
         container: '.ais-search-box-container',
-        placeholder: 'Search for products',
+        placeholder: 'Recherche',
         poweredBy: false
       })
     );
@@ -194,7 +194,7 @@
           body: 'ais-facet--body'
         },
         templates: {
-          header: 'Selected filters',
+          header: 'Filtres',
           item: instant.templates.currentItem
         },
         transformData: function (data) {
@@ -258,13 +258,15 @@
     });
 
     // Pagination
-    instant.search.addWidget(
-      instantsearch.widgets.pagination({
-        container: '.ais-pagination-container',
-        padding: 2,
-        maxPages: 20
-      })
-    );
+    {% comment %}
+          instant.search.addWidget(
+            instantsearch.widgets.pagination({
+              container: '.ais-pagination-container',
+              padding: 2,
+              maxPages: 20
+            })
+          );
+    {% endcomment %}
 
     // Main
     instant.search.start();
