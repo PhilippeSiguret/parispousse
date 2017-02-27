@@ -243,6 +243,21 @@
   <div id="PageContainer" class="is-moved-by-drawer">
 
     <div class="header-wrapper">
+
+
+{% comment %}
+<!-- .sub-header -->
+      <div class="sub-header grid">
+          <div class="grid__item large--one-half one-whole text-center message">
+                <a href="/pages/livraison"><i class="fa fa-bicycle" aria-hidden="true"></i> À Paris et en petite couronne (pour l'instant)
+          </div>
+          <div class="grid__item large--one-half one-whole text-center message">
+                <i class="fa fa-money" aria-hidden="true"></i> Livraison gratuite à partir de 80€</a>
+          </div>
+      </div>
+{% endcomment %}
+
+
       <header class="site-header" role="banner">
         <div class="wrapper">
           <div class="grid--full grid--table" style="border-bottom: 1px solid #E6E6E6;">
@@ -411,7 +426,7 @@
       </div>
     </main>
       {% if settings.footer_newsletter_enable %}
-          <div class="newsletter">
+          <div class="newsletter col-xs-12">
               <div class="wrapper newsletter-wrapper" style="border-top: 1px solid #E6E6E6; padding-top: 22px; border-bottom: 1px solid #E6E6E6; padding-bottom: 20px;">
                   <div class="grid">
                       <div class="grid__item large--one-half text-center">
