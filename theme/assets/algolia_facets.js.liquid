@@ -4,10 +4,10 @@
   var _ = algolia._;
 
   var TYPES_TO_WIDGET = {
-    slider: { name: 'rangeSlider', hasHeader: true, useDefault: true },
+    slider: { name: 'rangeSlider', useDefault: true },
     menu: { name: 'menu', params: { limit: 10 } },
-    conjunctive: { name: 'refinementList', params: { operator: 'and', limit: 10 }, hasHeader: true },
-    disjunctive: { name: 'refinementList', params: { operator: 'or', limit: 10 }, hasHeader: true },
+    conjunctive: { name: 'refinementList', params: { operator: 'and', limit: 10 } },
+    disjunctive: { name: 'refinementList', params: { operator: 'or', limit: 10 } },
   };
 
   var sortByRefined = function sortByRefined (sortFunction) {
@@ -33,7 +33,7 @@
    * The default sort function is refined > count > name.
    */
   algolia.facetSortFunctions = {
-    sortRanges: sortByRefined(function sortRanges (a, b) {
+    price_range: sortByRefined(function sortRanges (a, b) {
       if (a.name.length === b.name.length) {
         return a.name.localeCompare(b.name);
       }
@@ -47,7 +47,7 @@
    * like, use a function to reformat it how you want.
    */
   algolia.facetDisplayFunctions = {
-    displayRange: function displayRange (value) {
+    price_range: function displayRange (value) {
       var format = '{{ shop.money_with_currency_format }}',
           values = value.split(':');
 
@@ -80,32 +80,19 @@
       count: 'ais-facet--count'
     };
 
-    if (widget.hasHeader) {
-      params.templates.header = function () {
-        return facet.title;
-      }
+    params.templates.header = function () {
+      return facet.title;
     }
 
     if (!widget.useDefault) {
       params.templates.item = algolia.getTemplate('instant_search_facet_item');
     }
 
-    // Temporary fix - To remove in the long term
-    if (facet.sortFunction) {
-      facet.sortBy = facet.sortFunction;
+    if (algolia.facetSortFunctions[facet.name]) {
+      params.sortBy = algolia.facetSortFunctions[facet.name];
     }
 
-    if (facet.sortBy) {
-      if (facet.sortBy.match(/:/)) {
-        params.sortBy = facet.sortBy;
-      } else if (algolia.facetSortFunctions[facet.sortBy]) {
-        params.sortBy = algolia.facetSortFunctions[facet.sortBy];
-      } else {
-        console.log('Algolia: Warning: Unrecognized sort order: ' + facet.sortBy);
-      }
-    }
-
-    var displayFunction = algolia.facetDisplayFunctions[facet.displayFunction];
+    var displayFunction = algolia.facetDisplayFunctions[facet.name];
     params.transformData = function (data) {
       data.type = {};
       data.type[facet.type] = true;

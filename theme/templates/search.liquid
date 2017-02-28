@@ -1,16 +1,6 @@
 <!-- /templates/search.liquid -->
 {% comment %}
 
-To change from Algolia searc to shopify one, simply uncomment :
-
-{% assign respond_js_secret_key = shop.domain | md5 %}
-{% unless search.terms == respond_js_secret_key %}
-An from
-{% paginate search.results by 12 %}
-to the end
-
-
-
   To return only products or pages in results:
     - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
     - Or manually add type=product or type=page to the search URL as a parameter
@@ -20,21 +10,14 @@ to the end
 {% comment %}
   Check to enforce respond.js
 {% endcomment %}
-
-
 {% assign respond_js_secret_key = shop.domain | md5 %}
 {% unless search.terms == respond_js_secret_key %}
-
-
-
 
 {% comment %}
   Avoid accessing search.results before the opening paginate tag.
   If you do, the pagination of results will be broken.
 {% endcomment %}
-
 {% paginate search.results by 12 %}
-
 
   <div class="grid">
     <div class="grid__item">
@@ -139,4 +122,3 @@ to the end
   {% include 'respond' %}
   {% layout none %}
 {% endunless %}
-
