@@ -2876,7 +2876,7 @@ button.mfp-arrow {
   margin: 0 auto;
   max-height: 100%;
   max-width: 100%;
-  padding: 20px;
+  min-height: 180px;
   @include prefix('transform', 'translate(-50%, -50%)');
   @include backface();
 
@@ -3366,6 +3366,25 @@ button.mfp-arrow {
   Custom CSS by Philippe Siguret
 ==============================================================================*/
 
+.accueil-content h2 {
+  font-size: 1.4em;
+}
+.client-review {
+  font-family : Open Sans, sans-serif;
+  font-size: 0.9em;
+}
+.client-review img {
+    max-width: 100px;
+}
+
+.client-profil-picture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 15px;
+    border: 5px solid #FFFFFF;
+}
 
  .newsletter {
     padding-top: 0px;
@@ -3562,6 +3581,3 @@ button.mfp-arrow {
   left: 30px;
   right: inherit;
 }
-
-
-/*================ Algolia  ================*/
