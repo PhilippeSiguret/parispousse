@@ -1,4 +1,4 @@
-<!-- /templates/product.slider-plante.liquid -->
+<!-- /templates/product.slider-produitseul.liquid -->
 <div class="product-v2">
     <div itemscope itemtype="http://schema.org/Product">
         <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
@@ -143,7 +143,7 @@
                                   <div class="row">
                                       <h2 class="text-center">{{ product.metafields.c_f.metier }}</h2>
                                       <div class="col-md-3 img-fluid offset-lg-1 col-xs-12">
-                                          <img src="//cdn.shopify.com/s/files/1/1063/7402/files/{{ product.metafields.c_f.nom }}_185x185.png?" alt="{{ product.metafields.c_f.nom }}" style="border-radius: 50%">
+                                          <img src="//cdn.shopify.com/s/files/1/1063/7402/files/{{ product.metafields.c_f.nom }}_185x185.png?" alt="{{ product.metafields.c_f.nom }}" style="border-radius: 50%; -webkit-filter: grayscale(100%); filter: grayscale(100%);">
                                       </div>
                                       <div class="col-md-7 col-xs-12">
                                           <p class="text-left">{{ product.description }}</p>
@@ -199,43 +199,6 @@
                                           </div>
                                       {% endcomment %}
                                 </div>
-                            <!-- Pot -->
-                                <div class="row" id="pot">
-                                  <div class="col-lg-4 small--hide">
-                                      <img src="{{ product.images[2] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
-                                        {% comment %}
-                                            <img src="{{ product.metafields.c_f.potimg }}" alt="{{ product.title }}">
-                                        {% endcomment %}
-                                  </div>
-                                  <div class="col-lg-8 text-left">
-                                      <h3 class="text-left">{{ product.metafields.c_f.potnom }} </h3>
-                                      <p> {{ product.metafields.c_f.potdesc }} </p>
-                                  </div>
-                                  <div class="col-lg-4 large--hide medium--hide">
-                                      <img src="{{ product.images[2] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
-                                  </div>
-                                  {% comment %}
-                                      <!-- pot icones, table mode  -->
-                                        <div class="col-lg-4 icones">
-                                            <table class="table table-sm table-responsive">
-                                                <tr>
-                                                    <td class="borderless">
-                                                        <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/pot.png?5612668898654607789" alt="{{ product.metafields.c_f.potnom }}">
-                                                    </td>
-                                                    <td class="borderless">{{ product.metafields.c_f.potdimensions }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/materiaux.png?3844830907266863827">
-                                                    </td>
-                                              <td>
-                                                  {{ product.metafields.c_f.potmatiere }}
-                                              </td>
-                                            </tr>
-                                          {{ product.metafields.c_f.potsicones }}
-                                          </table>
-                                        </div>
-                                  {% endcomment %}
                       </div>
                     </div>
                 </div>
