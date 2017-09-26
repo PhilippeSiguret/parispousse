@@ -1,0 +1,296 @@
+<!-- /templates/product.slider-produitseul.liquid -->
+<div class="product-v2">
+    <div itemscope itemtype="http://schema.org/Product">
+        <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+        <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}"> {% assign current_variant = product.selected_or_first_available_variant %}
+        <div class="grid product-single">
+            <!-- Product Title -->
+                  <div class="">
+                      <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+                      <h2 style="font-weight: 400; padding-bottom: 20px;">{{ product.metafields.global.title_tag }}</h2>
+                  </div>
+            <!-- Caroussel Slider -->
+              <!-- Large & Medium Device -->
+              <div class="grid__item small--hide text-center">
+                  {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+                  {% comment %}
+                      Display current variant image, or default first on the first slide, then the other
+                  {% endcomment %}
+                  <div id="slider-products-v2" class="carousel slide" data-ride="carousel">
+                     <!-- .carousel-inner -->
+                          <div class="carousel-inner" role="listbox">
+                              <div class="carousel-item active">
+                                  <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: '800x500' }}" alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}" data-slide-number="0">
+                              </div>
+                              {% comment %}
+                                  Display rest of product images, not repeating the featured one
+                              {% endcomment %}
+                                  {% for image in product.images %}
+                                      {% unless image contains featured_image %}
+                                          <div class="carousel-item">
+                                              <img class="product-single__photo" src="{{ image.src | img_url: '800x500' }}" {% if settings.product_zoom_enable %} data-mfp-src="{{ image.src | img_url: '1024x1024' }}" {% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}" data-slide-number="{{ forloop.index0 }}">
+                                          </div>
+                                      {% endunless %}
+                                  {% endfor %}
+                          </div>
+                     <!-- .carousel-control -->
+                          <a class="carousel-control-prev" href="#slider-products-v2" role="button" data-slide="prev">
+                              <button title="Précédent (flèche gauche)" type="button" class="mfp-arrow mfp-arrow-left mfp-prevent-close"><span class="mfp-chevron mfp-chevron-left"></span></button>
+                          </a>
+                          <a class="carousel-control-next" href="#slider-products-v2" role="button" data-slide="next">
+                              <button title="Suivant (flèche droite)" type="button" class="mfp-arrow mfp-arrow-right mfp-prevent-close"><span class="mfp-chevron mfp-chevron-right"></span></button>
+                          </a>
+                     <!-- #slider-thumbs only large device-->
+                          <div class="grid__item medium-down--hide" id="slider-thumbs">
+                              {% comment %}
+                                  Display Thumbs under slider
+                              {% endcomment %}
+                              <ul class="hide-bullets">
+                                  <li class="grid__item large--one-eighth">
+                                      <a class="thumbnail" id="carousel-selector-0"><img src="{{ featured_image | | img_url: '100x100' }}"></a>
+                                  </li>
+                                  {% comment %}
+                                      Display rest of product images, not repeating the featured one
+                                  {% endcomment %}
+                                      {% for image in product.images %}
+                                          {% unless image contains featured_image %}
+                                              <li class="grid__item large--one-eighth">
+                                                  <a class="thumbnail" id="carousel-selector-{{ forloop.index0 }}">
+                                                      <img src="{{ image.src | img_url: '100x100' }}">
+                                                  </a>
+                                              </li>
+                                          {% endunless %}
+                                      {% endfor %}
+                              </ul>
+                          </div>
+                  </div>
+              </div>
+              <!-- Small device -->
+              <div class="product-single__photos medium--hide large--hide">
+                  {% assign featured_image = current_variant.featured_image | default: product.featured_image %} {% comment %} Display current variant image, or default first {% endcomment %}
+                  <div class="product-single__photo-wrapper">
+                      <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}" {% endif %} alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+                  </div>
+                  {% comment %} Display rest of product images, not repeating the featured one {% endcomment %} {% for image in product.images %} {% unless image contains featured_image %}
+                  <div class="product-single__photo-wrapper">
+                      <img class="product-single__photo" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}" {% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+                  </div>
+                  {% endunless %} {% endfor %}
+              </div>
+            <!-- Product Box -->
+              <div id="product-box">
+                  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                      {% comment %}
+                        Optionally show the 'compare at' or original price of the product.
+                      {% endcomment %}
+                        {% if product.compare_at_price > product.price %}
+                              <span class="product-single__price--wrapper">
+                                  <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                                  <span id="ComparePrice" class="product-single__price--compare-at">
+                                      {{ product.compare_at_price | money }}
+                                  </span>
+                                  <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                              </span>
+                        {% endif %}
+                      <span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
+                            {{ current_variant.price | money }}
+                      </span>
+                      <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                      <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+                      <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form" id="AddToCartForm">
+                          <select name="id" id="ProductSelect" class="product-single__variants">
+                              {% for variant in product.variants %}
+                    {% if variant.available %}
+                      <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                    {% else %}
+                      <option disabled="disabled">
+                        {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+
+                          </select>
+                          {% comment %}
+                          <div class="product-single__quantity">
+                              <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                              <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+                          </div>
+                          {% endcomment %}
+                          <div class="product-single__add-to-cart">
+                              <button type="submit" name="add" id="AddToCart" class="btn">
+                                  <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+                              </button>
+                          </div>
+                          <div id="infiniteoptions-container"></div>
+                                    {% comment %}
+                          <div id="timer-plus-display" data-toggle="tooltip" data-placement="left" data-original-title="Commandez avant que le compteur n’affiche zéro, pour être livré dès la semaine prochaine."></div>
+            {% endcomment %}
+                      </form>
+                  </div>
+              </div>
+            <!-- Product description  -->
+                <div class="product-single__description rte" itemprop="description" style="margin-top: 0px;">
+                    <br>
+                    <br>
+                    <!-- icone-line -->
+                        <div class="container text-center" id="icone-line">
+                            <hr class="hr--clear">
+                            {% for tag in product.tags %}
+                                  <img src="//cdn.shopify.com/s/files/1/1063/7402/files/{{ tag | handleize | capitalize | replace: '-', '_' }}_100x100.png?" alt="{{tag}}" data-toggle="tooltip" data-placement="top" data-original-title="{{ tag }}">
+
+                            {% endfor %}
+                        </div>
+                    <hr class="hr--clear">
+                    <!-- product-special-description -->
+                              <div class="container" id="product-special-description">
+                                  <div class="row">
+                                      <h2 class="text-center">{{ product.metafields.c_f.metier }}</h2>
+                                      <div class="col-md-3 img-fluid offset-lg-1 col-xs-12">
+                                          <img src="//cdn.shopify.com/s/files/1/1063/7402/files/{{ product.metafields.c_f.nom }}_185x185.png?" alt="{{ product.metafields.c_f.nom }}" style="border-radius: 50%; -webkit-filter: grayscale(100%); filter: grayscale(100%);">
+                                      </div>
+                                      <div class="col-md-7 col-xs-12">
+                                          <p class="text-left">{{ product.description }}</p>
+                                          <p class="text-right"> {{ product.metafields.c_f.nom }} </p>
+                                      </div>
+                                  </div>
+                              </div>
+                    <hr class="hr--clear">
+                    <!-- What you're buying -->
+                    <div class="container text-center" id="composition">
+                        <h2> Ce que vous achetez</h2>
+                        <!-- Product -->
+                            <!-- plante -->
+                                <div class="row" id="plante">
+                                      <div class="col-lg-8 text-left">
+                                          <h3 class="text-left">{{ product.metafields.c_f.plantenom }} </h3>
+                                          <p> {{ product.metafields.c_f.plantedesc }} </p>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <img src="{{ product.images[1] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
+
+                                      {% comment %}
+                                            <img src="{{ product.metafields.c_f.planteimg }}" alt="{{ product.title }}" width="200" height="200">
+                                      {% endcomment %}
+                                      </div>
+                                      {% comment %}
+                                            <!-- Présentation icones, table mode -->
+                                          <div class="col-lg-4 icones">
+                                              <table class="table table-sm table-responsive">
+                                                  <tr>
+                                                      <td class="borderless">
+                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/taille.png?8549892996940767476" alt="{{ product.metafields.c_f.plantenom }}">
+                                                      </td>
+                                                      <td class="borderless">{{ product.metafields.c_f.plantedimensions }}</i>
+                                                      </td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td>
+                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/sun.png?4731920396151867623">
+                                                      </td>
+                                                      <td>{{ product.metafields.c_f.exposition }}</td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td>
+                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/arrosoir.png?1738896043899954159" alt="{{ product.metafields.plantenom }}">
+                                                      </td>
+                                                      <td>
+                                                          {{ product.metafields.c_f.arrosage }}
+                                                      </td>
+                                                  </tr>
+                                                  {{ product.metafields.c_f.plantesicones }}
+                                              </table>
+                                          </div>
+                                      {% endcomment %}
+                                </div>
+                      </div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Social Sharing -->
+                {% if settings.social_sharing_products %} {% include 'social-sharing' %}
+                {% endif %}
+
+        <!-- Collection -->
+                {% comment %}
+                    {% if collection %}
+                        <hr class="hr--clear">
+                        <div class="text-center">
+                            <a href="{{ collection.url }}" class="return-link">&larr; {{ 'products.general.collection_return' | t: collection: collection.title }}</a>
+                        </div>
+                    {% endif %}
+                {% endcomment %}
+
+        {% include 'customers-images' %}
+
+        {% include 'related-products' %}
+          {% comment %}
+
+            *IMPORTANT:*
+            This theme uses a customized version of `option_selection.js` to support using radio inputs for
+            color and size variants. The custom version is in `variant_selection.js`.
+
+            If you wish to enable the default dropdowns for size and color
+            you can change the liquid asset tag below from:
+
+            {{ 'variant_selection.js' | asset_url | script_tag }}
+
+            to
+
+            {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+            If you use the default `option_selection.js` the labels for the dropdowns will
+            appear outside the dropdown.
+
+            You will also need to change `.radio-wrapper` to `.selector-wrapper` below.
+
+          {% endcomment %}
+            {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+
+          <script>
+            var selectCallback = function(variant, selector) {
+              timber.productPage({
+                money_format: "{{ shop.money_format }}",
+                variant: variant,
+                selector: selector
+              });
+            };
+
+            jQuery(function($) {
+              new Shopify.OptionSelectors('ProductSelect', {
+                product: {{ product | json }},
+                onVariantSelected: selectCallback,
+                enableHistoryState: true
+              });
+
+              // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+              {% if product.options.size == 1 and product.options.first != 'Title' %}
+                $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0" class="single-option-radio__label">{{ product.options.first | escape }}</label>');
+              {% endif %}
+
+              // Hide drop-down selectors if we only have 1 variant and its title contains 'Default'.
+              {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                $('.selector-wrapper').hide();
+              {% endif %}
+            });
+          </script>
+
+                <script>
+                       jQuery(document).ready(function($) {
+                        $('.carousel').carousel({
+                            interval: 8000
+                        });
+
+                        //Handles the carousel thumbnails
+                        $('[id^=carousel-selector-]').click(function() {
+                            var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+                            var id = parseInt(id);
+                            $('#slider-products-v2').carousel(id);
+                        });
+
+                        });
+              </script>
+
+    </div>
+</div>
