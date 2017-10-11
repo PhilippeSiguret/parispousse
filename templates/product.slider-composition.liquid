@@ -39,41 +39,9 @@
                                                                     </div>
                                                             </div>
                                         <hr class="hr--clear">
-                                        <!-- What you're buying -->
-                                        <div class="container text-center" id="composition">
-                                                <h2> Ce que vous achetez</h2>
-		                                                <!-- plante -->
-	                                                    <div class="row" id="plante">
-	                                                                <div class="col-lg-8 text-left">
-	                                                                        <h3 class="text-left">{{ product.metafields.c_f.plantenom }} </h3>
-	                                                                        <p> {{ product.metafields.c_f.plantedesc }} </p>
-	                                                                </div>
-	                                                                <div class="col-lg-4">
-	                                                                	{% comment %}Put the second image of the product {% endcomment %}
-	                                                                        <img src="{{ product.images[1] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
+                                        
+                                        {% include 'product-description' %}
 
-	                                                                </div>
-	                                                    </div>
-                                                 
-                                                    {% if product.type == 'Plante & Pot' %}
-														{% if product.metafields.c_f.potnom %}
-	                                                        <!-- Pot -->
-	                                                        <div class="row" id="pot">
-	                                                        	{% comment %}Put the third image of the product {% endcomment %}
-	                                                            <div class="col-lg-4 small--hide">
-	                                                                <img src="{{ product.images[2] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
-	                                                            </div>
-	                                                            <div class="col-lg-8 text-left">
-	                                                                <h3 class="text-left">{{ product.metafields.c_f.potnom }} </h3>
-	                                                                <p> {{ product.metafields.c_f.potdesc }} </p>
-	                                                            </div>
-	                                                            <div class="col-lg-4 large--hide medium--hide">
-	                                                                <img src="{{ product.images[2] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
-	                                                            </div>
-	                                                        </div>
-                                                        {% endif %}
-                                                    {% endif %}
-                                        </div>
                                 </div>
                 </div>
 

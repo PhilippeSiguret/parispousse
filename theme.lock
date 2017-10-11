@@ -177,6 +177,8 @@ snippets/onboarding-featured-products.liquid:
   development: 2015-11-19T12:14:15+01:00   30686b1118339f52367b6351e23987d3
 snippets/product-box.liquid:
   development: 2017-10-11T23:59:43+02:00   eed0b4b0459889f34859ebd1052b1231
+snippets/product-description.liquid:
+  development: 2017-10-12T00:11:49+02:00   ea4390531413dd2f3d2c0d92a9e68ebd
 snippets/product-grid-collage.liquid:
   development: 2015-11-19T12:14:15+01:00   a258c7788397701a5db2d51783bfe2d2
 snippets/product-grid-item.liquid:
@@ -240,7 +242,7 @@ templates/password.liquid:
 templates/product.liquid:
   development: 2017-10-11T22:59:17+02:00   dbb286ce4f8adfbb6c20fdaae6730d3d
 templates/product.slider-composition.liquid:
-  development: 2017-10-12T00:00:30+02:00   d500a6935d17cbf13385d3860691b934
+  development: 2017-10-12T00:12:10+02:00   44d383dc4c214e7876f0ab916f4b794a
 templates/search.elpm_metaf.liquid:
   development: 2017-09-04T19:23:47+02:00   b8a0da170fa5a41f07c97c15d6f74b42
 templates/search.liquid:
