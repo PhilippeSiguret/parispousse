@@ -1,0 +1,53 @@
+<!-- Product Box --> 
+    <div id="product-box">
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                    {% comment %}
+                        Optionally show the 'compare at' or original price of the product.
+                    {% endcomment %}
+                        {% if product.compare_at_price > product.price %}
+                                    <span class="product-single__price--wrapper">
+                                            <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                                            <span id="ComparePrice" class="product-single__price--compare-at">
+                                                    {{ product.compare_at_price | money }}
+                                            </span>
+                                            <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                                    </span>
+                        {% endif %}
+                    <span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
+                                {{ current_variant.price | money }}
+                    </span>
+                    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                    <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+                    <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form" id="AddToCartForm">
+                            <select name="id" id="ProductSelect" class="product-single__variants">
+                                    {% for variant in product.variants %}
+                {% if variant.available %}
+                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                {% else %}
+                    <option disabled="disabled">
+                        {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                    </option>
+                {% endif %}
+            {% endfor %}
+
+                            </select>
+                            {% comment %}
+                            <div class="product-single__quantity">
+                                    <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                                    <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+                            </div>
+                            {% endcomment %}
+                            <div class="product-single__add-to-cart">
+                                    <button type="submit" name="add" id="AddToCart" class="btn">
+                                            <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+                                    </button>
+                            </div>
+                            
+                            {% include 'livraison' %}
+
+
+                            <div id="infiniteoptions-container"></div>
+                                             <div id="timer-plus-display" data-toggle="tooltip" data-placement="left" data-original-title="Commandez avant que le compteur n’affiche zéro, pour être livré dès la semaine prochaine"></div>
+                    </form>
+            </div>
+    </div>

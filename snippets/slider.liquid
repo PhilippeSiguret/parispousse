@@ -1,0 +1,68 @@
+<!-- Caroussel Slider -->
+<!-- Large & Medium Device -->
+<div class="grid__item small--hide text-center">
+        {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+        {% comment %}
+                Display current variant image, or default first on the first slide, then the other
+        {% endcomment %}
+        <div id="slider-products-v2" class="carousel slide" data-ride="carousel">
+             <!-- .carousel-inner -->
+                        <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                        <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: '800x500' }}" alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}" data-slide-number="0">
+                                </div>
+                                {% comment %}
+                                        Display rest of product images, not repeating the featured one
+                                {% endcomment %}
+                                        {% for image in product.images %}
+                                                {% unless image contains featured_image %}
+                                                        <div class="carousel-item">
+                                                                <img class="product-single__photo" src="{{ image.src | img_url: '800x500' }}" {% if settings.product_zoom_enable %} data-mfp-src="{{ image.src | img_url: '1024x1024' }}" {% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}" data-slide-number="{{ forloop.index0 }}">
+                                                        </div>
+                                                {% endunless %}
+                                        {% endfor %}
+                        </div>
+             <!-- .carousel-control -->
+                        <a class="carousel-control-prev" href="#slider-products-v2" role="button" data-slide="prev">
+                                <button title="Précédent (flèche gauche)" type="button" class="mfp-arrow mfp-arrow-left mfp-prevent-close"><span class="mfp-chevron mfp-chevron-left"></span></button>
+                        </a>
+                        <a class="carousel-control-next" href="#slider-products-v2" role="button" data-slide="next">
+                                <button title="Suivant (flèche droite)" type="button" class="mfp-arrow mfp-arrow-right mfp-prevent-close"><span class="mfp-chevron mfp-chevron-right"></span></button>
+                        </a>
+             <!-- #slider-thumbs only large device-->
+                        <div class="grid__item medium-down--hide" id="slider-thumbs">
+                                {% comment %}
+                                        Display Thumbs under slider
+                                {% endcomment %}
+                                <ul class="hide-bullets">
+                                        <li class="grid__item large--one-eighth">
+                                                <a class="thumbnail" id="carousel-selector-0"><img src="{{ featured_image | | img_url: '100x100' }}"></a>
+                                        </li>
+                                        {% comment %}
+                                                Display rest of product images, not repeating the featured one
+                                        {% endcomment %}
+                                                {% for image in product.images %}
+                                                        {% unless image contains featured_image %}
+                                                                <li class="grid__item large--one-eighth">
+                                                                        <a class="thumbnail" id="carousel-selector-{{ forloop.index0 }}">
+                                                                                <img src="{{ image.src | img_url: '100x100' }}">
+                                                                        </a>
+                                                                </li>
+                                                        {% endunless %}
+                                                {% endfor %}
+                                </ul>
+                        </div>
+        </div>
+</div>
+<!-- Small device -->
+<div class="product-single__photos medium--hide large--hide">
+        {% assign featured_image = current_variant.featured_image | default: product.featured_image %} {% comment %} Display current variant image, or default first {% endcomment %}
+        <div class="product-single__photo-wrapper">
+                <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}" {% endif %} alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+        </div>
+        {% comment %} Display rest of product images, not repeating the featured one {% endcomment %} {% for image in product.images %} {% unless image contains featured_image %}
+        <div class="product-single__photo-wrapper">
+                <img class="product-single__photo" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}" {% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+        </div>
+        {% endunless %} {% endfor %}
+</div>

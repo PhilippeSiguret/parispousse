@@ -94,7 +94,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2016-11-11T12:44:24+01:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2017-10-01T18:43:31+02:00   ee61fbacc1536a1f9c85c008a641099d
+  development: 2017-10-11T23:22:00+02:00   768a75dd681240d374611c8b91a92aef
 locales/de.json:
   development: 2017-02-03T21:49:58+01:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -143,12 +143,6 @@ snippets/algolia_instant_search_stats.hogan.liquid:
   development: 2017-02-28T14:39:42+01:00   516dd6c9802e5d616cf5efa97c483e2e
 snippets/algolia_money_format.liquid:
   development: 2017-02-15T10:44:12+01:00   18244bd847b5895ab5b88050b21b65c0
-snippets/bk-tracking.liquid:
-  development: 2017-06-28T16:40:07+02:00   a400c192a1385308c77b9c4b3d65ef8a
-snippets/bold-common.liquid:
-  development: 2017-02-17T19:32:06+01:00   44af4c021cc2546afa7ceb5f05c1e29c
-snippets/bold-product.liquid:
-  development: 2017-02-17T19:23:41+01:00   cd43faf9e8154ed8db095711720faa8e
 snippets/clients-images.liquid:
   development: '2017-02-11T18:30:09+01:00   '
 snippets/collection-grid-collage.liquid:
@@ -171,6 +165,8 @@ snippets/hero.liquid:
   development: 2017-07-01T19:03:00+02:00   c3874c05556f524f87473e9dc3a3e2e3
 snippets/home-content.liquid:
   development: 2015-11-19T12:14:14+01:00   f227159b82971e2a50604fd56b508d86
+snippets/livraison.liquid:
+  development: 2017-10-11T22:59:35+02:00   fca9b2d59af0966b2c2a7f0d34d6e66c
 snippets/oldIE-js.liquid:
   development: 2015-11-19T12:14:15+01:00   daf28c8834122dcaf976369fdf48323a
 snippets/onboarding-empty-collection.liquid:
@@ -179,6 +175,8 @@ snippets/onboarding-featured-collections.liquid:
   development: 2015-11-19T12:14:15+01:00   9b1474eda2ec04452e47c94ca60bcdea
 snippets/onboarding-featured-products.liquid:
   development: 2015-11-19T12:14:15+01:00   30686b1118339f52367b6351e23987d3
+snippets/product-box.liquid:
+  development: 2017-10-11T23:59:43+02:00   eed0b4b0459889f34859ebd1052b1231
 snippets/product-grid-collage.liquid:
   development: 2015-11-19T12:14:15+01:00   a258c7788397701a5db2d51783bfe2d2
 snippets/product-grid-item.liquid:
@@ -189,8 +187,8 @@ snippets/respond.liquid:
   development: 2015-11-19T12:14:15+01:00   ca6abf0635dc2ad8c6bd377f83c79f6b
 snippets/search-bar.liquid:
   development: 2016-11-04T15:35:32+01:00   09c97d1e453c835a8a5568a70d690883
-snippets/shappify-options.liquid:
-  development: 2017-02-17T19:23:39+01:00   b33ff8dc5813eb97b943075620ef700d
+snippets/slider.liquid:
+  development: 2017-10-11T23:59:02+02:00   a035a6394433620497de36881a11e608
 snippets/social-meta-tags.liquid:
   development: 2015-11-19T12:14:15+01:00   dd9f442571dbd69f6a37f08b669c20ea
 snippets/social-sharing.liquid:
@@ -240,13 +238,9 @@ templates/page.review.liquid:
 templates/password.liquid:
   development: 2015-11-19T12:14:15+01:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
-  development: 2017-07-07T19:33:38+02:00   93b16fcb3a18001ad3fd4e17dc0c0727
+  development: 2017-10-11T22:59:17+02:00   dbb286ce4f8adfbb6c20fdaae6730d3d
 templates/product.slider-composition.liquid:
-  development: 2017-10-02T15:17:29+02:00   c1ed740192518f87637f44b5c18ee03c
-templates/product.slider-produitseul.liquid:
-  development: 2017-07-07T19:34:08+02:00   cf849fbdf591d5df10a8c036680df47d
-templates/product.slider.liquid:
-  development: 2017-09-29T20:49:57+02:00   ddd5b01651931affde3b2babbf85a2b5
+  development: 2017-10-12T00:00:30+02:00   d500a6935d17cbf13385d3860691b934
 templates/search.elpm_metaf.liquid:
   development: 2017-09-04T19:23:47+02:00   b8a0da170fa5a41f07c97c15d6f74b42
 templates/search.liquid:
