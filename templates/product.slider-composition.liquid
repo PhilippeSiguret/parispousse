@@ -164,79 +164,23 @@
                                           <p> {{ product.metafields.c_f.plantedesc }} </p>
                                       </div>
                                       <div class="col-lg-4">
-                                          <img src="{{ product.images[1] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
+                                          <img src="{{ product.images[0] | product_img_url: 'medium' }}" alt="{{ product.title }}" width="200" height="200">
 
-                                      {% comment %}
-                                            <img src="{{ product.metafields.c_f.planteimg }}" alt="{{ product.title }}" width="200" height="200">
-                                      {% endcomment %}
                                       </div>
-                                      {% comment %}
-                                            <!-- Présentation icones, table mode -->
-                                          <div class="col-lg-4 icones">
-                                              <table class="table table-sm table-responsive">
-                                                  <tr>
-                                                      <td class="borderless">
-                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/taille.png?8549892996940767476" alt="{{ product.metafields.c_f.plantenom }}">
-                                                      </td>
-                                                      <td class="borderless">{{ product.metafields.c_f.plantedimensions }}</i>
-                                                      </td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td>
-                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/sun.png?4731920396151867623">
-                                                      </td>
-                                                      <td>{{ product.metafields.c_f.exposition }}</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td>
-                                                          <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/arrosoir.png?1738896043899954159" alt="{{ product.metafields.plantenom }}">
-                                                      </td>
-                                                      <td>
-                                                          {{ product.metafields.c_f.arrosage }}
-                                                      </td>
-                                                  </tr>
-                                                  {{ product.metafields.c_f.plantesicones }}
-                                              </table>
-                                          </div>
-                                      {% endcomment %}
                                 </div>
                             <!-- Pot -->
                                 <div class="row" id="pot">
                                   <div class="col-lg-4 small--hide">
-                                      <img src="{{ product.images[2] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
-                                        {% comment %}
-                                            <img src="{{ product.metafields.c_f.potimg }}" alt="{{ product.title }}">
-                                        {% endcomment %}
+                                      <img src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
                                   </div>
                                   <div class="col-lg-8 text-left">
                                       <h3 class="text-left">{{ product.metafields.c_f.potnom }} </h3>
                                       <p> {{ product.metafields.c_f.potdesc }} </p>
                                   </div>
                                   <div class="col-lg-4 large--hide medium--hide">
-                                      <img src="{{ product.images[2] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
+                                      <img src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.title }}" width="200" height="200">
                                   </div>
-                                  {% comment %}
-                                      <!-- pot icones, table mode  -->
-                                        <div class="col-lg-4 icones">
-                                            <table class="table table-sm table-responsive">
-                                                <tr>
-                                                    <td class="borderless">
-                                                        <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/pot.png?5612668898654607789" alt="{{ product.metafields.c_f.potnom }}">
-                                                    </td>
-                                                    <td class="borderless">{{ product.metafields.c_f.potdimensions }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="https://cdn.shopify.com/s/files/1/1063/7402/files/materiaux.png?3844830907266863827">
-                                                    </td>
-                                              <td>
-                                                  {{ product.metafields.c_f.potmatiere }}
-                                              </td>
-                                            </tr>
-                                          {{ product.metafields.c_f.potsicones }}
-                                          </table>
-                                        </div>
-                                  {% endcomment %}
+   
                       </div>
                     </div>
                 </div>
@@ -246,15 +190,6 @@
                 {% if settings.social_sharing_products %} {% include 'social-sharing' %}
                 {% endif %}
 
-        <!-- Collection -->
-                {% comment %}
-                    {% if collection %}
-                        <hr class="hr--clear">
-                        <div class="text-center">
-                            <a href="{{ collection.url }}" class="return-link">&larr; {{ 'products.general.collection_return' | t: collection: collection.title }}</a>
-                        </div>
-                    {% endif %}
-                {% endcomment %}
 
         {% include 'customers-images' %}
 

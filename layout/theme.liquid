@@ -54,7 +54,7 @@
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
  
-  <!-- FullStor ================================================== -->
+  <!-- FullStory ================================================== -->
     <script>
     window['_fs_debug'] = false;
     window['_fs_host'] = 'fullstory.com';
@@ -129,6 +129,8 @@
   {{ 'algolia_sort_orders.js' | asset_url | script_tag }}
   {{ 'algolia_instant_search.js' | asset_url | script_tag }}
 <!-- /Algolia head -->
+
+
 
 </head>
 
@@ -263,7 +265,7 @@
                 <i class="fa fa-money" aria-hidden="true"></i> Livraison gratuite à partir de 80€</a>
           </div>
            <div class="grid__item large-- one-whole text-center message">
-                <i class="fa fa-home" aria-hidden="true"></i> Ouverture prochaine: des plantes de 5 à 50€ dans notre Pop up store Broc'plante (Paris 18e), du 3 au 17 octobre 2017 </a>
+                <i class="fa fa-home" aria-hidden="true"></i> Des plantes de 5 à 50€ et + dans notre Pop up store Broc'plante (Paris 18e), du 3 au 17 octobre 2017 </a>
            </div>
       </div>
 
@@ -705,6 +707,19 @@
 
   {% if settings.product_zoom_enable and template contains 'product' %}
     {{ 'magnific-popup.min.js' | asset_url | script_tag }}
+    {% comment %}
+    Accept Open Popup from other places 
+
+    idea that came from https://gist.github.com/carolineschnapp/288da541ea2b69aedc3b
+
+    {% endcomment %}
+    <script>
+      $('.open-popup').magnificPopup({
+        type:'inline',
+        midClick: true
+      });
+    </script>
+
   {% elsif search_modal == true %}
     {{ 'magnific-popup.min.js' | asset_url | script_tag }}
   {% endif %}
