@@ -94,7 +94,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2016-11-11T12:44:24+01:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2017-10-18T10:05:56+02:00   efbe741449bee8ecc16b5d83f12df8ce
+  development: 2017-10-23T16:45:07+02:00   56ed47163bf293b2bc9dd4660233e4c9
 locales/de.json:
   development: 2017-02-03T21:49:58+01:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -166,9 +166,11 @@ snippets/featured-products.liquid:
 snippets/google-fonts.liquid:
   development: 2015-11-19T12:14:14+01:00   8e40cfa27425f9a5b955b747e1edee96
 snippets/hero.liquid:
-  development: 2017-07-01T19:03:00+02:00   c3874c05556f524f87473e9dc3a3e2e3
+  development: 2017-10-23T16:49:07+02:00   f4a5296b70dcd3bb15f312db5edfdf67
 snippets/home-content.liquid:
   development: 2015-11-19T12:14:14+01:00   f227159b82971e2a50604fd56b508d86
+snippets/icones.liquid:
+  development: 2017-10-23T17:25:49+02:00   2e2789087107fb80fddc4ceaa708c08b
 snippets/livraison.liquid:
   development: 2017-10-11T22:59:35+02:00   fca9b2d59af0966b2c2a7f0d34d6e66c
 snippets/oldIE-js.liquid:
