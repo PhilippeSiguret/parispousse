@@ -170,7 +170,7 @@ snippets/hero.liquid:
 snippets/home-content.liquid:
   development: 2015-11-19T12:14:14+01:00   f227159b82971e2a50604fd56b508d86
 snippets/icones.liquid:
-  development: 2017-10-23T17:25:49+02:00   2e2789087107fb80fddc4ceaa708c08b
+  development: 2017-10-23T17:43:09+02:00   d70a01d5aa0bc67a4c88596ff281a64e
 snippets/livraison.liquid:
   development: 2017-10-11T22:59:35+02:00   fca9b2d59af0966b2c2a7f0d34d6e66c
 snippets/oldIE-js.liquid:
