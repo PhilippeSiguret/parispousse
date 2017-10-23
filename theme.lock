@@ -12,7 +12,7 @@ assets/algolia_facets.js.liquid:
 assets/algolia_helpers.js.liquid:
   development: 2017-02-15T10:44:13+01:00   6d763577223010b515b6fca1bc16930e
 assets/algolia_init.js.liquid:
-  development: 2017-02-15T10:44:13+01:00   109c958fbcba82cd35d1316a6bd18de7
+  development: 2017-10-12T18:30:18+02:00   7dd272df9f4db591fcb9af6a7963cc1f
 assets/algolia_instant_search.js.liquid:
   development: 2017-03-10T11:13:45+01:00   f19b93ff5e83e4c19f862bdb9ed7b6e6
 assets/algolia_sort_orders.js.liquid:
@@ -32,13 +32,13 @@ assets/gift-card.scss.liquid:
 assets/handlebars.min.js:
   development: 2015-11-19T12:14:13+01:00   b3c11508a224ee83f86e2fc6491e9751
 assets/hero_slide_1.jpg:
-  development: 2017-10-09T11:57:07+02:00   03602c6a6de48ded1d2aaa4ce62031c8
+  development: 2017-10-18T10:00:52+02:00   22a3130cc1325fb2a1a60a6f8b308411
 assets/hero_slide_2.jpg:
   development: 2017-10-09T11:30:01+02:00   dac09c9e95f33a73d500fe428fbb8132
 assets/hero_slide_3.jpg:
   development: 2017-10-09T11:45:24+02:00   22a3130cc1325fb2a1a60a6f8b308411
 assets/hero_slide_4.jpg:
-  development: 2017-10-09T16:45:30+02:00   aa7332dd6c7f91c364050ef3763d32d5
+  development: 2017-10-17T14:38:47+02:00   62720e28750b44d719ef912a760b93c4
 assets/ico-select.svg.liquid:
   development: 2015-11-19T12:14:13+01:00   9c9cc5a57cc74a0a64c2f62b1370a920
 assets/icons.eot:
@@ -90,11 +90,11 @@ assets/timber.scss.liquid:
 assets/variant_selection.js:
   development: 2015-11-19T12:14:14+01:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2017-10-09T16:45:30+02:00   f29dc6b76e34299743b26cd509e6f353
+  development: 2017-10-23T11:19:53+02:00   9dd5112d90d72450466f9e0f81006e69
 config/settings_schema.json:
   development: 2016-11-11T12:44:24+01:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2017-10-11T23:22:00+02:00   768a75dd681240d374611c8b91a92aef
+  development: 2017-10-18T10:05:56+02:00   efbe741449bee8ecc16b5d83f12df8ce
 locales/de.json:
   development: 2017-02-03T21:49:58+01:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -107,6 +107,10 @@ locales/pt-BR.json:
   development: 2017-02-03T21:50:45+01:00   e301376e7c1f157f69f09e57e555b325
 locales/pt-PT.json:
   development: 2017-02-03T21:49:52+01:00   5fed2204b62fb777d25fb4bccd5fc0f6
+snippets/SEOManager-404.liquid:
+  development: 2017-10-22T00:46:53+02:00   27d5b69429e1c1fc3c0ef0f38358e6eb
+snippets/SEOMetaManager-404.liquid:
+  development: 2017-10-22T00:46:53+02:00   27d5b69429e1c1fc3c0ef0f38358e6eb
 snippets/ajax-cart-template.liquid:
   development: 2017-02-10T16:51:31+01:00   4a5cacbb88a989d2f71bfb26309b258b
 snippets/algolia_autocomplete.css.hogan.liquid:
@@ -144,7 +148,7 @@ snippets/algolia_instant_search_stats.hogan.liquid:
 snippets/algolia_money_format.liquid:
   development: 2017-02-15T10:44:12+01:00   18244bd847b5895ab5b88050b21b65c0
 snippets/clients-images.liquid:
-  development: '2017-02-11T18:30:09+01:00   '
+  development: 2017-02-11T18:30:09+01:00
 snippets/collection-grid-collage.liquid:
   development: 2015-11-19T12:14:14+01:00   b4da868a6dbb5d26f4056c43733d44d5
 snippets/collection-grid-item.liquid:
@@ -154,7 +158,7 @@ snippets/collection-template.liquid:
 snippets/comment.liquid:
   development: 2015-11-19T12:14:14+01:00   490bf7370ece4d0217f9c229aefd5880
 snippets/customers-images.liquid:
-  development: '2017-02-28T14:38:27+01:00   '
+  development: 2017-02-28T14:38:27+01:00
 snippets/featured-collections.liquid:
   development: 2015-11-19T12:14:14+01:00   6a12cf7ed063d34052742b7f1d0a11c0
 snippets/featured-products.liquid:
@@ -244,6 +248,6 @@ templates/product.liquid:
 templates/product.slider-composition.liquid:
   development: 2017-10-12T00:12:10+02:00   44d383dc4c214e7876f0ab916f4b794a
 templates/search.elpm_metaf.liquid:
-  development: 2017-09-04T19:23:47+02:00   b8a0da170fa5a41f07c97c15d6f74b42
+  development: 2017-10-13T18:59:57+02:00   c69023d356903d4865d94055ec016ac5
 templates/search.liquid:
   development: 2017-02-18T11:52:24+01:00   e0507b7bfc12d5e0f7ef25b4c800a705
