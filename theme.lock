@@ -6,7 +6,7 @@ assets/ajax-loader.gif:
 assets/algolia_autocomplete.js.liquid:
   development: 2017-02-15T10:44:13+01:00   af5b15905cb0e1a00fab35412eb5efd8
 assets/algolia_config.js.liquid:
-  development: 2017-09-26T14:50:52+02:00   cb3208f5ddf9b52f9c4ac8714fa00fb7
+  development: 2017-11-30T20:19:06+01:00   9dc44709bba20bd29f18713d59a13ae4
 assets/algolia_facets.js.liquid:
   development: 2017-02-27T14:04:28+01:00   3a166ba8651e33b39a6befe23dd50cbc
 assets/algolia_helpers.js.liquid:
@@ -32,9 +32,9 @@ assets/gift-card.scss.liquid:
 assets/handlebars.min.js:
   development: 2015-11-19T12:14:13+01:00   b3c11508a224ee83f86e2fc6491e9751
 assets/hero_slide_1.jpg:
-  development: 2017-10-18T10:00:52+02:00   22a3130cc1325fb2a1a60a6f8b308411
+  development: 2017-11-29T16:03:45+01:00   3ef783a6e8ab1a76614d8134229645d1
 assets/hero_slide_2.jpg:
-  development: 2017-10-09T11:30:01+02:00   dac09c9e95f33a73d500fe428fbb8132
+  development: 2017-11-29T16:18:38+01:00   3425cb6988795a586597bd6c7139e3c4
 assets/hero_slide_3.jpg:
   development: 2017-10-09T11:45:24+02:00   22a3130cc1325fb2a1a60a6f8b308411
 assets/hero_slide_4.jpg:
@@ -82,7 +82,7 @@ assets/sss.js:
 assets/theme.js.liquid:
   development: 2016-05-11T00:03:28+02:00   f6123c318cb125abb0162c5093f65e1e
 assets/theme.scss.liquid:
-  development: 2017-09-29T20:21:25+02:00   39ab6e0bf78b2af4aebaf9e2b2a84c63
+  development: 2017-11-20T14:50:13+01:00   ccd3461a58b49e0d07609317a32ae873
 assets/timber.js.liquid:
   development: 2015-11-19T12:14:14+01:00   6e587c5434f3186594514cbbd9cbd855
 assets/timber.scss.liquid:
@@ -90,7 +90,7 @@ assets/timber.scss.liquid:
 assets/variant_selection.js:
   development: 2015-11-19T12:14:14+01:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2017-10-23T11:19:53+02:00   9dd5112d90d72450466f9e0f81006e69
+  development: 2017-11-29T10:37:43+01:00   18e2d4c3fefc858773df8cc93db91a6d
 config/settings_schema.json:
   development: 2016-11-11T12:44:24+01:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
@@ -112,7 +112,7 @@ snippets/SEOManager-404.liquid:
 snippets/SEOMetaManager-404.liquid:
   development: 2017-10-22T00:46:53+02:00   27d5b69429e1c1fc3c0ef0f38358e6eb
 snippets/ajax-cart-template.liquid:
-  development: 2017-02-10T16:51:31+01:00   4a5cacbb88a989d2f71bfb26309b258b
+  development: 2017-11-23T14:31:55+01:00   c6e11fce23aa3e5bbc183e252bc346f2
 snippets/algolia_autocomplete.css.hogan.liquid:
   development: 2017-02-28T14:37:23+01:00   1043fdc853e1f04b3c3f11731bf5bd12
 snippets/algolia_autocomplete.hogan.liquid:
@@ -170,7 +170,7 @@ snippets/hero.liquid:
 snippets/home-content.liquid:
   development: 2015-11-19T12:14:14+01:00   f227159b82971e2a50604fd56b508d86
 snippets/icones.liquid:
-  development: 2017-10-23T17:43:09+02:00   d70a01d5aa0bc67a4c88596ff281a64e
+  development: 2017-10-31T19:04:56+01:00   fac04c57e66e6f4c438e2a27bc2e0b6c
 snippets/livraison.liquid:
   development: 2017-10-11T22:59:35+02:00   fca9b2d59af0966b2c2a7f0d34d6e66c
 snippets/oldIE-js.liquid:
@@ -182,7 +182,7 @@ snippets/onboarding-featured-collections.liquid:
 snippets/onboarding-featured-products.liquid:
   development: 2015-11-19T12:14:15+01:00   30686b1118339f52367b6351e23987d3
 snippets/product-box.liquid:
-  development: 2017-10-11T23:59:43+02:00   eed0b4b0459889f34859ebd1052b1231
+  development: 2017-11-30T10:39:42+01:00   49de6b682b664634bbf48ed0d87de06e
 snippets/product-description.liquid:
   development: 2017-10-12T00:11:49+02:00   ea4390531413dd2f3d2c0d92a9e68ebd
 snippets/product-grid-collage.liquid:
@@ -210,7 +210,7 @@ templates/404.liquid:
 templates/article.liquid:
   development: 2017-04-15T17:23:45+02:00   d0ce72c2b7c0c064ee8c27c4a7fb73ef
 templates/blog.liquid:
-  development: 2017-04-14T18:02:01+02:00   9123ead3665d8d9fee3a81812a364615
+  development: 2017-11-21T10:33:58+01:00   af3389924c80700a3d0c872a1a0e151c
 templates/cart.liquid:
   development: 2017-09-04T21:41:12+02:00   b2a5c15e8016a2912822c6dba748e3d5
 templates/collection.image.liquid:
@@ -232,7 +232,7 @@ templates/customers/register.liquid:
 templates/customers/reset_password.liquid:
   development: 2015-11-19T12:14:15+01:00   bd78871a9d2e373575659c6f9f68aa9b
 templates/gift_card.liquid:
-  development: 2015-11-19T12:14:15+01:00   0498921c744a58b256f812fab3784c89
+  development: 2017-11-20T16:05:53+01:00   3c4780b45df868442e1c968ef9b5fd92
 templates/index.liquid:
   development: 2015-11-19T12:14:15+01:00   6c8661e0fda832ad0c0cfeb714e701ec
 templates/list-collections.liquid:
@@ -246,10 +246,10 @@ templates/page.review.liquid:
 templates/password.liquid:
   development: 2015-11-19T12:14:15+01:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
-  development: 2017-10-11T22:59:17+02:00   dbb286ce4f8adfbb6c20fdaae6730d3d
+  development: 2017-12-02T12:59:55+01:00   4b8f1f7ba94254d6b646d90a82dff08e
 templates/product.slider-composition.liquid:
-  development: 2017-10-12T00:12:10+02:00   44d383dc4c214e7876f0ab916f4b794a
+  development: 2017-12-01T11:26:33+01:00   0ee38237b5950a820e1a3b4d084c6de4
 templates/search.elpm_metaf.liquid:
-  development: 2017-10-13T18:59:57+02:00   c69023d356903d4865d94055ec016ac5
+  development: 2017-11-24T16:07:49+01:00   fd4ed3ed157b3a5db4994751d6d5a62c
 templates/search.liquid:
   development: 2017-02-18T11:52:24+01:00   e0507b7bfc12d5e0f7ef25b4c800a705

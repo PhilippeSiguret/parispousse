@@ -40,6 +40,7 @@
                                                             </div>
                                         <hr class="hr--clear">
                                         
+
                                         {% include 'product-description' %}
 
                                 </div>
@@ -106,19 +107,19 @@
                     </script>
 
                     <script>
-                                 jQuery(document).ready(function($) {
-                                    $('.carousel').carousel({
-                                            interval: 8000
-                                    });
+                         jQuery(document).ready(function($) {
+                            $('.carousel').carousel({
+                                    interval: 8000
+                            });
 
-                                    //Handles the carousel thumbnails
-                                    $('[id^=carousel-selector-]').click(function() {
-                                            var id = this.id.substr(this.id.lastIndexOf("-") + 1);
-                                            var id = parseInt(id);
-                                            $('#slider-products-v2').carousel(id);
-                                    });
+                            //Handles the carousel thumbnails
+                            $('[id^=carousel-selector-]').click(function() {
+                                    var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+                                    var id = parseInt(id);
+                                    $('#slider-products-v2').carousel(id);
+                            });
 
-                                    });
+                            });
                 </script>
 
         </div>

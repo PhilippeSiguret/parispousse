@@ -1,6 +1,17 @@
 <!-- /templates/blog.liquid -->
 {% paginate blog.articles by 5 %}
 
+<style type="text/css">
+  .tags span {
+    font-family: "Big Caslon","Book Antiqua","Palatino Linotype",Georgia,serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    font-size: 1.8125em;
+  }
+
+</style>
+
 <div class="grid">
 
   <div class="grid__item large--five-sixths push--large--one-twelfth">
@@ -17,7 +28,16 @@
           <span class="fallback-text">RSS</span>
         </a>
       </h1>
+
+      {% for tag in blog.all_tags %}
+        <span class="tags">
+           <a href="https://www.parispousse.fr/blogs/blog-paris-pousse/tagged/{{ tag }}" class="icon-fallback-text rss-link">{{ tag }}</a>
+        </span>
+      {% endfor %}
+
       <hr class="hr--small">
+
+
     </header>
 
     {% for article in blog.articles %}

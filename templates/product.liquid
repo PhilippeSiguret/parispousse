@@ -57,10 +57,10 @@
 
 						<span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
 							{{ current_variant.price | money }}
+
 						</span>
 
 						<hr class="hr--small">
-
 						<meta itemprop="priceCurrency" content="{{ shop.currency }}">
 						<link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
@@ -76,6 +76,7 @@
 								{% endif %}
 							{% endfor %}
 						</select>
+
 						<div id="infiniteoptions-container"></div></br>
 					{% comment %}
 					 <div id="timer-plus-display" data-toggle="tooltip" data-placement="left" data-original-title="Commandez avant que le compteur n’affiche zéro, pour être livré dès la semaine prochaine."></div>
@@ -99,7 +100,16 @@
 				</div>
 
 				<div class="product-single__description rte" itemprop="description">
+
+
+							{% for variant in product.variants %}
+								{{% if variant.selected == true %}}
+									{{ variant.metafields.c_f.livraison }}
+								{{% endif %}}
+							{% endfor %}					
 					{{ product.description }}
+
+
 				</div>
 
 				{% if settings.social_sharing_products %}
@@ -167,3 +177,4 @@
 		{% endif %}
 	});
 </script>
+
