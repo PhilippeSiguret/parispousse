@@ -178,7 +178,7 @@ $gutter: 30px;
 
 .giftcard__code {
   position: absolute;
-  bottom: $gutter;
+  bottom: $gutter * 3;
   text-align: center;
   width: 100%;
   z-index: 50;
@@ -195,13 +195,13 @@ $gutter: 30px;
 .giftcard__code__inner {
   display: inline-block;
   vertical-align: baseline;
-  background-color: #fff;
+  {% comment %}background-color: #fff;{% endcomment %}
   padding: .5em;
   border-radius: 4px;
   max-width: 450px;
-  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  {% comment %}-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
-
+{% endcomment %}
   .giftcard__code--small & {
     overflow: auto;
   }
@@ -211,8 +211,8 @@ $gutter: 30px;
   font-weight: 400;
   font-size: 1.875em;
   text-transform: uppercase;
-  border-radius: 2px;
-  border: 1px dashed $colorBorder;
+  {% comment %}border-radius: 2px;
+  border: 1px dashed $colorBorder;{% endcomment %}
   padding: .4em .5em;
   display: inline-block;
   vertical-align: baseline;
@@ -227,9 +227,9 @@ $gutter: 30px;
 
 .giftcard__amount {
   position: absolute;
-  top: 0;
-  right: 0;
-  color: #fff;
+  top: 25%;
+  right: 34%;
+  color: #000;
   font-size: 2.75em;
   line-height: 1.2;
   padding: $gutter / 2;
@@ -237,7 +237,7 @@ $gutter: 30px;
 
   strong {
     display: block;
-    text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    {% comment %}text-shadow: 3px 3px 0 rgba(0,0,0,0.1);{% endcomment %}
   }
 }
 

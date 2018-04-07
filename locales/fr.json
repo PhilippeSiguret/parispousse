@@ -270,7 +270,7 @@
       "active": "Expire le {{ expiry }}",
       "redeem": "Entrez ce code lors du paiement pour utiliser votre carte-cadeau",
       "shop_link": "Boutique",
-      "print": "Imprimer",
+      "print": "Imprimer maintenant",
       "add_to_apple_wallet": "Ajouter à Apple Wallet"
     }
   },

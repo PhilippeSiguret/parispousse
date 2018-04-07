@@ -18,7 +18,6 @@
     <p>
       <span class="date">{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</span>
     </p>
-
     {% if order.cancelled %}
       <div class="errors">
         {% assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" %}

@@ -1,6 +1,91 @@
-<div> 
-		<a class="open-popup" href="#livraison"> <u><i class="fa fa-truck" aria-hidden="true"></i>&nbspEn savoir plus sur la livraison</u></a>
-		<div id="livraison" class="mfp-hide">
-				{{ pages.livraison.content }}
-		</div>              
+<div id="livraisonBox"> 
+		{% for variant in product.variants %}
+			<span id="variant-id-meta-{{ variant.id }}" data-meta="{{ variant.metafields.c_f.livraison }}"></span>
+		{% endfor %}	
+
+		<div class="variantdes France">
+			<p data-toggle="tooltip" data-placement="bottom" title="Quand le compteur affiche zéro, nous groupons les commandes pour les expédier le lendemain. </br> N'attendez pas que le compteur atteigne zéro pour passer commande." data-html="true" >
+				<i class="fa fa-clock-o" aria-hidden="true"></i>
+				<span id="clockFrance"></span>
+			</p>
+			<p data-toggle="tooltip" data-placement="bottom" title="Le transporteur vous contactera pour arranger une date de livraison une fois le colis reçu à l'entrepôt dans les 5 jours ouvrés. </br>	La livraison est à 9 € et <strong>gratuite à partir de 150 €</strong> d'achat" data-html="true">
+				<i class="fa fa-truck" aria-hidden="true" ></i>
+				<i>Livrable dans <strong>toute la France</strong></i>
+			</p>
+		</div>
+		<div class="variantdes Île-de-France">
+			<p data-toggle="tooltip" data-placement="bottom" title="Quand le compteur affiche zéro, nous groupons les commandes pour les expédier le lendemain. </br> N'attendez pas que le compteur atteigne zéro pour passer commande." data-html="true" >
+				<i class="fa fa-clock-o" aria-hidden="true"></i>
+				<span id="clockIDF"></span>
+			</p>
+			<p data-toggle="tooltip" data-placement="bottom" title="Le transporteur vous contactera pour arranger une date de livraison une fois le colis reçu à l'entrepôt dans les 5 jours ouvrés. </br>	La livraison est à 9 € et <strong>gratuite à partir de 150 €</strong> d'achat" data-html="true">
+				<i class="fa fa-truck" aria-hidden="true" ></i>
+				<i>Livrable en <strong>Île de France uniquement</strong></i>	
+			</p>
+		</div>
+		<div class="variantdes Paris-petite-couronne">
+
+			<p data-toggle="tooltip" data-placement="bottom" title="Commandez <strong>avant 16h00</strong> (en semaine) pour recevoir votre commande aujourd'hui!" data-html="true">
+				<i class="fa fa-clock-o" aria-hidden="true"></i>
+				<span  id="clockPasha"></span>
+			</p>
+			<p data-toggle="tooltip" data-placement="bottom" title="
+				Vous pourrez choisir un créneau de livraison de 2h après votre commande : 
+				<br> → entre 18h et 00h en semaine
+				<br> → entre 9h et 14h le samedi
+				<br>La livraison est à 9 € et <strong>gratuite à partir de 150 €</strong> d'achat" data-html="true">
+				<i class="fa fa-truck" aria-hidden="true" ></i>
+				<i>Livrable uniquement à <strong> Paris, Boulogne, Issy-les-moulineaux, Vanves, Neuilly-sur-Seine, Levallois-Perret</strong>.</i>
+
+			</p>
+		</div>
+		<!-- Countdown  -->
+			<script>
+	        	var nextMonday = new Date();
+					nextMonday.setDate(nextMonday.getDate() + (1 + 7 - nextMonday.getDay()) % 7);
+					nextMonday.setHours(23);
+					nextMonday.setMinutes(59);
+					nextMonday.setSeconds(0);
+	            $('#clockFrance').countdown(nextMonday, function(event) {
+	              $(this).html(event.strftime('%-D jours, %-H:%M:%S'));
+	            })	;
+
+	            $('#clockIDF').countdown(nextMonday, function(event) {
+	              $(this).html(event.strftime('%-D jours, %-H:%M:%S'));
+	            })	;
+
+		      	var Pasha = new Date();
+					Pasha.setHours(16);
+					Pasha.setMinutes(0);
+					Pasha.setSeconds(0);
+
+	            $('#clockPasha').countdown(Pasha, function(event) {
+	              $(this).html(event.strftime('%-H:%M:%S'));
+	            })	;
+
+	        </script>
+
+		{% comment %}
+		<!-- Call Livraison Modal --> 
+
+				<p><a data-toggle="modal" data-target="#livraison" href="#"> <u>En savoir plus <i class="fa fa-caret-down" aria-hidden="true"></i></u></a></p>
+
+		<!-- Modal livraison -->
+					<div class="modal fade" id="livraison" tabindex="-1" role="dialog" aria-labelledby="livraisonLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h3 class="modal-title" id="livraisonLabel">{{ pages.livraison.title}} </h3>
+					      </div>
+					      <div class="modal-body text-left">
+					        {{ pages.livraison.content }}
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+		{% endcomment %}
+
 </div>

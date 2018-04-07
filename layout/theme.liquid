@@ -54,6 +54,15 @@
         {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
     {% endif %}
  
+	{% comment %} 
+  		Script to decrease infinite option load time 
+  		
+    {% endcomment %}
+
+  <script src="//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}"></script>
+
+  
+  
     <!-- FullStory ================================================== -->
         <script>
         window['_fs_debug'] = false;
@@ -129,7 +138,14 @@
         {{ 'algolia_sort_orders.js' | asset_url | script_tag }}
         {{ 'algolia_instant_search.js' | asset_url | script_tag }}
     <!-- /Algolia head -->
+    <!-- Jquery CountDown Timer -->
 
+        {{ 'jquery.countdown.js' | asset_url | script_tag }}
+
+
+
+    <!-- Autorisation GSuite ================================================== -->
+	  	<meta name="google-site-verification" content="eCitWSF5jaOjE_UtMJqMxZHsicqtnrx7B7dkhpz03OY" />
 
 
 </head>
@@ -628,10 +644,10 @@
         </footer>
 
     </div>
-
+    
+    {{ 'theme.js' | asset_url | script_tag }}
     {{ 'fastclick.min.js' | asset_url | script_tag }}
     {{ 'timber.js' | asset_url | script_tag }}
-    {{ 'theme.js' | asset_url | script_tag }}
 
     {% comment %}
         Template-specific js
@@ -700,14 +716,6 @@
                 });
             });
         </script>
-        <script type="text/javascript">
-        window._chatlio = window._chatlio||[];
-        !function(){ var t=document.getElementById("chatlio-widget-embed");if(t&&window.ChatlioReact&&_chatlio.init)return void _chatlio.init(t,ChatlioReact);for(var e=function(t){return function(){_chatlio.push([t].concat(arguments)) }},i=["configure","identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];n.id="chatlio-widget-embed",n.src="https://w.chatlio.com/w.chatlio-widget.js",n.async=!0,n.setAttribute("data-embed-version","2.1");
-             n.setAttribute('data-widget-id','20243c59-16f1-47f8-7a1c-ecd25dcd7ea1');
-             c.parentNode.insertBefore(n,c);
-        }();
-</script>
-
 
     {% endif %}
 
@@ -752,7 +760,14 @@
             }
         });
     </script>
+    {% comment %}Auto select available options in a product {% endcomment %}
+    {% include 'linked-options' %}
+
     <!-- Mailchimp Popup -->
-            <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us14.list-manage.com","uuid":"f89d2b0018555252f0f44e2be","lid":"b85d3996b5"}) })</script>
+        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us14.list-manage.com","uuid":"f89d2b0018555252f0f44e2be","lid":"b85d3996b5"}) })</script>
+
+{% include 'banana-stand-footer' %}
+
+
 </body>
 </html>

@@ -25,15 +25,16 @@
         {% endif %}
         <a href="{{ shop.url }}{{ blog.url }}.atom" class="icon-fallback-text rss-link">
           <span class="icon icon-rss" aria-hidden="true"></span>
-          <span class="fallback-text">RSS</span>
+          <span class="fallback-text">RSS</span> 
         </a>
       </h1>
 
-      {% for tag in blog.all_tags %}
-        <span class="tags">
-           <a href="https://www.parispousse.fr/blogs/blog-paris-pousse/tagged/{{ tag }}" class="icon-fallback-text rss-link">{{ tag }}</a>
-        </span>
-      {% endfor %}
+      <!-- /snippets/tags-article.liquid -->
+          {% for tag in blog.all_tags %}
+            <span class="tags">
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="text-link">{{ tag }}</a>
+            </span>
+          {% endfor %}
 
       <hr class="hr--small">
 
