@@ -35,23 +35,33 @@
 
     <!-- CSS ================================================== -->
     {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css' | stylesheet_tag }}
-    {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
-    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'application.scss' | asset_url | stylesheet_tag }}
+  	
+    
+	{% comment %}
+  		{{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+   		{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  
+  	{% endcomment %}
     {% include 'google-fonts' %}
+  
+     
 
 
     <!-- Header hook for plugins ================================================== -->
     {{ content_for_header }}
     {% include 'oldIE-js' %}
-
-    {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
-    {{ 'modernizr.min.js' | asset_url | script_tag }}
+     {{ 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js' | script_tag }}
+  <!--	<script src="{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'  }}" defer></script>
+  -->	<script src="{{ 'modernizr.min.js' | asset_url  }}" defer></script>
+  
 
     {% comment %}
         If you store has customer accounts disabled, you can remove the following JS file
     {% endcomment %}
     {% if template contains 'customers' %}
-        {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  		<script src="{{ 'shopify_common.js' | asset_url  }}" defer></script>
+        
     {% endif %}
  
 	{% comment %} 
@@ -59,7 +69,7 @@
   		
     {% endcomment %}
 
-  <script src="//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}"></script>
+  <script src="//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}" defer></script> 
 
   
   
@@ -84,7 +94,8 @@
 
 
     <!-- Boostrap ================================================== -->
-        {{ 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js' | script_tag }}
+  		
+       <!--   {{ 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js' | script_tag }}  -->
         {{ 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js' | script_tag }}
         {{ 'https://cdn.rawgit.com/HubSpot/tether/master/dist/js/tether.min.js' | script_tag }}
         {{ 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js' | script_tag }}
@@ -123,9 +134,11 @@
         <script type="text/template" id="template_algolia_instant_search_no_result">{% include 'algolia_instant_search_no_result.hogan' %}</script>
         {{ '//cdn.jsdelivr.net/fontawesome/4.4.0/css/font-awesome.min.css' | stylesheet_tag }}
         {{ '//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css' | stylesheet_tag }}
+         {{ 'favico.js' | asset_url | script_tag }}
+        
         {{ '//cdn.polyfill.io/v2/polyfill.min.js' | script_tag }}
         {{ '//cdn.jsdelivr.net/lodash/3.7.0/lodash.min.js' | script_tag }}
-        {{ '//cdn.jsdelivr.net/jquery/2/jquery.min.js' | script_tag }}
+        {{ '//cdn.jsdelivr.net/jquery/2/jquery.min.js' | script_tag }} 
         {{ '//cdn.jsdelivr.net/hogan.js/3/hogan.min.js' | script_tag }}
         {{ '//cdn.jsdelivr.net/autocomplete.js/0.24.2/autocomplete.jquery.min.js' | script_tag }}
         {{ '//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js' | script_tag }}
@@ -316,20 +329,20 @@
                                     {% endcomment %}
                                     {% assign logo_inverted_url = 'logo-inverted.png' | asset_url %}
                                     <a href="/" itemprop="url" class="site-header__logo-link{% if settings.logo_use_inverted %} logo--has-inverted{% endif %}">
-                                        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="small--hide">
+                                        <img src="{{ 'logo_250x100.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="small--hide">
                                         <img src="https://cdn.shopify.com/s/files/1/1063/7402/t/2/assets/checkout_logo.png?18408082231618623106" alt="{{ shop.name }}" itemprop="logo" class="small--show medium--hide large--hide" style="max-width: 140px;">
                                     </a>
 
                                     {% if settings.logo_use_inverted %}
                                         <a href="/" itemprop="url" class="logo--inverted">
-                                            <img src="{{ 'logo-inverted.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                                            <img src="{{ 'logo-inverted_250x100.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
                                         </a>
                                     {% endif %}
                                 {% else %}
                                     <a href="/" itemprop="url">{{ shop.name }}</a>
                                 {% endif %}
                             {% if template == 'index' %}
-                                </h1>
+                                </h1> 
                             {% else %}
                                 </div>
                             {% endif %}
@@ -649,38 +662,9 @@
     {{ 'fastclick.min.js' | asset_url | script_tag }}
     {{ 'timber.js' | asset_url | script_tag }}
 
-    {% comment %}
-        Template-specific js
-    {% endcomment %}
-    <script>
-        {% if resetPassword %}
-            $(function() {
-                timber.resetPasswordSuccess();
-            });
-        {% endif %}
-    </script>
-    {% comment %}
-            Popover Activation
-    {% endcomment %}
-
-    <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-    </script>
-    {% comment %}
-            Tooltip Activation
-    {% endcomment %}
-
-    <script>
-        $(function() {
-                $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
     {% if template contains 'index' and hero_enabled %}
         {{ 'slick.min.js' | asset_url | script_tag }}
-        {{ 'slick-theme.js' | asset_url | script_tag }}
+       {% comment %} {{ 'slick-theme.js' | asset_url | script_tag }}{% endcomment %}
         <script>
             jQuery(function($) {
                 slickTheme.init({
@@ -690,10 +674,11 @@
                     parallax     : {{ hero_parallax }}
                 });
             });
+          
         </script>
     {% elsif template contains 'product' %}
         {{ 'slick.min.js' | asset_url | script_tag }}
-        {{ 'scrolltofixed.min.js' | asset_url | script_tag }}
+        {{ 'scrolltofixed.min.js' | asset_url | script_tag }} 
     {% endif %}
 
     {% comment %}
@@ -701,25 +686,10 @@
         Documentation:
             - http://shopify.com/timber#ajax-cart
     {% endcomment %}
-    {% if settings.cart_type == 'drawer' %}
-        {{ 'handlebars.min.js' | asset_url | script_tag }}
-        {% include 'ajax-cart-template' %}
-        {{ 'ajax-cart.js' | asset_url | script_tag }}
-        <script>
-            jQuery(function($) {
-                ajaxCart.init({
-                    formSelector: '#AddToCartForm',
-                    cartContainer: '#CartContainer',
-                    addToCartSelector: '#AddToCart',
-                    enableQtySelectors: true,
-                    moneyFormat: {{ shop.money_format | json }}
-                });
-            });
-        </script>
+    
 
-    {% endif %}
-
-    {% if settings.product_zoom_enable and template contains 'product' %}
+    {% if  template contains 'product' %}
+         
         {{ 'magnific-popup.min.js' | asset_url | script_tag }}
         {% comment %}
         Accept Open Popup from other places 
@@ -727,12 +697,7 @@
         idea that came from https://gist.github.com/carolineschnapp/288da541ea2b69aedc3b
 
         {% endcomment %}
-        <script>
-            $('.open-popup').magnificPopup({
-                type:'inline',
-                midClick: true
-            });
-        </script>
+        
 
     {% elsif search_modal == true %}
         {{ 'magnific-popup.min.js' | asset_url | script_tag }}
@@ -749,25 +714,64 @@
             {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--modal' %}
         </div>
     {% endif %}
-    <script>
-        $('body').on('click', '[name="checkout"], [name="goto_pp"], [name="goto_gc"]', function() {
-            if ($('#agree').is(':checked')) {
-                $(this).submit();
-            }
-            else {
-                alert("Vous devez accepter les conditions générales de vente pour valider votre panier");
-                return false;
-            }
-        });
-    </script>
+   
     {% comment %}Auto select available options in a product {% endcomment %}
     {% include 'linked-options' %}
 
     <!-- Mailchimp Popup -->
-        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us14.list-manage.com","uuid":"f89d2b0018555252f0f44e2be","lid":"b85d3996b5"}) })</script>
+        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false" ></script><script type="text/javascript" defer>require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us14.list-manage.com","uuid":"f89d2b0018555252f0f44e2be","lid":"b85d3996b5"}) })</script>
 
 {% include 'banana-stand-footer' %}
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&subset=latin-ext');
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+  	font-family: 'Libre Baskerville', serif;
+    font-weight: 600;
+  }
+  h1, .h1{
+    font-size: 30px !important;
+  }
+</style>  
+{% if settings.cart_type == 'drawer' %}
+        {{ 'handlebars.min.js' | asset_url | script_tag }}
+        {% include 'ajax-cart-template' %}
+        {{ 'ajax-cart.js' | asset_url | script_tag }}
+        <script>
+            jQuery(function($) {
+                ajaxCart.init({
+                    formSelector: '#AddToCartForm',
+                    cartContainer: '#CartContainer',
+                    addToCartSelector: '#AddToCart',
+                    enableQtySelectors: true,
+                    moneyFormat: {{ shop.money_format | json }}
+                });
+            });
+          {% if resetPassword %}
+              $(function() {
+                  timber.resetPasswordSuccess();
+              });
+          {% endif %}
+          $(function () {
+              $('[data-toggle="popover"]').popover();
+             $('[data-toggle="tooltip"]').tooltip();
+          });
+         $('.product-single__photos').magnificPopup({
+            type:'image',
+            delegate: 'img',
+             gallery : {enabled: true }
+          });
+          $('body').on('click', '[name="checkout"], [name="goto_pp"], [name="goto_gc"]', function() {
+            if ($('#agree').is(':checked')) {
+              $(this).submit();
+            }
+            else {
+              alert("Vous devez accepter les conditions générales de vente pour valider votre panier");
+              return false;
+            }
+          });
+    </script>
 
+    {% endif %}
 
 </body>
 </html>
