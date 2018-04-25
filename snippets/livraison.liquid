@@ -41,7 +41,6 @@
 		</div>
 		<!-- Countdown  -->
 			<script>
-              $(function(){ 
 	        	var nextMonday = new Date();
 					nextMonday.setDate(nextMonday.getDate() + (1 + 7 - nextMonday.getDay()) % 7);
 					nextMonday.setHours(23);
@@ -63,7 +62,6 @@
 	            $('#clockPasha').countdown(Pasha, function(event) {
 	              $(this).html(event.strftime('%-H:%M:%S'));
 	            })	;
-              });  
 
 	        </script>
 

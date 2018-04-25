@@ -12,13 +12,13 @@
 {% endcomment %}
 {% assign respond_js_secret_key = shop.domain | md5 %}
 {% unless search.terms == respond_js_secret_key %}
- 
+
 {% comment %}
   Avoid accessing search.results before the opening paginate tag.
   If you do, the pagination of results will be broken.
 {% endcomment %}
 {% paginate search.results by 12 %}
- 
+
   <div class="grid">
     <div class="grid__item">
       <header class="section-header text-center">
@@ -35,11 +35,8 @@
       </header>
 
       {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--page' %}
-      
-      
-      
       {% if search.performed %}
-               
+
         <hr class="hr--medium hr--clear">
 
         <div class="grid-uniform">
@@ -121,7 +118,7 @@
 
 {% endpaginate %}
 
-{% else %} 
+{% else %}
   {% include 'respond' %}
   {% layout none %}
 {% endunless %}

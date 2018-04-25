@@ -37,21 +37,18 @@
                 {% endcomment %}
                 <ul class="hide-bullets">
                     <li class="grid__item large--one-eighth">
-                        <a class="thumbnail" id="carousel-selector-0"><img data-src="{{ featured_image | img_url: 'master' }}" src="{{ featured_image | img_url: '80x80' }}"></a>
+                        <a class="thumbnail" id="carousel-selector-0"><img src="{{ featured_image | | img_url: '80x80' }}"></a>
                     </li>
                     {% comment %}
                         Display rest of product images, not repeating the featured one
                     {% endcomment %}
-                    {% assign counter = 1 %}
                         {% for image in product.images %}
                             {% unless image contains featured_image %}
-                           
                                 <li class="grid__item large--one-eighth">
-                                    <a class="thumbnail" id="carousel-selector-{{ counter }}">
-                                        <img data-src="{{ image.src | img_url: 'master' }}" src="{{ image.src | img_url: '80x80' }}">
+                                    <a class="thumbnail" id="carousel-selector-{{ forloop.index0 }}">
+                                        <img src="{{ image.src | img_url: '80x80' }}">
                                     </a>
                                 </li>
-                                   {% assign counter = counter | plus: 1 %}
                             {% endunless %}
                         {% endfor %}
                 </ul>

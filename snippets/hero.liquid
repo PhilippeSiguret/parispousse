@@ -46,9 +46,7 @@
             <div class="hero__image" style="background-image: url('{{ slide_img | asset_url }}');" data-image="{{ slide_img | asset_url }}"></div>
           {% else %}
              <div class="hero__image">
-               
-              <img src="{{ slide_img | asset_img_url: '990x' }}" alt="{{ settings[slide_heading] }}">
-            
+              <img src="{{ slide_img | asset_url }}" alt="{{ settings[slide_heading] }}">
             </div>          
           {% endif %}
           <div class="hero__text-wrap">

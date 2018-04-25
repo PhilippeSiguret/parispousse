@@ -211,57 +211,22 @@
     });
 
     // Hits
-   instant.search.addWidget(
-  {
-    init: function (params) {
-      params.helper.setQueryParameter('hitsPerPage', 12);
-
-      function scrollhandler() {
-
-        var isAtBottomOfPage = $(window).scrollTop() + $(window).height()
-                                > $(document).height() - 500;
-
-        if (readyToFetchMore && isAtBottomOfPage) {
-          readyToFetchMore = false;
-          params.helper.nextPage().search();
+    instant.search.addWidget(
+      instantsearch.widgets.hits({
+        container: '.ais-hits-container',
+        hitsPerPage: instant.hitsPerPage,
+        templates: {
+          empty: instant.templates.empty,
+          item: instant.templates.product
+        },
+        transformData: {
+          item: function (product) {
+            product.can_order = product.inventory_policy === 'continue' || product.inventory_quantity > 0;
+            return product;
+          }
         }
-      }
-
-      $(window).bind("scroll", scrollhandler);
-    },
-
-    render: function (params) {
-
-      readyToFetchMore = true;
-
-      var hits = params.results.hits;
-
-      hitsContainer = $(".ais-hits-container .ais-hits");
-
-      if (params.state.page === 0) { // because '0' means we changed the query
-        hitsContainer.html('');
-      }
-
-      var html = '';
-
-      if (params.results.nbHits > 0) {
-
-        html = hits.map(function (hit) {
-
-      
-        return '<div class="ais-hits--item"><div class="ais-hit ais-product" data-handle="'+hit.handle+'" data-variant-id="'+hit.objectID+'"> <div class="ais-hit--picture"> <img src="'+hit.image+'" alt=""> </div> <div class="ais-hit--details"> <p class="ais-hit--title"> <a href="/products/'+hit.handle+'?variant='+hit.objectID+'" onclick="void(0)" title="" style="color: #000">'+hit.title+'</a> </p> <p class="ais-hit--subtitle" title="" style="display: none"> </p> <p class="ais-hit--price" style="color: #000"><b>'+hit.price.toFixed(2)+' &euro;</b></p> <!-- Extra info examples - Remove the display: none to show them --> <p class="ais-hit--info" style="display: none"> <span class="algolia-sku">Crealab - 25 HT</span> <span class="algolia-weight">0.0kg</span> </p> <!-- Tags example - Remove the display: none to show them --> <p class="ais-hit--tags" style="display: none"> </p> <p class="ais-hit--cart" style="display: none"> <span class="ais-hit--cart-button ais-hit--cart-button__disabled"> Out of stock </span> </p> </div> </div> </div>';
-
-        });
-
-      } else {
-          html = ['Pas de résultats :( Essayez d\'enlever les filtres ou modifier votre recherche'];
-      }
-      console.log(html,"html");
-
-      hitsContainer.append(html.join(''));
-    }
-  }
-);
+      })
+    );
 
     // Redirect to product on click
     instant.search.addWidget({
@@ -295,7 +260,6 @@
 
     // Pagination
     {% comment %}
-    
           instant.search.addWidget(
             instantsearch.widgets.pagination({
               container: '.ais-pagination-container',
