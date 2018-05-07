@@ -32,9 +32,9 @@ assets/gift-card.scss.liquid:
 assets/handlebars.min.js:
   development: 2018-04-07T16:00:22+02:00   b3c11508a224ee83f86e2fc6491e9751
 assets/hero_slide_1.jpg:
-  development: 2018-04-18T10:47:30+02:00   a694ed7b331b234cc1c98d03982879ac
+  development: 2018-05-02T15:03:50+02:00   6d68c3bb986cdeb7960037b71db7f561
 assets/hero_slide_2.jpg:
-  development: 2018-04-07T16:00:22+02:00   25d70f425b65551e9af6e66c27577624
+  development: 2018-04-25T18:30:21+02:00   3b9611c8b8767c86dd8449de33e64b0c
 assets/hero_slide_3.jpg:
   development: 2018-04-18T10:51:58+02:00   f473cce7688a5ec1f07183aafbb906d5
 assets/hero_slide_4.jpg:
@@ -86,15 +86,15 @@ assets/sss.js:
 assets/theme.js.liquid:
   development: 2018-04-07T16:00:25+02:00   f6123c318cb125abb0162c5093f65e1e
 assets/theme.scss.liquid:
-  development: 2018-04-19T14:30:06+02:00   2c64f0201af2fb3b4139b2e4f6919834
+  development: 2018-04-25T12:21:25+02:00   a4dd06024cdd684e08433294eefae400
 assets/timber.js.liquid:
-  development: 2018-04-07T16:00:25+02:00   6e587c5434f3186594514cbbd9cbd855
+  development: 2018-04-25T14:38:06+02:00   6e587c5434f3186594514cbbd9cbd855
 assets/timber.scss.liquid:
-  development: 2018-04-07T16:00:25+02:00   ab1900c1b725319952e20c796ebe2339
+  development: 2018-04-25T12:22:16+02:00   ae324f562eab223aacc6084786a3e3f5
 assets/variant_selection.js:
   development: 2018-04-07T16:00:25+02:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2018-04-19T14:04:27+02:00   86525891685367734230437b004e4c3f
+  development: 2018-05-02T15:03:50+02:00   01225bbeb7540430138f131ca89384a3
 config/settings_schema.json:
   development: 2018-04-07T16:00:29+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
@@ -277,10 +277,6 @@ templates/password.liquid:
   development: 2018-04-07T16:00:29+02:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
   development: 2018-04-19T14:27:12+02:00   8266ae37746ab5f5f1f5a92b2d5c6d86
-templates/product.slider-composition.liquid:
-  development: 2018-04-07T16:00:29+02:00   de74c1abf5784a7f6a78a7a4dff6bcb1
-templates/product2.liquid:
-  development: 2018-04-07T16:00:29+02:00   195c2bd792d635182f1d0ce61ad47248
 templates/search.SEOManagerTags.liquid:
   development: 2018-04-07T16:00:29+02:00   50492ed9246da25cb26e58acf47fa9a3
 templates/search.elpm_metaf.liquid:
