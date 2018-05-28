@@ -32,7 +32,7 @@ theme.vendorPrefix = (function () {
 
 theme.variables = {
   productPageLoad     : false,
-  productPageSticky   : true,
+  productPageSticky   : false,
 
   // Breakpoints from src/stylesheets/global/variables.scss.liquid
   mediaQuerySmall     : 'screen and (max-width: 590px)',
@@ -127,6 +127,7 @@ theme.backButton = function () {
 
 theme.setBreakpoints = function () {
   if(!theme.cache.$html.hasClass('lt-ie9')) {
+    /*
     enquire.register(theme.variables.mediaQuerySmall, {
       match: function () {
         theme.createImageCarousel();
@@ -151,6 +152,15 @@ theme.setBreakpoints = function () {
         {% endif %}
       }
     });
+    */
+    
+        theme.createImageCarousel();
+        theme.clearCollageGridHeights();
+        theme.variables.bpSmall = true;
+		{% if settings.product_zoom_enable %}
+          // reinit product zoom
+          theme.productImageZoom();
+        {% endif %}
   }
 };
 
@@ -256,7 +266,7 @@ theme.searchModal = function() {
 }
 
 theme.productImageZoom = function() {
-  if (!theme.cache.$productImagePhoto.length || theme.variables.bpSmall) {
+  if (!theme.cache.$productImagePhoto.length) {
     return;
   };
 
@@ -301,7 +311,17 @@ theme.createImageCarousel = function () {
   theme.cache.$productImages.slick({
     arrows         : false,
     dots           : true,
-    adaptiveHeight : true
+    asNavFor: '.product-photos-thumbnails'
+  });
+
+  $('.product-photos-thumbnails').slick({
+    slidesToScroll: 1,
+    asNavFor: '.product-single__photos',
+    dots: false,
+    centerMode: true,
+    focusOnSelect: true,
+    variableWidth: true,
+    infinite: false
   });
 };
 
@@ -362,6 +382,7 @@ theme.clearCollageGridHeights = function () {
 }
 
 theme.initStickyProductMeta = function () {
+  /*
   if (theme.cache.$productSingleMeta.find('#shopify-product-reviews').length) {
     return;
   }
@@ -390,18 +411,19 @@ theme.initStickyProductMeta = function () {
     Calculate when to detach fixed element to avoid content overlap.
     Subtract product copy height from the limit because plugin uses offset().top
   ==============================================================================*/
-  var calcLimit = theme.cache.$productSingleWrapper.offset().top + theme.cache.$productSingleWrapper.height();
+  
+  /*var calcLimit = theme.cache.$productSingleWrapper.offset().top + theme.cache.$productSingleWrapper.height();
   calcLimit -= productCopyHeight;
 
   // Init sticky if desc shorter than images and fits in viewport
   if (productCopyHeight < productImagesHeight && productCopyHeight < theme.cache.$window.height()) {
-    theme.variables.productPageSticky = true;
+    theme.variables.productPageSticky = false;
     theme.cache.$productSingleMeta.scrollToFixed({
       limit: calcLimit
     });
   } else {
     theme.variables.productPageSticky = false;
-  }
+  }*/
 }
 
 theme.hideSingleSelectors = function () {
@@ -437,6 +459,7 @@ theme.showVariantImage = function (src, imgObject, el) {
   }
 
   function scrollToImage(onLoad) {
+    
     if (theme.variables.bpSmall) {
       // Switch carousel slide, unless it's the first photo on load
       var imageIndex = $newImage.parent().attr('index');
@@ -450,7 +473,7 @@ theme.showVariantImage = function (src, imgObject, el) {
       if (imageIndex != 0 || !onLoad) {
         theme.cache.$productImages.slickGoTo(imageIndex);
       }
-    } else {
+    } else {/*
       var imageIndex = $newImage.parent().index();
       // Scroll to/reorder image unless it's the first photo on load
       if (imageIndex != 0 || !onLoad) {
@@ -463,8 +486,9 @@ theme.showVariantImage = function (src, imgObject, el) {
             scrollTop: $newImage.offset().top
           }, 250);
         }
-      }
+      }*/
     }
+    
   }
 };
 
