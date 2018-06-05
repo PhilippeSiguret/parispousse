@@ -14,13 +14,13 @@
 
 <div class="product-photos-thumbnails">
   <div class="product-photo-thumb">
-    <img src="{{ featured_image | img_url: '80x80', crop: 'center' }}" alt="{{ featured_image.alt | escape }}">
+    <img src="{{ featured_image | img_url: '60x60', crop: 'center' }}" alt="{{ featured_image.alt | escape }}">
   </div>
   {% comment %} Display rest of product images, not repeating the featured one {% endcomment %} 
   {% for image in product.images %} 
   {% unless image contains featured_image %}
   <div class="product-photo-thumb">
-    <img src="{{ image.src | img_url: '80x80', crop: 'center' }}" alt="{{ image.alt | escape }}">
+    <img src="{{ image.src | img_url: '60x60', crop: 'center' }}" alt="{{ image.alt | escape }}">
   </div>
   {% endunless %} 
   {% endfor %}

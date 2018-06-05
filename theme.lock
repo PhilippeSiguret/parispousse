@@ -222,7 +222,7 @@ snippets/search-bar.liquid:
 snippets/selectCallback.liquid:
   development: 2018-04-25T14:52:14+02:00   f46bfd598014547e1fea6bf5e684a1d1
 snippets/slider.liquid:
-  development: 2018-04-26T05:55:39+02:00   fd34d009b409c4023b11e803cf4ba414
+  development: 2018-06-05T19:53:53+02:00   ab9039f281ba2ee0ce565e28de85d1b3
 snippets/social-meta-tags.liquid:
   development: 2018-04-25T14:52:14+02:00   dd9f442571dbd69f6a37f08b669c20ea
 snippets/social-sharing.liquid:
@@ -278,7 +278,7 @@ templates/page.review.liquid:
 templates/password.liquid:
   development: 2018-04-25T14:52:15+02:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
-  development: 2018-05-23T19:06:40+02:00   95407742d8c41fff02fae48220534c3a
+  development: 2018-06-05T19:00:46+02:00   7d4fb6830eef224fac14cce09bf2aa64
 templates/search.SEOManagerTags.liquid:
   development: 2018-04-25T14:52:15+02:00   50492ed9246da25cb26e58acf47fa9a3
 templates/search.elpm_metaf.liquid:
