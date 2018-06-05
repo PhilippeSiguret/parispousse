@@ -32,13 +32,13 @@ assets/gift-card.scss.liquid:
 assets/handlebars.min.js:
   development: 2018-04-25T14:52:06+02:00   b3c11508a224ee83f86e2fc6491e9751
 assets/hero_slide_1.jpg:
-  development: 2018-04-25T14:52:06+02:00   a694ed7b331b234cc1c98d03982879ac
+  development: 2018-05-29T13:43:18+02:00   d341b8b84a4f5b335806837f24bbaadb
 assets/hero_slide_2.jpg:
   development: 2018-04-25T14:52:07+02:00   25d70f425b65551e9af6e66c27577624
 assets/hero_slide_3.jpg:
   development: 2018-04-25T14:52:07+02:00   f473cce7688a5ec1f07183aafbb906d5
 assets/hero_slide_4.jpg:
-  development: 2018-04-25T14:52:07+02:00   b6c1d7494cff7c24ddbd51bfe1648964
+  development: 2018-05-28T13:34:16+02:00   d1edd884d5d472b8632fb6e06c18b158
 assets/hero_slide_5.jpg:
   development: 2018-04-25T14:52:07+02:00   30ea7111a7bac469ce8698e60eb96018
 assets/ico-select.svg.liquid:
@@ -86,7 +86,7 @@ assets/sss.js:
 assets/theme.js.liquid:
   development: 2018-05-28T12:51:54+02:00   cf79066c7775608a054211001bb22f43
 assets/theme.scss.liquid:
-  development: 2018-05-24T10:04:02+02:00   03e468684baff6f4e8b9b3f1e2ba4ec4
+  development: 2018-05-28T13:39:02+02:00   97df2b4cdbbe0a11485dbdb052119286
 assets/timber.js.liquid:
   development: 2018-04-25T14:52:11+02:00   6e587c5434f3186594514cbbd9cbd855
 assets/timber.scss.liquid:
@@ -94,7 +94,7 @@ assets/timber.scss.liquid:
 assets/variant_selection.js:
   development: 2018-04-25T14:52:11+02:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2018-04-25T14:52:15+02:00   86525891685367734230437b004e4c3f
+  development: 2018-05-29T13:43:18+02:00   69b519c176e27b24dbc3fff4b0ae361d
 config/settings_schema.json:
   development: 2018-04-25T14:52:15+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
