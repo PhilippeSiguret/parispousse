@@ -58,7 +58,7 @@ assets/jquery.countdown.js:
 assets/logo-inverted.png:
   development: 2018-04-25T14:52:09+02:00   2560de3bbdacb79e95dfe665306406ad
 assets/logo.png:
-  development: 2018-04-25T14:52:09+02:00   2336b30614cb754ab5f45efb1091f5cc
+  development: 2018-06-07T13:45:41+02:00   4fda85db931f28b8029a6cc86f360f16
 assets/magnific-popup.min.js:
   development: 2018-04-25T14:52:09+02:00   049f6e86c0d95422346c4bacfa593eb3
 assets/match-media.min.js:
@@ -84,9 +84,9 @@ assets/sss.css:
 assets/sss.js:
   development: 2018-04-25T14:52:11+02:00   60fd04db7908800e8508d33b870ced8c
 assets/theme.js.liquid:
-  development: 2018-05-28T12:51:54+02:00   cf79066c7775608a054211001bb22f43
+  development: 2018-06-07T12:57:03+02:00   cf79066c7775608a054211001bb22f43
 assets/theme.scss.liquid:
-  development: 2018-05-28T13:39:02+02:00   97df2b4cdbbe0a11485dbdb052119286
+  development: 2018-06-07T13:55:10+02:00   68c212c2e5cee260ae28f12c02881b6c
 assets/timber.js.liquid:
   development: 2018-04-25T14:52:11+02:00   6e587c5434f3186594514cbbd9cbd855
 assets/timber.scss.liquid:
@@ -94,11 +94,11 @@ assets/timber.scss.liquid:
 assets/variant_selection.js:
   development: 2018-04-25T14:52:11+02:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2018-05-29T13:43:18+02:00   69b519c176e27b24dbc3fff4b0ae361d
+  development: 2018-06-07T13:52:35+02:00   8f76911cc1176116d0d52ad4193119a4
 config/settings_schema.json:
   development: 2018-04-25T14:52:15+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2018-05-23T19:06:37+02:00   5d20e9cb547a72e246d1f818c2f543de
+  development: 2018-06-07T13:30:35+02:00   021026db54f7457f50b5d4e19a4f576c
 locales/de.json:
   development: 2018-04-25T14:52:12+02:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -222,7 +222,7 @@ snippets/search-bar.liquid:
 snippets/selectCallback.liquid:
   development: 2018-04-25T14:52:14+02:00   f46bfd598014547e1fea6bf5e684a1d1
 snippets/slider.liquid:
-  development: 2018-06-05T19:53:53+02:00   ab9039f281ba2ee0ce565e28de85d1b3
+  development: 2018-06-07T13:30:40+02:00   d61b95118e4964010787ba153660f7da
 snippets/social-meta-tags.liquid:
   development: 2018-04-25T14:52:14+02:00   dd9f442571dbd69f6a37f08b669c20ea
 snippets/social-sharing.liquid:

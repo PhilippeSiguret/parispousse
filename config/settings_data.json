@@ -25,7 +25,7 @@
     "type_base_italize_titles": false,
     "logo_use_image": true,
     "logo_use_inverted": false,
-    "logo_max_width": "250",
+    "logo_max_width": "150",
     "favicon_enable": true,
     "home_section_1": "hero",
     "home_section_2": "featured-products",
