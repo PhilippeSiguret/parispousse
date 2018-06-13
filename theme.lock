@@ -32,13 +32,13 @@ assets/gift-card.scss.liquid:
 assets/handlebars.min.js:
   development: 2018-04-25T14:52:06+02:00   b3c11508a224ee83f86e2fc6491e9751
 assets/hero_slide_1.jpg:
-  development: 2018-05-29T13:43:18+02:00   d341b8b84a4f5b335806837f24bbaadb
+  development: 2018-06-07T15:07:18+02:00   8666ad2bafae2716155095d84cc9032a
 assets/hero_slide_2.jpg:
-  development: 2018-04-25T14:52:07+02:00   25d70f425b65551e9af6e66c27577624
+  development: 2018-06-07T14:55:03+02:00   16f99700a48fb0ce1f7ffff44f729381
 assets/hero_slide_3.jpg:
   development: 2018-04-25T14:52:07+02:00   f473cce7688a5ec1f07183aafbb906d5
 assets/hero_slide_4.jpg:
-  development: 2018-05-28T13:34:16+02:00   d1edd884d5d472b8632fb6e06c18b158
+  development: 2018-06-07T15:02:13+02:00   770d13a4b7237fad5f13bcb93f279e87
 assets/hero_slide_5.jpg:
   development: 2018-04-25T14:52:07+02:00   30ea7111a7bac469ce8698e60eb96018
 assets/ico-select.svg.liquid:
@@ -94,7 +94,7 @@ assets/timber.scss.liquid:
 assets/variant_selection.js:
   development: 2018-04-25T14:52:11+02:00   de179d1a42c7af039f9a654a4731194f
 config/settings_data.json:
-  development: 2018-06-07T13:52:35+02:00   8f76911cc1176116d0d52ad4193119a4
+  development: 2018-06-07T14:51:43+02:00   17c351189e5a8dba86e88103a09091b3
 config/settings_schema.json:
   development: 2018-04-25T14:52:15+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
@@ -160,7 +160,7 @@ snippets/algolia_money_format.liquid:
 snippets/banana-stand-cart-top-container.liquid:
   development: 2018-04-25T14:52:13+02:00   e737363bcb5e5d62feb9b9329e1340b8
 snippets/banana-stand-footer.liquid:
-  development: 2018-05-23T19:06:36+02:00   5b52b3159c330f41ba9f6c7b85ee0c05
+  development: 2018-06-13T00:34:49+02:00   125478508d13120db12fc70c7b4efc79
 snippets/banana-stand-product-list-container.liquid:
   development: 2018-04-25T14:52:13+02:00   110ec4b0af2d8957d22f2a6093f4af9a
 snippets/banana-stand-product-page-container.liquid:
@@ -222,7 +222,7 @@ snippets/search-bar.liquid:
 snippets/selectCallback.liquid:
   development: 2018-04-25T14:52:14+02:00   f46bfd598014547e1fea6bf5e684a1d1
 snippets/slider.liquid:
-  development: 2018-06-07T13:30:40+02:00   d61b95118e4964010787ba153660f7da
+  development: 2018-06-13T13:48:44+02:00   3be9096021a9277aa41f827e988d9c95
 snippets/social-meta-tags.liquid:
   development: 2018-04-25T14:52:14+02:00   dd9f442571dbd69f6a37f08b669c20ea
 snippets/social-sharing.liquid:
@@ -278,7 +278,7 @@ templates/page.review.liquid:
 templates/password.liquid:
   development: 2018-04-25T14:52:15+02:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
-  development: 2018-06-05T19:00:46+02:00   7d4fb6830eef224fac14cce09bf2aa64
+  development: 2018-06-11T14:37:52+02:00   ab912f33bb26328380dbfbea664bae75
 templates/search.SEOManagerTags.liquid:
   development: 2018-04-25T14:52:15+02:00   50492ed9246da25cb26e58acf47fa9a3
 templates/search.elpm_metaf.liquid:
