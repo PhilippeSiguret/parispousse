@@ -278,7 +278,7 @@ templates/page.review.liquid:
 templates/password.liquid:
   development: 2018-06-13T14:33:03+02:00   7bc06d941025a7099ee4f87f88f9f2a6
 templates/product.liquid:
-  development: 2018-06-13T17:05:07+02:00   2a9cf5489335b143864e0dce281131ea
+  development: 2018-06-27T12:06:59+02:00   55789fc86c8e5b763e409bfbf5cee04f
 templates/search.SEOManagerTags.liquid:
   development: 2018-06-13T14:33:04+02:00   50492ed9246da25cb26e58acf47fa9a3
 templates/search.elpm_metaf.liquid:

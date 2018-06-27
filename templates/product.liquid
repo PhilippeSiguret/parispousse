@@ -70,6 +70,8 @@
 					</form>
      {% include 'banana-stand-product-page-container' %}
      	
+     			{% if product.type == 'Plante & Pot' or product.type == 'Plante seule' or product.type == 'Suspension' or product.type == 'Terrarium' %}
+
 					{% comment %}Warranty Alert{% endcomment %}
 						<p>
 						  <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -81,6 +83,8 @@
 						<div class="collapse" id="collapseExample">
 							Toutes nos plantes sont garanties un mois après la commande. Envoyez-nous une photo s'il y a le moindre pépin. Nous serons toujours là pour vous conseiller après l'achat pour prendre soin de vos plantes. Nous ne chipoterons pas sur les retours. Dites-le nous dans les 72 heures suivant la livraison - nous gérons la suite.
 						</div>
+						
+				{% endif %}
 
               		{% include 'iStock-notify-me' %}
 
