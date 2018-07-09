@@ -98,7 +98,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2018-06-13T14:33:04+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2018-06-13T14:33:00+02:00   021026db54f7457f50b5d4e19a4f576c
+  development: 2018-07-09T17:11:11+02:00   ea56e70948e6728b67bc8521e276d5e7
 locales/de.json:
   development: 2018-06-13T14:33:00+02:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
