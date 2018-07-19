@@ -86,7 +86,7 @@ assets/sss.js:
 assets/theme.js.liquid:
   development: 2018-06-13T16:57:56+02:00   a807b0f5a6dd40690ab1213460c96130
 assets/theme.scss.liquid:
-  development: 2018-06-13T18:55:09+02:00   b15a45b11021e62397a533dce8f09108
+  development: 2018-07-19T14:03:53+02:00   4a74cdeb9925d19d9557af66fb1a5a62
 assets/timber.js.liquid:
   development: 2018-06-13T14:33:00+02:00   6e587c5434f3186594514cbbd9cbd855
 assets/timber.scss.liquid:
@@ -98,7 +98,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2018-06-13T14:33:04+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2018-07-19T13:22:02+02:00   f817fabe565732511a9a867186d82574
+  development: 2018-07-19T17:29:00+02:00   a396af6a6f80aa7a58b56e1c08a22b42
 locales/de.json:
   development: 2018-06-13T14:33:00+02:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -178,9 +178,9 @@ snippets/comment.liquid:
 snippets/customers-images.liquid:
   development: 2018-06-13T14:33:01+02:00
 snippets/featured-collections.liquid:
-  development: 2018-06-13T14:33:02+02:00   6a12cf7ed063d34052742b7f1d0a11c0
+  development: 2018-07-19T14:01:03+02:00   30c4a9c19943a0dd313d2d689f5e4c66
 snippets/featured-products.liquid:
-  development: 2018-06-13T14:33:02+02:00   97c7074d7d60ae7b01193e4762f49f04
+  development: 2018-07-19T14:01:14+02:00   f7a96f1e0416288515f76c5a008ab4a1
 snippets/google-fonts.liquid:
   development: 2018-06-13T14:33:02+02:00   8e40cfa27425f9a5b955b747e1edee96
 snippets/hero.liquid:
