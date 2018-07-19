@@ -6,7 +6,7 @@ assets/ajax-loader.gif:
 assets/algolia_autocomplete.js.liquid:
   development: 2018-06-13T14:32:53+02:00   af5b15905cb0e1a00fab35412eb5efd8
 assets/algolia_config.js.liquid:
-  development: 2018-06-13T14:32:53+02:00   8180ee5595ce32ec60ecb9d95e7d309b
+  development: 2018-07-19T18:09:55+02:00   125b0ebb0debe7c7b3294d59a0380507
 assets/algolia_facets.js.liquid:
   development: 2018-06-13T14:32:53+02:00   3a166ba8651e33b39a6befe23dd50cbc
 assets/algolia_helpers.js.liquid:
@@ -98,7 +98,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2018-06-13T14:33:04+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2018-07-19T17:29:00+02:00   a396af6a6f80aa7a58b56e1c08a22b42
+  development: 2018-07-19T18:37:44+02:00   6206084a844fe14330d4eae65a0c825b
 locales/de.json:
   development: 2018-06-13T14:33:00+02:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
