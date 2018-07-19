@@ -98,7 +98,7 @@ config/settings_data.json:
 config/settings_schema.json:
   development: 2018-06-13T14:33:04+02:00   f69aa35bd5d6e74aab5928e7483dc689
 layout/theme.liquid:
-  development: 2018-07-12T15:08:01+02:00   1c492a0c997d306fc72a50baa8b3508d
+  development: 2018-07-19T13:22:02+02:00   f817fabe565732511a9a867186d82574
 locales/de.json:
   development: 2018-06-13T14:33:00+02:00   2c9db9815a3ac93a2343d72d81e643d3
 locales/en.default.json:
@@ -111,8 +111,6 @@ locales/pt-BR.json:
   development: 2018-06-13T14:33:00+02:00   e301376e7c1f157f69f09e57e555b325
 locales/pt-PT.json:
   development: 2018-06-13T14:33:00+02:00   5fed2204b62fb777d25fb4bccd5fc0f6
-snippets/SEO-All-in-one.liquid:
-  development: 2018-06-13T14:33:00+02:00   84599ff11fede4938c9d468c1d3d41a7
 snippets/SEOManager-404.liquid:
   development: 2018-06-13T14:33:00+02:00   27d5b69429e1c1fc3c0ef0f38358e6eb
 snippets/SEOManager.liquid:
