@@ -275,26 +275,30 @@
                 
                 
                         <!-- Right Floating Button -->
-                        <div style="z-index: 99999; position:  fixed;right:  0;top: 50%;transform:translateY(-50%); -webkit-transform:translateY(-50%);" class="right_button_floating ">
+                        {% comment %}<div style="z-index: 99999; position:  fixed;right:  0;top: 50%;transform:translateY(-50%); -webkit-transform:translateY(-50%);" class="right_button_floating ">
                             <a href="https://www.parispousse.fr/collections/brocplantes">
-                                <button type="button" class="btn btn-secondary float-lg-right" style="margin-right: -46px;transform: rotate(270deg);" > Broc'Plant</button>
+                                <button type="button" class="btn btn-secondary float-lg-right" style="margin-right: -46px;transform: rotate(270deg);background-color: #ff8f00;" > HALLOGREEN </button>
                             </a>
-                        </div>
+                        </div>{% endcomment %}
                 
-                {% comment %}
+                
                 <!-- .sub-header -->
                         <div class="sub-header grid">
-                                <div class="grid__item large--one-half one-whole text-center message">
-                                            <a href="/pages/livraison"><i class="fa fa-truck" aria-hidden="true"></i> France entière 
+                                {% comment %}
+                                    <div class="grid__item large--one-half one-whole text-center message">
+                                                <a href="/pages/livraison"><i class="fa fa-truck" aria-hidden="true"></i> France entière 
+                                    </div>
+                                {% endcomment %}                                
+                                <div class="grid__item one-whole text-center message">
+                                            <i class="fa fa-truck" aria-hidden="true"></i> Livraison gratuite à partir de 150€ d'achat ! </a>
                                 </div>
-                                <div class="grid__item large--one-half one-whole text-center message">
-                                            <i class="fa fa-money" aria-hidden="true"></i> Livraison gratuite à partir de 80€</a>
-                                </div>
-                                 <div class="grid__item large-- one-whole text-center message">
-                                            <i class="fa fa-home" aria-hidden="true"></i> Cactus 90/120cm, Ficus Lyrata et terrarium disponibles dans notre Pop up store Broc'plante (Paris 18e) </a>
-                                 </div>
+                                 {% comment %}
+                                     <div class="grid__item large-- one-whole text-center message">
+                                                <i class="fa fa-home" aria-hidden="true"></i> Cactus 90/120cm, Ficus Lyrata et terrarium disponibles dans notre Pop up store Broc'plante (Paris 18e) </a>
+                                     </div>
+                                 {% endcomment %}
                         </div>
-                {% endcomment %}
+                
 
 
             <header class="site-header" role="banner">
@@ -411,7 +415,7 @@
                             </div>
                         </div>
                                      </div>
-                    <div class="grid--full grid--table medium-down--hide">
+                    <div class="grid--full grid--table medium-down--hide main_menu">
                         <div class="grid__item  text-center" style="border-bottom: 1px solid #E6E6E6;">
                             {% for link in linklists.main-menu.links %}
                                     {% comment %}
@@ -436,7 +440,7 @@
                                             </ul>
                                         </li>
                                     {% else %}
-                                        <li class="site-nav__item site-nav__expanded-item{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}">
+                                        <li class="site-nav__item site-nav__expanded-item{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%} site-nav__item_main_menu">
                                             <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
                                         </li>
                                     {% endif %}
