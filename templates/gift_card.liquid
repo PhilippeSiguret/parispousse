@@ -1,6 +1,7 @@
   <!-- /templates/gift_card.liquid -->
   {% layout none %}
   {% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency %}
+  {% assign code_size = gift_card.code | format_code | size %}
   {% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
   <!doctype html>
   <!--[if lt IE 7]><html class="template-giftcard no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -77,6 +78,12 @@
               <br><br>
               {{ 'gift_cards.issued.redeem' | t }}
             </p>
+
+              <div class="small--show medium--hide large--hide" onclick="selectText('GiftCardDigits');">
+                <div class="giftcard__code__inner">
+                  <strong class="giftcard__code__text" id="GiftCardDigits">{{ gift_card.code | format_code }}</strong>
+                </div>
+              </div>
             <div class="giftcard__wrap">
               <img src="{{ 'https://cdn.shopify.com/s/files/1/1063/7402/files/Capture_d_ecran_2018-01-29_16.48.22.png?16158232448557614469' }}" alt="Gift card illustration">
 
@@ -90,8 +97,7 @@
                 <strong>{{ formatted_initial_value }}</strong>
               </div>
 
-              {% assign code_size = gift_card.code | format_code | size %}
-              <div class="giftcard__code{% if code_size <= 25 %} giftcard__code--large{% elsif code_size > 25 and code_size <= 30 %} giftcard__code--medium{% else %} giftcard__code--small{% endif %}" onclick="selectText('GiftCardDigits');">
+              <div class="giftcard__code{% if code_size <= 25 %} giftcard__code--large{% elsif code_size > 25 and code_size <= 30 %} giftcard__code--medium{% else %} giftcard__code--small{% endif %} small--hide " onclick="selectText('GiftCardDigits');">
                 <div class="giftcard__code__inner">
                   <strong class="giftcard__code__text" id="GiftCardDigits">{{ gift_card.code | format_code }}</strong>
                 </div>
