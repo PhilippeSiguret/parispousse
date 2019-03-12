@@ -275,11 +275,13 @@
                 
                 
                         <!-- Right Floating Button -->
-                        {% comment %}<div style="z-index: 99999; position:  fixed;right:  0;top: 50%;transform:translateY(-50%); -webkit-transform:translateY(-50%);" class="right_button_floating ">
-                            <a href="https://www.parispousse.fr/collections/brocplantes">
-                                <button type="button" class="btn btn-secondary float-lg-right" style="margin-right: -46px;transform: rotate(270deg);background-color: #ff8f00;" > HALLOGREEN </button>
-                            </a>
-                        </div>{% endcomment %}
+                        {% comment %}
+                            <div style="z-index: 99999; position:  fixed;right:  0;top: 50%;transform:translateY(-50%); -webkit-transform:translateY(-50%);" class="right_button_floating ">
+                                <a href="https://www.parispousse.fr/collections/brocplantes">
+                                    <button type="button" class="btn btn-secondary float-lg-right" style="margin-right: -46px;transform: rotate(270deg);background-color: #ff8f00;" > HALLOGREEN </button>
+                                </a>
+                            </div>
+                        {% endcomment %}
                 
                 
                 <!-- .sub-header -->
@@ -290,7 +292,7 @@
                                     </div>
                                 {% endcomment %}                                
                                 <div class="grid__item one-whole text-center message">
-                                            <i class="fa fa-truck" aria-hidden="true"></i> LIVRAISON OFFERTE pour les soldes </a>
+                                            <a data-toggle="tooltip" data-placement="bottom" title="Afin de compenser nos émissions de CO2<br> Pour chaque commande réalisée en ligne, un arbre est planté" data-html="true"><i class="fa fa-truck" aria-hidden="true"></i> LIVRAISON GRATUITE À PARTIR DE 90€ 🌱 </a>
                                 </div>
                                  {% comment %}
                                      <div class="grid__item large-- one-whole text-center message">
@@ -709,6 +711,9 @@
             });
         </script>
     {% elsif template contains 'product' %}
+        {{ 'slick.min.js' | asset_url | script_tag }}
+        {{ 'scrolltofixed.min.js' | asset_url | script_tag }}
+    {% elsif template contains 'article' %}
         {{ 'slick.min.js' | asset_url | script_tag }}
         {{ 'scrolltofixed.min.js' | asset_url | script_tag }}
     {% endif %}

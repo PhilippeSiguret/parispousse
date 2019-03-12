@@ -1,0 +1,362 @@
+<div class="grid">
+    <article class="grid__item article__custom" itemscope itemtype="http://schema.org/Article">
+        <main class="main">
+          	{% assign can_render_product = product.selected_or_first_available_variant %}
+            {% assign current_variant = product.selected_or_first_available_variant %}
+            {% assign can_render_look = (article.metafields["global"]["titre-details-1"] != blank) && (
+				article.metafields["global"]["titre-details-2"] != blank) && (
+          		article.metafields["global"]["titre-details-3"] != blank) && (
+                article.metafields["global"]["content-details-3"] != blank) && (
+                article.metafields["global"]["content-details-3"] != blank) && (
+            	article.metafields["global"]["look-section-ensoleillement"] != blank) 
+          	%}
+            {% assign can_render_diseases = (article.metafields["global"]["image-maladies"] != blank) && (
+            article.metafields["global"]["texte-maladies"] != blank)%}
+            {% assign can_render_repot = (article.metafields["global"]["image-repot"] != blank) && (
+            article.metafields["global"]["texte-repot"] != blank)%}
+            <div class="scroll-box js--scroll-box">
+                <ul class="scroll-box__list">
+                    <li class="scroll-box__list-item" data-target="#section-intro">Introduction</li>
+                    {% if can_render_look %}<li class="scroll-box__list-item" data-target="#section-look">Coup d’oeil</li>{%
+                    endif %}
+                    <li class="scroll-box__list-item" data-target="#maintenance">Fiche entretien</li>
+                    {% if can_render_diseases %}<li class="scroll-box__list-item" data-target="#diseases">Maladies et
+                        ravageurs</li>{%endif%}
+                    {% if can_render_repot %}<li class="scroll-box__list-item" data-target="#repot">Rempotage</li>{%endif%}
+                    <li class="scroll-box__list-item" data-target="#advice">Bon à savoir</li>
+                </ul>
+
+                <img class="scroll-box__product-img" src="{{ product.featured_image.src | img_url: 'grande' }}" alt="">
+                <h2 class="scroll-box__product-name">{{ product.title }}</h2>
+                <p class="scroll-box__product-price">
+                    <span id="ProductPriceAlt" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}"
+                        itemprop="price">
+                        {{ current_variant.price | money }}
+
+                    </span>
+                </p>
+                <button class="scroll-box__product-add">AJOUTER AU PANIER</button>
+                <script>
+                    $(document).on('click', '.scroll-box__list-item', function () {
+                        var $target = $($(this).data('target'));
+                        $('.scroll-box__list-item._active').removeClass('_active');
+                        $(this).addClass('_active');
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $target.offset().top
+                        }, 700);
+
+                    })
+
+                    $(document).on('click', '.scroll-box__product-add', function () {
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $('#product-contents').offset().top
+                        }, 700);
+
+                    })
+
+                    var sections = ['#section-intro', '#section-look', '#maintenance', '#diseases', '#repot', '#advice']
+
+                    $(document).on('scroll', function () {
+                        var distance = document.documentElement.scrollTop;
+                        var selector = sections.find(function (el) {
+                            return (
+                                $(el).length ? ($(el).offset().top >= distance) && ($(el).offset().top <= distance + window.innerHeight) : false
+                            )
+                        })
+                        if (!selector && $('#advice').offset().top <= distance) selector = '#advice'
+                        $('.scroll-box__list-item._active').removeClass('_active');
+                        $('.scroll-box__list-item[data-target="' + selector + '"]').addClass('_active');
+                      
+                        var anchor = $('.js--product-hero-img').height();
+                        $(window).scroll(function() {
+                          var winTop = $(window).scrollTop();
+                          if(winTop >= anchor){
+                           $('.js--scroll-box').addClass('visible')
+                          } else {
+                           $('.js--scroll-box').removeClass('visible')
+                          }
+                        });
+                    })
+
+                </script>
+            </div>
+            <section id="hero" class="hero section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 no-pad">
+                            <ul class="menu row">
+                            	<a class="menu__item col-4" href="{{ product.url }}"><li >FICHE PRODUIT</li></a>
+                                <li class="menu__item menu__item_active col-4">FICHE ENTRETIEN</li>
+                            	<a class="menu__item col-4" href="https://www.pinterest.fr/parispousse" target="_blank"><li >IDÉES DECO</li></a>
+                            </ul>
+                        </div>
+                        <div class="col-12" id="section-intro">
+                            <img class="main__image js--product-hero-img" src="{{ article.metafields["global"]["grande-image"] }}"
+                                alt="">
+                            <div class="hero__content">
+                                <h1 class="content__heading">{{ article.title }}</h1>
+                                {{ article.metafields["global"]["description"] }}
+                            </div>
+                            {% if can_render_look %}
+                            <div class="hero__box" id="section-look">
+                                <div class="row">
+                                    <div class="col-12 box__heading">
+                                        En un coup d’oeil
+                                    </div>
+                                    <div class="col-12 box__content">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="col-12 no-pad">
+                                                    <div class="box__product-info">
+                                                        <h3>{{
+                                                            article.metafields["global"]["titre-details-1"]
+                                                            }}</h3>
+                                                        <p>
+                                                            {{
+                                                            article.metafields["global"]["content-details-1"]
+                                                            }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 no-pad">
+                                                    <div class="box__product-info">
+                                                        <h3>{{
+                                                            article.metafields["global"]["titre-details-2"]
+                                                            }}</h3>
+                                                        <p>
+                                                            {{
+                                                            article.metafields["global"]["content-details-2"]
+                                                            }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 no-pad">
+                                                    <div class="box__product-info">
+                                                        <h3>{{
+                                                            article.metafields["global"]["titre-details-3"]
+                                                            }}</h3>
+                                                        <p>
+                                                            {{
+                                                            article.metafields["global"]["content-details-3"]
+                                                            }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 no-pad col-md-6">
+                                                <img class="box__product-img" src="{{ (product.featured_image.src | img_url: 'grande' ) ||  article.metafields["global"]["image-produit"] }}"
+                                                    alt="">
+                                                <p class="box__product-desc">
+                                                    Recevez cette fiche d’entretien directement dans votre boite mail
+                                                </p>
+                                                <form class="box__form" action="">
+                                                    <input class="box__form-input" type="email" placeholder="Entrez votre mail">
+                                                    <input class="box__form-submit" type="submit" value="envoyer">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="maintenance" class="section__maintenance">
+                <div class="container">
+                    <h2 class="maintenance__header">
+                        - FICHE ENTRETIEN -
+                    </h2>
+                    <div class="section__desc _maintenance">
+                        <div class="rte rte--indented-images rte--nomargin" itemprop="articleBody">
+                            {{ article.content }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% if can_render_diseases %}
+            <section id="diseases" class="section__diseases section_smaller">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex d-md-none col-12 no-pad">
+                                <img class="section__long-img _left" src="{{ article.metafields["global"]["image-maladies"] }}"
+                                    alt="">
+                                <span class="section__long-img-emoji _right">🤢</span>
+                            </div>
+                            <h2 class="section__heading">
+                                MALADIES ET RAVAGEURS
+                            </h2>
+                            <div class="row">
+                                <div class="d-none d-md-flex col-md-4">
+                                    <img class="section__long-img _left" src="{{ article.metafields["global"]["image-maladies"] }}"
+                                        alt="">
+                                    <span class="section__long-img-emoji _right">🤢</span>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="section__desc _diseases">
+                                        {{ article.metafields["global"]["texte-maladies"] }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+            {% if can_render_repot %}
+            <section id="repot" class="section__repot section_smaller">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex d-md-none col-12 no-pad">
+                                <img class="section__long-img _right" src="{{ article.metafields["global"]["image-repot"] }}"
+                                    alt="">
+                                <span class="section__long-img-emoji _left">🌱</span>
+                            </div>
+                            <h2 class="section__heading _left">
+                                {{article.metafields["global"]["titre-repot"]}}
+                            </h2>
+                            <div class="row">
+                                <div class="col-12 col-md-8">
+                                    <div class="section__desc _repot">
+                                        {{ article.metafields["global"]["texte-repot"] }}
+                                    </div>
+                                </div>
+                                <div class="col-12 d-none d-md-flex col-md-4">
+                                    <img class="section__long-img _right" src="{{ article.metafields["global"]["image-repot"] }}"
+                                        alt="">
+                                    <span class="section__long-img-emoji _left">🌱</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+            <section id="advice" class="section__advice section_smaller">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="section__heading">
+                                {{ article.metafields["global"]["titre-infos"] }}
+                            </h2>
+                            <div class="section__desc">
+                                {{ article.metafields["global"]["texte-infos"] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid product-single" id="product-contents">
+                <div class="grid__item large--one-half medium--one-half text-center">
+                   {% include 'slider' %}
+                </div>
+
+                <div class="grid__item product-single__meta--wrapper large--one-half medium--one-half">
+                    <div class="product-single__meta" style="text-align: left;">
+
+                        {% if settings.product_vendor_enable %}
+                        <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
+                        {% endif %}
+
+                        <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+
+                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                            {% comment %}
+                            Optionally show the 'compare at' or original price of the product.
+                            {% endcomment %}
+
+                            {% if product.compare_at_price > product.price %}
+                            <span class="product-single__price--wrapper">
+                                <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                                <span id="ComparePrice" class="product-single__price--compare-at">
+                                    {{ product.compare_at_price | money }}
+                                </span>
+                                <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                            </span>
+                            {% endif %}
+
+                            <span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}"
+                                itemprop="price">
+                                {{ current_variant.price | money }}
+
+                            </span>
+
+                            <hr class="hr--big">
+                            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                            <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+                            <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form"
+                                id="AddToCartForm">
+                                <select name="id" id="ProductSelect" class="product-single__variants">
+                                    {% for variant in product.variants %}
+                                    {% if variant.available %}
+                                    <option {% if variant==product.selected_or_first_available_variant %}
+                                        selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{
+                                        variant.title }} - {{ variant.price | money_with_currency }}</option>
+                                    {% else %}
+                                    <option value="{{ variant.id }}">
+                                        {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                                    </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                                {% comment %}
+                                <div id="infiniteoptions-container"></div></br>
+                                {% endcomment %}
+                                {% include 'livraison' %}
+
+                                <div class="product-single__add-to-cart">
+                                    <button type="submit" name="add" id="AddToCart" class="btn">
+                                        <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                            {% include 'banana-stand-product-page-container' %}
+
+                            {% if product.type == 'Plante & Pot' or product.type == 'Plante seule' or
+                            product.type == 'Suspension' or product.type == 'Terrarium' %}
+
+                            {% comment %}Warranty Alert{% endcomment %}
+                            <p>
+                                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    <i class="fa fa-check"></i>
+                                    <u>Toutes nos plantes sont garanties un mois </u>
+                                </a>
+
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                Toutes nos plantes sont garanties un mois après la commande. Envoyez-nous une photo
+                                s'il y a le moindre pépin. Nous serons toujours là pour vous conseiller après
+                                l'achat pour prendre soin de vos plantes. Nous ne chipoterons pas sur les retours.
+                                Dites-le nous dans les 72 heures suivant la livraison - nous gérons la suite.
+                            </div>
+
+                            {% endif %}
+
+                            {% include 'iStock-notify-me' %}
+
+
+                        </div>
+                    </div>
+                </div>
+
+                {% if collection %}
+                <hr class="hr--clear">
+                <div class="text-center">
+                    <a href="{{ collection.url }}" class="return-link">&larr; {{
+                        'products.general.collection_return' | t: collection: collection.title }}</a>
+                </div>
+                {% endif %}
+
+                {% include 'related-products' %}
+
+        </main>
+    </article>
+</div>
