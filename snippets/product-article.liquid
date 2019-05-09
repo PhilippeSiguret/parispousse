@@ -26,7 +26,7 @@
                         ravageurs</li>{%endif%}
                     {% if can_render_repot %}<li class="scroll-box__list-item" data-target="#repot">Rempotage</li>{%endif%}
                     <li class="scroll-box__list-item" data-target="#advice">Bon à savoir</li>
-                </ul>
+                </ul> 
 
                 <img class="scroll-box__product-img" src="{{ product.featured_image.src | img_url: 'grande' }}" alt="">
                 <h2 class="scroll-box__product-name">{{ product.title }}</h2>
@@ -377,7 +377,6 @@
                                 </div>
 
                             </form>
-                            {% include 'banana-stand-product-page-container' %}
 
                             {% if product.type == 'Plante & Pot' or product.type == 'Plante seule' or
                             product.type == 'Suspension' or product.type == 'Terrarium' %}

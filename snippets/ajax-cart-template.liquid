@@ -7,7 +7,6 @@
 
 {% endcomment %}
   <script id="CartTemplate" type="text/template">
-  {% include 'banana-stand-cart-top-container' %}
   {% raw %}
     <form action="/cart" method="post" novalidate class="cart ajaxcart">
       <div class="ajaxcart__inner ajaxcart__inner--has-fixed-footer">
@@ -27,7 +26,7 @@
 <!-- 
                   {{#properties}}
                     {{#each this}}
-                      {{#if this}}
+                      {{#if this}} 
                         <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
                       {{/if}}
                     {{/each}}

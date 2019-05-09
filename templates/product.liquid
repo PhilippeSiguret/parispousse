@@ -60,7 +60,6 @@
 						{% comment %}
 							<div id="infiniteoptions-container"></div></br>
 						{% endcomment %}
-						{% include 'livraison' %}
 
 						<div class="product-single__add-to-cart">
 							<button type="submit" name="add" id="AddToCart" class="btn">
@@ -69,8 +68,9 @@
 						</div>
 
 					</form>
-     {% include 'banana-stand-product-page-container' %}
-     	
+					<br>
+				{% include 'livraison' %}
+
      			{% if product.type == 'Plante & Pot' or product.type == 'Plante seule' or product.type == 'Suspension' or product.type == 'Terrarium' %}
 
 					{% comment %}Warranty Alert{% endcomment %}
