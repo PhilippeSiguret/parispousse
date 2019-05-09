@@ -10,6 +10,8 @@
                 article.metafields["global"]["content-details-3"] != blank) && (
             	article.metafields["global"]["look-section-ensoleillement"] != blank) 
           	%}
+          	{% assign repot_product = all_products[article.metafields["global"]["code-produit-repot"]] %}
+          	{% assign maladies_product = all_products[article.metafields["global"]["code-produit-maladies"]] %}
             {% assign can_render_diseases = (article.metafields["global"]["image-maladies"] != blank) && (
             article.metafields["global"]["texte-maladies"] != blank)%}
             {% assign can_render_repot = (article.metafields["global"]["image-repot"] != blank) && (
@@ -91,10 +93,11 @@
                             </ul>
                         </div>
                         <div class="col-12" id="section-intro">
-                            <img class="main__image js--product-hero-img" src="{{ article.metafields["global"]["grande-image"] }}"
-                                alt="">
+                          	<div class="main__image">
+                          		<img class="js--product-hero-img" src="{{ article.metafields["global"]["grande-image"] }}" alt="">
+                          	</div>  
                             <div class="hero__content">
-                                <h1 class="content__heading">{{ article.title }}</h1>
+                                <h1 class="content__heading mar-bot-30">{{ article.title }}</h1>
                                 {{ article.metafields["global"]["description"] }}
                             </div>
                             {% if can_render_look %}
@@ -198,6 +201,35 @@
                                     <div class="section__desc _diseases">
                                         {{ article.metafields["global"]["texte-maladies"] }}
                                     </div>
+                                  	{% if maladies_product != blank %}
+                                    <div class="section__rec">
+                                      <h3 class="rec__title">Notre recommandation </h3>
+                                      <div class="row">
+                                        <div class="col-12 col-md-8">
+                                          <div class="rec__box">
+                                            <div class="row">
+                                              <div class="col-3">
+                                                <img src="{{maladies_product.featured_image.src | img_url: 'grande' }}" alt="">
+                                              </div>
+                                              <div class="col-9">
+                                                <h4>{{maladies_product.title}}</h4>
+                                                <p>{{maladies_product.price | money_with_currency }}</p>
+                                                <span></span>
+                                                <div class="d-none d-md-block">
+                                                  <button>AJOUTER AU PANIER</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-12 no-pad d-md-none">
+                                              <button>AJOUTER AU PANIER</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col"></div>
+                                      </div>
+                                    </div>
+                                  	{% endif %}
+
                                 </div>
                             </div>
                         </div>
@@ -223,6 +255,34 @@
                                     <div class="section__desc _repot">
                                         {{ article.metafields["global"]["texte-repot"] }}
                                     </div>
+                                  {% if repot_product != blank %}
+                                    <div class="section__rec _left">
+                                      <h3 class="rec__title">Notre recommandation </h3>
+                                      <div class="row">
+                                        <div class="col-12 col-md-8">
+                                          <div class="rec__box">
+                                            <div class="row">
+                                              <div class="col-3">
+                                                <img src="{{ repot_product.featured_image.src | img_url: 'grande' }}" alt="">
+                                              </div>
+                                              <div class="col-9">
+                                                <h4>{{repot_product.title}}</h4>
+                                                <p>{{repot_product.price | money_with_currency }}</p>
+                                                <span></span>
+                                                <div class="d-none d-md-block">
+                                                  <button>AJOUTER AU PANIER</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-12 no-pad d-md-none">
+                                              <button>AJOUTER AU PANIER</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col"></div>
+                                      </div>
+                                    </div>
+                                  {% endif %}
                                 </div>
                                 <div class="col-12 d-none d-md-flex col-md-4">
                                     <img class="section__long-img _right" src="{{ article.metafields["global"]["image-repot"] }}"

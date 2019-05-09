@@ -61,7 +61,16 @@
   		
     {% endcomment %}
 
-  <script src="//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}"></script>
+  
+	<!-- ShopPad Apps -->
+	<script>
+        window.Shoppad = window.Shoppad || {},
+	    window.Shoppad.apps = window.Shoppad.apps || {},
+    	window.Shoppad.apps.blogstudio = window.Shoppad.apps.blogstudio || {},
+    	window.Shoppad.apps.blogstudio.config = window.Shoppad.apps.blogstudio.config || {},
+        window.Shoppad.apps.blogstudio.config.loadjQuery = true;
+    </script>
+  	<script src="//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}"></script>
 
   
   
@@ -150,6 +159,8 @@
 	  	<meta name="google-site-verification" content="eCitWSF5jaOjE_UtMJqMxZHsicqtnrx7B7dkhpz03OY" />
 
 
+
+  {% include 'bookthatapp-widgets' %}
 </head>
 
 {% comment %}
@@ -292,7 +303,7 @@
                                     </div>
                                 {% endcomment %}                                
                                 <div class="grid__item one-whole text-center message">
-                                            <a data-toggle="tooltip" data-placement="bottom" title="Afin de compenser nos émissions de CO2<br> Pour chaque commande réalisée en ligne, un arbre est planté" data-html="true"><i class="fa fa-truck" aria-hidden="true"></i> LIVRAISON GRATUITE À PARTIR DE 90€ avec le code promo <strong>GreenDelivery</strong> 🌱 </a>
+                                            <a data-toggle="tooltip" data-placement="bottom" title="Afin de compenser nos émissions de CO2<br> Pour chaque commande réalisée en ligne, un arbre est planté" data-html="true"><i class="fa fa-truck" aria-hidden="true"></i> LIVRAISON GRATUITE À PARTIR DE 90€ avec le code promo <strong>#gardetonblé</strong> 🌽 </a>
                                 </div>
                                  {% comment %}
                                      <div class="grid__item large-- one-whole text-center message">
