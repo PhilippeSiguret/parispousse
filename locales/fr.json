@@ -294,6 +294,10 @@
       },
       "newsletter": {
         "subscription_checkbox_label": "S'abonner à notre newsletter"
+      },
+      "order_summary": {
+        "gift_card_and_discount_label": "Livraison gratuite dès 90€ avec le code #économiedoseille ",
+        "gift_card_and_discount_placeholder": "Utilisez le code #économiedoseille "
       }
     }
   }
