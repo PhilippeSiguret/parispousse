@@ -490,10 +490,6 @@
                                     <div class="grid">
                                             <div class="grid__item large--one-half text-center">
                                                 <div class="newsletter-suscribe">
-                                                        {% comment %}
-                                                        https://www.parispousse.fr/products_preview?cache=false&preview_key=f8ad1adf8a0971a94b27a50d433fd17c MailChimp is the go-to newsletter service for Shopify. Use the link below to find your MailChimp "form action" and insert it in your site settings. MailChimp newsletter integration and requirement: - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
-                                                        {% endcomment %}
-
                                                         {% if settings.newsletter_form_action != blank %} {% assign form_action = settings.newsletter_form_action %} {% else %} {% assign form_action = '#' %} {% endif %}
                                                         <h4>Inscrivez-vous à notre newsletter et gagnez 10€</h4>
                                                         <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
@@ -634,30 +630,10 @@
                                 {% endfor %}
                                     <li>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</li>
                                     <li><i class="fa fa-lock" aria-hidden="true"></i> Paiements sécurisés</li>
-
-                            </ul>
-                        </div>
-                    {% endif %}
-
-                    <div class="grid__item three-fifths small--one-whole {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
-
-
-                    <h4>Adoptons le design vivant</h4>
-                    <p>
-                    Paris Pousse c'est le premier marché en ligne proposant une gamme poussée de plantes, pots et autres produits design qui touchent au végétal.
-                    Notre équipe sélectionne  des potiers, des horticulteurs et des fabricants de confiance qui sortent des standards visibles dans votre jardinerie.
-                    Paris Pousse est une entreprise parisienne, digitale et foisonnante. Nous répondons de façon efficace et pertinente à nos clients en proposant des projets uniques et haut de gamme tant au niveau du design, des produits ou de la qualité.
-                    En constante évolution, nous n'hésitons pas à nous nourrir des tendances scandinaves et américaines, tout en gardant notre touche et savoir faire “français”.
-                    Paris Pousse poursuit un objectif simple : Offrir aux parisiens de se reconnecter avec la nature, synonyme de bonheur et de bien-être, dans tous leurs lieux de vie, tous les jours.
-                    <a href="https://www.parispousse.fr/pages/qui-sommes-nous">En savoir plus </a>
-
-
-                    </p>
-                        {% comment %}
+                                                            {% comment %}
                             Delete the "comments" tags in order to show the payment stuff
                         {% endcomment %}
 
-                        {% comment %}
                                 {% unless shop.enabled_payment_types == empty %}
                                     <ul class="inline-list payment-icons">
                                         {% for type in shop.enabled_payment_types %}
@@ -670,7 +646,24 @@
                                         {% endfor %}
                                     </ul>
                                 {% endunless %}
-                        {% endcomment %}
+
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <div class="grid__item three-fifths small--one-whole {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
+
+
+                    <h4>Adoptons le design vivant</h4>
+                    <p>
+                    Paris Pousse est une entreprise parisienne, digitale et foisonnante. Nous répondons de façon efficace et pertinente à nos clients en proposant des projets uniques et haut de gamme tant au niveau du design, des produits ou de la qualité. <br>
+                    En constante évolution, nous n'hésitons pas à nous nourrir des tendances scandinaves et américaines, tout en gardant notre touche et savoir faire “français”. <br>
+                    Paris Pousse poursuit un objectif simple : Offrir aux parisiens de se reconnecter avec la nature, synonyme de bonheur et de bien-être, dans tous leurs lieux de vie, tous les jours. <br>
+                    <u><a href="https://www.parispousse.fr/pages/qui-sommes-nous">En savoir plus </a></u>
+
+
+                    </p>
+
                     </div>
                 </div>
 

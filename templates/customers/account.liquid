@@ -39,12 +39,15 @@
           <tbody>
             {% for order in customer.orders %}
               <tr class="table__section">
-                <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                <u><td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td></u>
+                
                 <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
                 <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
                 <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.fulfillment_status_label }}</td>
                 <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
-                <td> <a target="_blank" href="https://www.parispousse.fr/apps/download-pdf/0d2fadc0c3726508b256/{{ order.id | times: 4404 }}/Facture Paris Pousse.pdf">Facture</a> </td>
+                <td><strong><a target='_blank' href='https://www.parispousse.fr/apps/download-pdf/c6bf5f3337d0c6467ee3/{{ id | times: 4990 }}/{{ order_number | default: number }}.pdf'>Facture </a></strong></td>
+
+
               </tr>
             {% endfor %}
           </tbody>
