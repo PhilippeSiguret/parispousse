@@ -1,0 +1,45 @@
+(function (algolia) {
+  'use strict';
+
+  algolia.translations = {
+    search: "Recherche",
+    noCollectionFound: "Pas de collection trouvée",
+    allProducts: "Voir tous les produits",
+    matching: "matching",
+    sortBy: "Trier par",
+    relevance: "Pertinence",
+    outOf: "plus de",
+    resultsFound: "résultats trouvés",
+    oneResultFound: "1 produit trouvé",
+    noResultFound: "Pas de résultats pour ta recherche ¯\_(ツ)_/¯",
+    addToCart: "Ajouter au panier",
+    searchForProduct: "Chercher un produit",
+    selectedFilter: "Filtres",
+    clearAll: "Elever les filtres",
+    noPageFound: "Pas de résultats pour ta recherche ¯\_(ツ)_/¯",
+    outOfStock: "Pas de stocks de disponible pour l'instant ¯\_(ツ)_/¯",
+  };
+
+  algolia.translation_helpers = {
+    no_result_for: function (text, render) {
+      return 'Pas de résultats pour ta recherche ' + render(text) + '';
+    },
+    in: function (text, render) {
+      return 'in ' + render(text) + 's';
+    },
+
+    try_clear_or_change_input: function (text, render) {
+      var regex = new RegExp(/<\/a>|<a[a-z "-=]*>/, 'g');
+      var html_tags = text.match(regex);
+      return 'Essaie de ' + render(html_tags[0]) + ' supprimer des filtres ' + render(html_tags[1]) + ' o ' + render(html_tags[2]) + ' de modifier ta recherche 😉 ' + render(html_tags[3]) + '';
+    },
+    outOf: function (text, render) {
+      return '' + render(text) + ' out of';
+    },
+
+    by: function (text, render) {
+      return 'by ' + render(text) + '';
+    }
+  };
+
+}(algoliaShopify));

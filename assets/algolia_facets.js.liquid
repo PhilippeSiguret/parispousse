@@ -48,37 +48,46 @@
    */
   algolia.facetDisplayFunctions = {
     price_range: function displayRange (value) {
-      var format = '{{ shop.money_with_currency_format }}',
-          values = value.split(':');
+      var values = value.split(':');
 
       return _.map(values, function (e) {
-        return algolia.formatMoney(+e * 100, format).replace(/\.\d+$/, '');
+        return algolia.formatMoney(+e * 100).replace(/\.\d+/, '');
       }).join(' - ');
     }
   }
 
-  algolia.facets = _.filter(algolia.config.facets, function (facet) { return facet.enabled || parseInt(facet.enabled); });
+  algolia.facetCssClasses = {
+    root: 'ais-facet',
+    header: 'ais-facet--header',
+    body: 'ais-facet--body',
+    item: 'ais-facet--item',
+    label: 'ais-facet--label',
+    checkbox: 'ais-facet--checkbox',
+    active: 'ais-facet--active',
+    count: 'ais-facet--count'
+  };
+
+  var enabledFacets = _.filter(algolia.config.facets, function (facet) { return facet.enabled || parseInt(facet.enabled); });
+  algolia.facets = _.map(enabledFacets, function (facet) { return Object.assign({}, facet, { escapedName: encodeURIComponent(facet.name) }) });
+  algolia.shownFacets = _.filter(algolia.facets, function (facet) { return facet.type !== 'hidden' });
+  algolia.hiddenFacets = _.filter(algolia.config.facets, function (facet) { return facet.type === 'hidden'; });
   algolia.facetTitles = {};
   _.each(algolia.facets, function (facet) {
     algolia.facetTitles[facet.name] = facet.title;
   });
-  algolia.facetsWidgets = _.map(algolia.facets, function (facet) {
+  algolia.facetsWidgets = _.map(algolia.shownFacets, function (facet) {
     var widget = TYPES_TO_WIDGET[facet.type],
         params = _.cloneDeep(widget.params) || {};
 
-    params.container = "[class~='ais-facet-" + facet.name + "']";
+    params.container = "[class~='ais-facet-" + facet.escapedName + "']";
     params.attributeName = facet.name;
     params.templates = {};
-    params.cssClasses = {
-      root: 'ais-facet',
-      header: 'ais-facet--header',
-      body: 'ais-facet--body',
-      item: 'ais-facet--item',
-      label: 'ais-facet--label',
-      checkbox: 'ais-facet--checkbox',
-      active: 'ais-facet--active',
-      count: 'ais-facet--count'
-    };
+    params.cssClasses = algolia.facetCssClasses;
+
+    if (facet.searchable) {
+      params.searchForFacetValues = {placeholder: 'Search for ' + facet.name, isAlwaysActive: true};
+      params.searchForFacetValues.templates = {noResults: '<div> No matching ' + facet.name + '</div>'};
+    }
 
     params.templates.header = function () {
       return facet.title;

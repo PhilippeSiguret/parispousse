@@ -64,7 +64,7 @@
 
           <div class="grid__item large--one-half">
             <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
-            <select id="AddressCountryNew" class="input-full" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+            <select id="AddressCountryNew" class="input-full" name="address[country]" data-default="{{form.country}}">{{ all_country_option_tags }}</select>
           </div>
 
           <div class="grid__item" id="AddressProvinceContainerNew" style="display:none">
@@ -102,23 +102,12 @@
       Also add pagination in case they have a large number of addresses
     {% endcomment %}
     {% for address in customer.addresses %}
+      {% if address == customer.default_address %}
+        <p><strong>{{ 'customer.addresses.default' | t }}</strong></p>
+      {% endif %}
 
-      <p class="h5">
-        {{ address.first_name | capitalize }} {{address.last_name | capitalize }}
-        {% if address == customer.default_address %}({{ 'customer.addresses.default' | t }}){% endif %}
-      </p>
+      {{ address | format_address }}
 
-      <p>
-        {{ address.company }}<br>
-        {{ address.street }}<br>
-        {{ address.city | capitalize }}<br>
-        {% if address.province_code %}
-          {{ address.province_code | upcase }}<br>
-        {% endif %}
-        {{ address.zip | upcase }}<br>
-        {{ address.country }}<br>
-        {{ address.phone }}
-      </p>
       <p>
         {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} |
         {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }}
@@ -127,7 +116,7 @@
       <div id="EditAddress_{{address.id}}" class="form-vertical" style="display:none;">
         {% form 'customer_address', address %}
 
-          <h4>{{ 'customer.addresses.edit_address' | t }}</h4>
+          <h2 class="h4">{{ 'customer.addresses.edit_address' | t }}</h2>
 
           <div class="grid grid--small">
             <div class="grid__item one-half small--one-whole">
@@ -154,7 +143,7 @@
           <input type="text" id="AddressCity_{{form.id}}" class="input-full" name="address[city]" value="{{form.city}}" autocapitalize="words">
 
           <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
-          <select id="AddressCountry_{{form.id}}" class="input-full" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+          <select id="AddressCountry_{{form.id}}" class="input-full" name="address[country]" data-default="{{form.country}}">{{ all_country_option_tags }}</select>
 
           <div id="AddressProvinceContainer_{{form.id}}" style="display:none">
             <label for="AddressProvince_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
@@ -188,9 +177,7 @@
     {% endfor %}
 
     {% if paginate.pages > 1 %}
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
-      </div>
+      {% include 'pagination' %}
     {% endif %}
 
   </div>

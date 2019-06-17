@@ -1,8 +1,25 @@
 (function (algolia, instantsearch) {
-  if (!algolia.full_results || !algolia.config.instant_search_enabled) return;
+
+  var collectionFacetConstraint = !!algolia.is_collection_results_page &&
+    !!algolia.config.instant_search_enabled_on_collection;
+
+
+  if (
+      (!algolia.full_results && !collectionFacetConstraint) || !algolia.config.instant_search_enabled
+    ) {
+    return;
+  }
 
   var _ = algolia._,
       $ = algolia.jQuery;
+
+  var collectionFacetValue = null;
+  if (collectionFacetConstraint) {
+    var matches = window.location.pathname.match(/\/collections\/([^/]+)/i);
+    if (!!matches && matches.length === 2) {
+      collectionFacetValue = matches[1];
+    }
+  }
 
   algolia.config.results_selector += ', .algolia-shopify-instantsearch';
 
@@ -11,7 +28,10 @@
 
   var instant = algolia.instantsearch = {
     colors: algolia.config.colors,
+    distinct: !!algolia.config.show_products,
     facets: {
+      hidden: algolia.hiddenFacets,
+      shown: algolia.shownFacets,
       list: algolia.facets,
       widgets: algolia.facetsWidgets
     },
@@ -21,7 +41,26 @@
       appId: algolia.config.app_id,
       apiKey: algolia.config.search_api_key,
       indexName: '' + algolia.config.index_prefix + 'products',
-      urlSync: {}
+      searchParameters: {
+       clickAnalytics: true
+      },
+      urlSync: {},
+      searchFunction: function (searchFunctionHelper) {
+        // Set query parameters here because they're not kept when someone
+        // presses the Back button if set in the `init` function of a custom widget
+        var helper = instant.search.helper;
+        var page = helper.getPage();
+        helper.setQueryParameter('highlightPreTag', '<span class="ais-highlight">');
+        helper.setQueryParameter('highlightPostTag', '</span>');
+        if (instant.distinct) {
+          helper.setQueryParameter('distinct', true);
+        }
+        if (!!collectionFacetConstraint && !!collectionFacetValue) {
+          helper.setQueryParameter('filters', 'collections:"' + collectionFacetValue + '"');
+        }
+        helper.setPage(page);
+        searchFunctionHelper.search();
+      }
     }),
     selector: algolia.config.results_selector + ', .algolia-shopify-instantsearch',
     sortOrders: algolia.sortOrders,
@@ -57,21 +96,29 @@
   }
 
   // Bind helpers
-  _.forEach(algolia.helpers, function (helper, name) {
+  _.forEach(Object.assign({}, algolia.helpers, algolia.translation_helpers), function (helper, name) {
     instant.search.templatesConfig.helpers[name] = helper;
   });
   instant.search.templatesConfig.compileOptions = algolia.hoganOptions;
 
   algolia.appendStyle(algolia.render(instant.templates.style, {
+    distinct: instant.distinct,
     colors: instant.colors
   }));
 
   $(document).ready(function () {
+
+    if ($(algoliaShopify.config.results_selector).length == 0) {
+      throw new Error('Instant search CSS selector is incorrect\nFore more info see : https://community.algolia.com/shopify/css_selector.html#algolia-search');
+    }
+
     instant.$results = $(instant.selector);
 
     instant.$results.html(algolia.render(instant.templates.page, {
       facets: instant.facets.list,
-      storeName: instant.storeName
+      storeName: instant.storeName,
+      translations: algolia.translations,
+      multipleSortOrders: algolia.sortOrders.length > 1
     }));
 
     readjust();
@@ -98,22 +145,11 @@
       }
     });
 
-    // Highlight tags
-    instant.search.addWidget({
-      init: function (opts) {
-        var helper = opts.helper;
-        var page = helper.getPage();
-        helper.setQueryParameter('highlightPreTag', '<span class="ais-highlight">');
-        helper.setQueryParameter('highlightPostTag', '</span>');
-        helper.setPage(page);
-      }
-    });
-
     // Search input
     instant.search.addWidget(
       instantsearch.widgets.searchBox({
         container: '.ais-search-box-container',
-        placeholder: 'Recherche',
+        placeholder: algolia.translations.searchForProduct,
         poweredBy: false
       })
     );
@@ -154,6 +190,7 @@
             data.processingTimeS = data.processingTimeMS / 1000;
             data.start = data.page * data.hitsPerPage + 1;
             data.end = Math.min((data.page + 1) * data.hitsPerPage, data.nbHits);
+            data.translations = algolia.translations;
             return data;
           }
         }
@@ -161,12 +198,14 @@
     );
 
     // Sort orders
-    instant.search.addWidget(
-      instantsearch.widgets.sortBySelector({
-        container: '.ais-sort-orders-container',
-        indices: instant.sortOrders
-      })
-    );
+    if (algolia.sortOrders.length > 1) {
+      instant.search.addWidget(
+        instantsearch.widgets.sortBySelector({
+          container: '.ais-sort-orders-container',
+          indices: instant.sortOrders
+        })
+      );
+    }
 
     // Change display
     instant.search.addWidget({
@@ -184,7 +223,25 @@
       }
     });
 
+    // Hidden facets
+    var list = _.map(instant.facets.hidden, function (facet) { return facet.name; });
+    instant.search.addWidget({
+      getConfiguration: function () {
+        return {
+          facets: list,
+          disjunctiveFacets: list
+        };
+      },
+      init: function () {}
+    });
+
     // Current refined values
+    var attributes = _.map(instant.facets.shown, function (facet) {
+      return {
+        name: facet.name,
+        label: facet.title
+      }
+    });
     instant.search.addWidget(
       instantsearch.widgets.currentRefinedValues({
         container: '.ais-current-refined-values-container',
@@ -194,14 +251,12 @@
           body: 'ais-facet--body'
         },
         templates: {
-          header: 'Filtres',
-          clearAll: 'Enlever les filtres',
-          item: instant.templates.currentItem
+          header: algolia.translations.selectedFilter,
+          item: instant.templates.currentItem,
+          clearAll: algolia.translations.clearAll
         },
-        transformData: function (data) {
-          data.label = algolia.facetTitles[data.attributeName];
-          return data;
-        }
+        onlyListedAttributes: true,
+        attributes: attributes
       })
     );
 
@@ -221,8 +276,20 @@
         },
         transformData: {
           item: function (product) {
-            product.can_order = product.inventory_policy === 'continue' || product.inventory_quantity > 0;
+            product._distinct = instant.distinct;
+            product.can_order = (
+              product.inventory_management !== 'shopify' ||
+              product.inventory_policy === 'continue' ||
+              product.inventory_quantity > 0
+            );
+            product.translations = algolia.translations;
+            product.queryID = instant.search.helper.lastResults._rawResults[0].queryID;
+            product.productPosition = product.__hitIndex + 1;
             return product;
+          },
+          empty: function (params) {
+            params.translations = algolia.translations;
+            return params;
           }
         }
       })
@@ -234,12 +301,38 @@
         $('.ais-hits-container').on('click', '.ais-hit', function (e) {
           var $this = $(this),
               handle = $this.attr('data-handle'),
-              variant_id = $this.attr('data-variant-id');
+              variant_id = $this.attr('data-variant-id')
+              distinct = $this.attr('data-distinct');
 
-          window.location.href = '/products/' + handle + '?variant=' + variant_id;
+          var link = '/products/' + handle;
+          if (distinct !== 'true') {
+            link += '?variant=' + variant_id;
+          }
+          if (algolia.config.analytics_enabled) {
+            algolia.clickTracker(e);
+          }
+          window.location.href = link;
         });
         $('.ais-hits-container').on('click', '.ais-hit a', function (e) {
           e.stopPropagation();
+          if (algolia.config.analytics_enabled) {
+            algolia.clickTracker(e);
+          }
+        });
+      }
+    });
+
+    // Add to cart
+    instant.search.addWidget({
+      init: function (opts) {
+        $('.ais-hits-container').on('click', '.ais-hit--cart-button', function (e) {
+          e.stopPropagation();
+          var $this = $(this),
+              formId = $this.attr('data-form-id');
+
+          if (formId) {
+            document.getElementById(formId).submit();
+          }
         });
       }
     });
@@ -248,7 +341,12 @@
     instant.search.addWidget({
       init: function (opts) {
         $('.ais-hits-container').on('click', '.ais-hit-empty--clear-filters', function () {
-          opts.helper.clearRefinements().clearTags().search();
+          var helper = opts.helper;
+          helper.clearTags();
+          _.forEach(instant.facets.list, function (facet) {
+            helper.clearRefinements(facet.name);
+          });
+          helper.search();
         });
 
         $('.ais-hits-container').on('click', '.ais-hit-empty--clear-input', function () {
@@ -259,15 +357,13 @@
     });
 
     // Pagination
-    {% comment %}
-          instant.search.addWidget(
-            instantsearch.widgets.pagination({
-              container: '.ais-pagination-container',
-              padding: 2,
-              maxPages: 20
-            })
-          );
-    {% endcomment %}
+    instant.search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '.ais-pagination-container',
+        padding: 2,
+        maxPages: 20
+      })
+    );
 
     // Main
     instant.search.start();

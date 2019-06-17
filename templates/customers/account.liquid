@@ -16,7 +16,7 @@
 
 <div class="grid">
 
-  <div class="grid__item">
+  <div class="grid__item two-thirds medium-down--one-whole">
     <h2 class="h3">{{ 'customer.orders.title' | t }}</h2>
 
     {% comment %}
@@ -33,21 +33,16 @@
               <th>{{ 'customer.orders.payment_status' | t }}</th>
               <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
               <th>{{ 'customer.orders.total' | t }}</th>
-              <th>Factures</th>
             </tr>
           </thead>
           <tbody>
             {% for order in customer.orders %}
               <tr class="table__section">
-                <u><td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td></u>
-                
-                <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'date' }}</td>
                 <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
-                <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
                 <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
-                <td><strong><a target='_blank' href='https://www.parispousse.fr/apps/download-pdf/c6bf5f3337d0c6467ee3/{{ id | times: 4990 }}/{{ order_number | default: number }}.pdf'>Facture </a></strong></td>
-
-
               </tr>
             {% endfor %}
           </tbody>
@@ -63,41 +58,10 @@
     {% endif %}
   </div>
 
-  <div class="grid__item one-whole">
+  <div class="grid__item one-third medium-down--one-whole">
     <h3>{{ 'customer.account.details' | t }}</h3>
 
-    <p class="h5">{{ customer.name }}</p>
-
-    {% if customer.default_address != nil %}
-      <p>
-      {{ customer.default_address.address1 }}<br>
-
-      {% if customer.default_address.address2 != "" %}
-        {{ customer.default_address.address2 }}<br>
-      {% endif %}
-
-      {% if customer.default_address.city != "" %}
-        {{ customer.default_address.city }}<br>
-      {% endif %}
-
-      {% if customer.default_address.province_code != "" %}
-        {{ customer.default_address.province_code | upcase }}<br>
-      {% endif %}
-
-      {% if customer.default_address.zip != "" %}
-        {{ customer.default_address.zip | upcase }}<br>
-      {% endif %}
-
-      {% if customer.default_address.country != "" %}
-        {{ customer.default_address.country }}<br>
-      {% endif %}
-
-      {% if customer.default_address.phone != "" %}
-        {{ customer.default_address.phone }}
-      {% endif %}
-      </p>
-
-    {% endif %}
+    {{ customer.default_address | format_address }}
 
     <p><a href="/account/addresses" class="text-link">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
   </div>
@@ -105,8 +69,6 @@
 </div>
 
 {% if paginate.pages > 1 %}
-  <div class="pagination">
-    {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
-  </div>
+  {% include 'pagination' %}
 {% endif %}
 {% endpaginate %}

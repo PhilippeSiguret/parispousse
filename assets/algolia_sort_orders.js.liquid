@@ -5,7 +5,7 @@
 
   var sort_order_base = '' + algolia.config.index_prefix + 'products';
 
-  algolia.sortOrders = [ { name: sort_order_base, label: 'Relevance' } ];
+  algolia.sortOrders = [ { name: sort_order_base, label: '' + algolia.translations.relevance } ];
 
   _.forEach(algolia.config.sort_orders, function (sort_order) {
     if (!_.isUndefined(sort_order.asc) && !_.isNull(sort_order.asc) && (sort_order.asc.active === true || sort_order.asc.active === '1')) {

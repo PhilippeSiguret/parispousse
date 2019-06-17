@@ -68,7 +68,7 @@
   {% endcomment %}
   {% if collection_index == 1 and remaining_length == 0 %}
     {% assign grid_item_width = "one-whole" %}
-    {% assign image_size = '1024x1024' %}
+    {% assign grid_item_responsive = true %}
   {% elsif collection_index == 1 and divisible_by_two > 0 %}
     {% assign grid_item_width = "one-whole medium--one-half large--one-half" %}
   {% else %}
@@ -98,4 +98,3 @@
   {% comment %}Product Grid Item{% endcomment %}
   {% include 'collection-grid-item' %}
 {% endif %}
-

@@ -85,20 +85,32 @@
   {% case three_row_index__product %}
     {% when 0 %}
       {% if is_reverse_row__product %}
+        {%- assign width = 270 -%}
+        {%- assign height = 190 -%}
         {% assign grid_item_width = 'grid__item--small one-whole reverse' %}
       {% else %}
+        {%- assign width = 650 -%}
+        {%- assign height = 480 -%}
         {% assign grid_item_width = 'grid__item--large one-whole medium--two-thirds large--two-thirds' %}
       {% endif %}
     {% when 1 %}
       {% if is_reverse_row__product %}
+        {%- assign width = 270 -%}
+        {%- assign height = 190 -%}
         {% assign grid_item_width = 'grid__item--small one-whole reverse' %}
       {% else %}
+        {%- assign width = 270 -%}
+        {%- assign height = 190 -%}
         {% assign grid_item_width = 'grid__item--small one-whole medium--one-third large--one-third' %}
       {% endif %}
     {% when 2 %}
       {% if is_reverse_row__product %}
+        {%- assign width = 650 -%}
+        {%- assign height = 480 -%}
         {% assign grid_item_width = 'grid__item--large one-whole medium--two-thirds large--two-thirds reverse clearfix' %}
       {% else %}
+        {%- assign width = 270 -%}
+        {%- assign height = 190 -%}
         {% assign grid_item_width = 'grid__item--small one-whole medium--one-third large--one-third clearfix' %}
       {% endif %}
   {% endcase %}
@@ -147,11 +159,17 @@
   {% comment %} Set full width when there is 1 product in a collection by making
   `grid_item_width` an empty string {% endcomment %}
   {% assign grid_item_width = '' %}
+  {%- assign image_size = '990x' -%}
+  {%- assign width = 990 -%}
+  {%- assign height = 630 -%}
   {% include 'product-grid-item' %}
   {% break %}
 {% else %}
   {% comment %} Set item with to half if it isn't in a 3 row. {% endcomment %}
   {% assign grid_item_width = 'one-whole medium--one-half large--one-half' %}
+  {%- assign image_size = '480x' -%}
+  {%- assign width = 360 -%}
+  {%- assign height = 270 -%}
   {% include 'product-grid-item' %}
 
   {% comment %}add grid row separator between the last two rows{% endcomment %}

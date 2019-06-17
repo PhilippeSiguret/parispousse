@@ -1,19 +1,17 @@
-<div class="ais-hit ais-product" data-handle="[[ handle ]]" data-variant-id="[[ objectID ]]">
-  <div class="ais-hit--picture" >
-    <img src="[[# helpers.sizedImage ]]220x240[[/ helpers.sizedImage ]]" alt="" >
-  </div>
-
+<div data-algolia-position="[[ productPosition ]]" data-algolia-queryid="[[ queryID ]]" data-algolia-objectid="[[ objectID ]]" class="ais-hit ais-product" data-handle="[[ handle ]]" data-variant-id="[[ objectID ]]" data-distinct="[[ _distinct ]]">
+  <div class="ais-hit--picture" style="background-image: url('[[# helpers.mediumImage ]][[/ helpers.mediumImage ]]')"></div>
 
   <div class="ais-hit--details">
     <p class="ais-hit--title">
-      <a href="/products/[[ handle ]]?variant=[[ objectID ]]" onclick="void(0)" title="[[# helpers.fullTitle ]][[/ helpers.fullTitle ]]" style="color: #000">
+      <a data-algolia-position="[[ productPosition ]]" data-algolia-queryid="[[ queryID ]]" data-algolia-objectid="[[ objectID ]]" href="[[# helpers.instantsearchLink ]][[/ helpers.instantsearchLink ]]" onclick="void(0)" title="[[# helpers.fullTitle ]][[/ helpers.fullTitle ]]">
         [[# helpers.fullHTMLTitle ]][[/ helpers.fullHTMLTitle ]]
       </a>
     </p>
-    <p class="ais-hit--subtitle" title="[[ product_type ]][[# vendor ]] by [[ vendor ]][[/ vendor ]]" style="display: none">
+    <p class="ais-hit--subtitle" title="[[ product_type ]][[# vendor ]] by [[ vendor ]][[/ vendor ]]">
       [[& _highlightResult.product_type.value ]]
+      [[# vendor ]] by [[& _highlightResult.vendor.value ]][[/ vendor ]]
     </p>
-    <p class="ais-hit--price" style="color: #000">[[# helpers.formattedPriceWithComparison ]][[/ helpers.formattedPriceWithComparison ]]</p>
+    <p class="ais-hit--price">[[# helpers.instantsearchPrice ]][[/ helpers.instantsearchPrice ]]</p>
     <!-- Extra info examples - Remove the display: none to show them -->
     <p class="ais-hit--info" style="display: none">
       [[# sku ]]
@@ -26,7 +24,7 @@
         <span class="algolia-weight">[[ weight ]]</span>
       [[/ weight ]]
       [[^ taxable ]]
-        <span class="algolia-taxable">Pas de TVA</span>
+        <span class="algolia-taxable">Tax free</span>
       [[/ taxable ]]
     </p>
     <!-- Tags example - Remove the display: none to show them -->
@@ -35,17 +33,22 @@
         <span class="ais-hit--tag">[[& value ]]</span>
       [[/ _highlightResult.tags ]]
     </p>
-    <p class="ais-hit--cart" style="display: none">
-      [[# can_order ]]
-        <a class="ais-hit--cart-button" href="/cart/[[ objectID ]]:1">
-          Ajouter au panier
-        </a>
-      [[/ can_order ]]
-      [[^ can_order ]]
-        <span class="ais-hit--cart-button ais-hit--cart-button__disabled">
-          Out of stock
-        </span>
-      [[/ can_order ]]
-    </p>
+    [[^ _distinct ]]
+      <form id="algolia-add-to-cart-[[ objectID ]]" style="display: none;" action="/cart/add" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="[[ objectID ]]" />
+      </form>
+      <p class="ais-hit--cart">
+        [[# can_order ]]
+          <span class="ais-hit--cart-button" data-form-id="algolia-add-to-cart-[[ objectID ]]">
+            [[ translations.addToCart ]]
+          </span>
+        [[/ can_order ]]
+        [[^ can_order ]]
+          <span class="ais-hit--cart-button ais-hit--cart-button__disabled">
+            [[ translations.outOfStock ]]
+          </span>
+        [[/ can_order ]]
+      </p>
+    [[/ _distinct ]]
   </div>
 </div>

@@ -38,6 +38,39 @@
   #{$property}: #{$value};
 }
 
+/*============================================================================
+  Prefix mixin for generating vendor prefixes.
+  Based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/addons/_prefixer.scss
+  Usage:
+    // Input:
+    .element {
+      @include prefix(transform, scale(1), ms webkit spec);
+    }
+    // Output:
+    .element {
+      -ms-transform: scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+==============================================================================*/
+@mixin prefixFlex($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } @else if $prefix == o {
+      -o-#{$property}: $value;
+    } @else if $prefix == spec {
+      #{$property}: $value;
+    } @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
@@ -122,12 +155,13 @@
 @mixin headerFontStack {
   font-family: $headerFontStack;
   font-weight: $headerFontWeight;
+  font-style: $headerFontStyle;
 }
 
 @mixin accentFontStack {
   font-family: $accentFontStack;
   font-weight: $accentFontWeight;
-  font-style: normal;
+  font-style: $accentFontStyle;
   {% if settings.type_accent_spacing %}
     letter-spacing: 0.1em;
   {% endif %}
@@ -206,6 +240,59 @@ $max: max-width;
   }
 }
 
+/*============================================================================
+  Flexbox prefix mixins from Bourbon
+    https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/css3/_flex-box.scss
+==============================================================================*/
+@mixin display-flexbox() {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%; // necessary for ie10
+}
+
+@mixin flex-wrap($value: nowrap) {
+  @include prefixFlex(flex-wrap, $value, webkit moz ms spec);
+}
+
+@mixin flex-direction($value) {
+  @include prefixFlex(flex-direction, $value, webkit moz ms spec);
+}
+
+@mixin align-items($value: stretch) {
+  $alt-value: $value;
+
+  @if $value == 'flex-start' {
+    $alt-value: start;
+  } @else if $value == 'flex-end' {
+    $alt-value: end;
+  }
+
+  // sass-lint:disable no-misspelled-properties
+  -ms-flex-align: $alt-value;
+  @include prefixFlex(align-items, $value, webkit moz ms o spec);
+}
+
+@mixin flex($value) {
+  @include prefixFlex(flex, $value, webkit moz ms spec);
+}
+
+@mixin flex-basis($width: auto) {
+  // sass-lint:disable no-misspelled-properties
+  -ms-flex-preferred-size: $width;
+  @include prefixFlex(flex-basis, $width, webkit moz spec);
+}
+
+@mixin align-self($align: auto) {
+  // sass-lint:disable no-misspelled-properties
+  -ms-flex-item-align: $align;
+  @include prefixFlex(align-self, $align, webkit spec);
+}
+
+@mixin justify-content($justify: flex-start) {
+  @include prefixFlex(justify-content, $justify, webkit ms spec);
+}
+
 $viewportIncrement: 1px;
 $siteWidth: 1050px;
 $small: 590px;
@@ -222,9 +309,10 @@ $breakpoints: (
   'small' '(max-width: #{$small})',
   'medium' '(min-width: #{$postSmall}) and (max-width: #{$medium})',
   'medium-down' '(max-width: #{$medium})',
-  'large' '(min-width: #{$large})'
+  'large' '(min-width: #{$large})',
+  'xlarge' '(min-width: #{$xlarge})'
 );
-$breakpoint-has-widths: ('small', 'medium', 'medium-down', 'large');
+$breakpoint-has-widths: ('small', 'medium', 'medium-down', 'large', 'xlarge');
 $breakpoint-has-push:  ('medium', 'medium-down', 'large');
 $breakpoint-has-pull:  ('medium', 'medium-down', 'large');
 
@@ -236,12 +324,16 @@ $colorSecondary: {{ settings.color_secondary }};
 $colorBtnPrimary: $colorPrimary;
 $colorBtnPrimaryHover: lighten($colorBtnPrimary, 12%);
 $colorBtnPrimaryActive: adaptive-color($colorPrimary, 24%);
-$colorBtnPrimaryText: color-control($colorPrimary);
+$colorBtnPrimaryText: {{ settings.color_button_text }};
 
 $colorBtnSecondary: $colorSecondary;
 $colorBtnSecondaryHover: lighten($colorBtnSecondary, 10%);
 $colorBtnSecondaryActive: adaptive-color($colorSecondary, 10%);
-$colorBtnSecondaryText: color-control($colorSecondary);
+$colorBtnSecondaryText: {{ settings.color_button_text }};
+
+$colorBtnSecondaryAccent: $colorBtnPrimary;
+$colorBtnSecondaryAccentHover: lighten($colorBtnSecondaryAccent, 12%);
+$colorBtnSecondaryAccentActive: adaptive-color($colorBtnSecondaryAccent, 24%);
 
 // Text link colors
 $colorLink: $colorSecondary;
@@ -249,6 +341,9 @@ $colorLinkHover: $colorPrimary;
 
 // Text colors
 $colorTextBody: {{ settings.color_body_text }};
+
+// Heading colors
+$colorHeadings: {{ settings.color_headings }};
 
 // Backgrounds
 $colorBody: {{ settings.color_body_bg }};
@@ -267,7 +362,7 @@ $colorSaleTag: {{ settings.color_sale_tag }};
 
 // Nav and dropdown link background
 $colorNav: $colorBody;
-$colorNavText: $colorTextBody;
+$colorNavText: $colorHeadings;
 
 // Helper colors
 $disabledGrey: #f6f6f6;
@@ -292,20 +387,19 @@ $drawerTransition: 'all 0.35s cubic-bezier(0.46, 0.01 , 0.32, 1)';
 
 // Sizing variables
 $gutter: 30px;
+$gridGutterMobile: 22px;
+$section-spacing-small: 35px;
 $gridGutter: 30px; // can be a %, but nested grids will have smaller margins because of it
-$contentTopMarginLarge: 60px;
-$contentTopMargin: 40px;
-$contentTopMarginSmall: 20px;
+$contentTopMargin: 80px;
+$contentTopMarginSmall: 35px;
 $radius: 0;
 $customSelectHeight: 46px;
-
-// Logo size
-$logoMaxWidth: {{ settings.logo_max_width | default: '180' | remove: 'px' | append: 'px'}};
 
 // Z-index
 $zindexNavDropdowns: 5;
 $zindexDrawer: 10;
 $zindexHeroHeader: 2;
+$zindexDrawerOverlay: 20;
 
 // Product Collage Grid
 $collageImageXLarge: 670px;
@@ -327,44 +421,47 @@ $collectionCollageRowHeightSmall: 280px;
 // Password page
 $passwordPageUseBgImage: true;
 
+// Section onboarding
+$color-blankstate: rgba($colorTextBody, 0.35);
+$color-blankstate-background: rgba($colorTextBody, 0.10);
+
 /*================ Typography ================*/
-{% if settings.type_base_family contains 'Google' %}
-  {% assign type_base_parts = settings.type_base_family | split: '_' %}
-  {% assign type_base_name = type_base_parts[1] %}
-  {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% else %}
-  {% assign base_family = settings.type_base_family %}
-{% endif %}
+{%- assign accent_family = settings.type_accent_family -%}
+{%- assign base_family = settings.type_base_family -%}
+{%- assign header_family = settings.type_header_family -%}
 
-{% if settings.type_header_family contains 'Google' %}
-  {% assign type_header_parts = settings.type_header_family | split: '_' %}
-  {% assign type_header_name = type_header_parts[1] %}
-  {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign header_weight = type_header_parts[2] | split: ',' %}
-{% else %}
-  {% assign header_family = settings.type_header_family %}
-  {% assign header_weight = 400 %}
-{% endif %}
+{{ accent_family | font_face }}
+{{ base_family | font_face }}
+{{ header_family | font_face }}
 
-{% if settings.type_accent_family contains 'Google' %}
-  {% assign type_accent_parts = settings.type_accent_family | split: '_' %}
-  {% assign type_accent_name = type_accent_parts[1] %}
-  {% capture accent_family %}"{{ type_accent_name | split: ':' | first | replace: '+', ' ' }}"{% if type_accent_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign accent_weight = type_accent_parts[2] | split: ',' %}
-{% else %}
-  {% assign accent_family = settings.type_accent_family %}
-  {% assign accent_weight = 700 %}
-{% endif %}
+{%- assign base_family_bold = base_family | font_modify: 'weight', 'bolder' -%}
+{%- assign base_family_italic = base_family | font_modify: 'style', 'italic' -%}
+{%- assign base_family_bold_italic = base_family_bold | font_modify: 'style', 'italic' -%}
+{%- assign accent_family_bold = accent_family | font_modify: 'weight', 'bolder' -%}
 
-$headerFontStack: {{ header_family }};
-$headerFontWeight: {{ header_weight }};
+{{ base_family_bold | font_face }}
+{{ base_family_italic | font_face }}
+{{ base_family_bold_italic | font_face }}
+{{ accent_family_bold | font_face }}
+
+// Header Font
+$headerFontStack: {{ header_family.family }}, {{ header_family.fallback_families }};
+$headerFontWeight: {{ header_family.weight }};
+$headerFontStyle: {{ header_family.style }};
 $headerBaseFontSize: {{ settings.type_header_base_size }};
 
-$bodyFontStack: {{ base_family }};
-$baseFontSize: {{ settings.type_base_size }}; // Henseforth known as 1em
+// Body Font
+$bodyFontStack: {{ base_family.family }}, {{ base_family.fallback_families }};
+$bodyFontWeight: {{ base_family.weight }};
+$bodyFontWeightBold: {{ base_family_bold.weight | default: 700 }};
+$bodyFontStyle: {{ base_family.style }};
+$baseFontSize: {{ settings.type_base_size }}; // Henceforth known as 1em
 
-$accentFontStack: {{ accent_family }};
-$accentFontWeight: {{ accent_weight }};
+// Accent Font
+$accentFontStack: {{ accent_family.family }}, {{ accent_family.fallback_families }};
+$accentFontWeight: {{ accent_family.weight }};
+$accentFontWeightBold: {{ accent_family_bold.weight | default: 700 }};
+$accentFontStyle: {{ accent_family.style }};
 
 @font-face {
   font-family: 'icons';
@@ -416,7 +513,7 @@ body {
   background-color: $colorBody;
 }
 
-[tabindex='-1']:focus {
+[tabindex="-1"]:focus {
   outline: none;
 }
 
@@ -432,11 +529,7 @@ body {
 
 .main-content {
   display: block;
-  padding-top: $contentTopMarginLarge;
-
-  @media (min-width: 600px) {
-    padding-top: $contentTopMarginSmall;
-  }
+  padding-top: $gutter;
 
   @include at-query($min, $postSmall) {
     padding-bottom: 40px;
@@ -469,19 +562,32 @@ select {
   line-height: 1.6;
   font-family: $bodyFontStack;
   color: $colorTextBody;
-  font-weight: 300;
+  font-weight: $bodyFontWeight;
+  font-style: $bodyFontStyle;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   display: block;
   font-family: $headerFontStack;
   font-weight: $headerFontWeight;
+  font-style: $headerFontStyle;
   margin: 0 0 0.5em;
   line-height: 1.4;
   text-rendering: optimizeLegibility;
+
+  // Headings in the hero/slideshow use the color set in
+  // the Slideshow section settings, not $colorHeadings
+  &:not(.hero__title) {
+    color: $colorHeadings;
+  }
 
   a {
     text-decoration: none;
@@ -514,13 +620,24 @@ h6 {
   font-size: em(14px);
 }
 
-
-.h1 { @extend h1; }
-.h2 { @extend h2; }
-.h3 { @extend h3; }
-.h4 { @extend h4; }
-.h5 { @extend h5; }
-.h6 { @extend h6; }
+.h1 {
+  @extend h1;
+}
+.h2 {
+  @extend h2;
+}
+.h3 {
+  @extend h3;
+}
+.h4 {
+  @extend h4;
+}
+.h5 {
+  @extend h5;
+}
+.h6 {
+  @extend h6;
+}
 
 p {
   margin: 0 0 ($gutter / 2) 0;
@@ -535,15 +652,17 @@ em {
   font-style: italic;
 }
 
-b, strong {
-  font-weight: bold;
+b,
+strong {
+  font-weight: $bodyFontWeightBold;
 }
 
 small {
   font-size: 0.9em;
 }
 
-sup, sub {
+sup,
+sub {
   position: relative;
   font-size: 60%;
   vertical-align: baseline;
@@ -580,9 +699,10 @@ blockquote {
   }
 }
 
-code, pre {
+code,
+pre {
   background-color: #faf7f5;
-  font-family: Consolas,monospace;
+  font-family: Consolas, monospace;
   font-size: 1em;
   border: 0 none;
   padding: 0 2px;
@@ -596,7 +716,8 @@ pre {
 }
 
 /*================ Partials | Lists ================*/
-ul, ol {
+ul,
+ol {
   margin: 0 0 ($gutter / 2) 20px;
   padding: 0;
   text-rendering: optimizeLegibility;
@@ -606,14 +727,28 @@ ol ol {
   list-style: lower-alpha;
 }
 
-ol { list-style: decimal; }
-ul ul, ul ol,
-ol ol, ol ul { margin: 4px 0 5px 20px; }
-li { margin-bottom: 0.25em; }
+ol {
+  list-style: decimal;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 4px 0 5px 20px;
+}
+li {
+  margin-bottom: 0.25em;
+}
 
-ul.square { list-style: square outside; }
-ul.disc { list-style: disc outside; }
-ol.alpha { list-style: lower-alpha outside; }
+ul.square {
+  list-style: square outside;
+}
+ul.disc {
+  list-style: disc outside;
+}
+ol.alpha {
+  list-style: lower-alpha outside;
+}
 
 .no-bullets {
   list-style: none outside;
@@ -642,11 +777,17 @@ table {
   -webkit-overflow-scrolling: touch;
 }
 
-th {
-  font-weight: bold;
+.table-wrap--order {
+  background-color: $colorNewsletter;
+  padding: 1rem;
 }
 
-th, td {
+th {
+  font-weight: $bodyFontWeightBold;
+}
+
+th,
+td {
   text-align: left;
   padding: $gutter / 2;
   border: 1px solid $colorBorder;
@@ -775,11 +916,6 @@ $class-type: unquote(".");
 #{$class-type}grid--full {
   @extend #{$class-type}grid;
   margin-left: 0;
-
-  // IE8 needs this double-defined.. why? don't know
-  .lt-ie9 & {
-    margin-left: 0;
-  }
 
   > #{$class-type}grid__item {
     padding-left: 0;
@@ -1078,32 +1214,6 @@ $class-type: unquote(".");
   visibility: visible !important;
 }
 
-.display-table {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.display-table-cell {
-  display: table-cell;
-  vertical-align: middle;
-  float: none;
-}
-
-@include at-query ($min, $large) {
-  .large--display-table {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-  }
-
-  .large--display-table-cell {
-    display: table-cell;
-    vertical-align: middle;
-    float: none;
-  }
-}
-
 .visually-hidden {
   @include visuallyHidden();
 }
@@ -1134,6 +1244,20 @@ $class-type: unquote(".");
   display: block;
 }
 
+/*=============== Image Transitions ===================*/
+.fade-in {
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+
+  &.lazyloaded {
+    opacity: 1;
+  }
+
+  .no-js & {
+    @include visuallyHidden();
+  }
+}
+
 /*================ Partials | Links and Buttons ================*/
 a,
 .text-link {
@@ -1144,6 +1268,10 @@ a,
   &:hover {
     color: $colorLinkHover;
   }
+}
+
+a[href^="tel"] {
+  color: inherit;
 }
 
 button {
@@ -1162,14 +1290,14 @@ html input[disabled] {
   margin: 0;
   width: auto;
   line-height: 1.42;
-  font-weight: bold;
+  font-weight: $accentFontWeightBold;
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
   white-space: normal;
   cursor: pointer;
   border: 1px solid transparent;
-  @include prefix('user-select', 'none');
+  @include prefix("user-select", "none");
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius: $radius;
@@ -1194,7 +1322,7 @@ html input[disabled] {
   &[disabled],
   &.disabled {
     cursor: default;
-    color: $disabledBorder;
+    color: darken($disabledBorder, 27%);
     background-color: $disabledGrey;
   }
 }
@@ -1210,8 +1338,39 @@ html input[disabled] {
   }
 
   &:active {
-   background-color: $colorBtnSecondaryActive;
-   color: $colorBtnSecondaryText;
+    background-color: $colorBtnSecondaryActive;
+    color: $colorBtnSecondaryText;
+  }
+}
+
+.btn--secondary-accent {
+  background-color: $colorBody;
+  border: 1px solid $colorBtnSecondaryAccent;
+  color: $colorBtnSecondaryAccent;
+
+  &:hover,
+  &:focus {
+    background-color: $colorBody;
+    border: 1px solid $colorBtnSecondaryAccentHover;
+    color: $colorBtnSecondaryAccentHover;
+  }
+
+  &:active {
+    background-color: $colorBody;
+    border: 1px solid $colorBtnSecondaryAccentActive;
+    color: $colorBtnSecondaryAccentActive;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: default;
+    color: darken($disabledBorder, 27%);
+    background-color: $disabledGrey;
+    border: none;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
@@ -1370,8 +1529,8 @@ input[type="image"] {
 
 select {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-position: right center;
   background: {
     image: url('{{ "ico-select.svg" | asset_url }}');
@@ -1381,19 +1540,12 @@ select {
   }
   padding-right: 28px;
   text-indent: 0.01px;
-  text-overflow: '';
+  text-overflow: "";
   cursor: pointer;
-
-  /*================ Hide the svg arrow in IE9 and below ================*/
-  .ie9 &,
-  .lt-ie9 & {
-    padding-right: 10px;
-    background-image: none;
-  }
 }
 
 optgroup {
-  font-weight: bold;
+  font-weight: $accentFontWeightBold;
 }
 
 // Force option color (affects IE only)
@@ -1409,17 +1561,6 @@ select::-ms-expand {
 /*================ Form labels ================*/
 .hidden-label {
   @include visuallyHidden();
-
-  // No placeholders, so force show labels
-  .ie9 &,
-  .lt-ie9 & {
-    position: static;
-    height: auto;
-    width: auto;
-    margin-bottom: 2px;
-    overflow: visible;
-    clip: initial;
-  }
 }
 
 label[for] {
@@ -1460,7 +1601,6 @@ label.error {
   color: $errorRed;
 }
 
-
 /*================ Input Group ================*/
 .input-group {
   position: relative;
@@ -1477,7 +1617,7 @@ label.error {
 
   .input-group-field:last-child,
   .input-group-btn:last-child > .btn {
-   border-radius: 0 $radius $radius 0;
+    border-radius: 0 $radius $radius 0;
   }
 
   input {
@@ -1496,7 +1636,6 @@ label.error {
   display: table-cell;
   vertical-align: middle;
   margin: 0;
-  font-size: em(16px);
 }
 
 .input-group .btn,
@@ -1530,10 +1669,10 @@ label.error {
 @font-face {
   font-family: 'icons';
   src: url('{{ "icons.eot" | asset_url }}');
-  src: url('{{ "icons.eot" | asset_url }}#iefix') format("embedded-opentype"),
-       url('{{ "icons.woff" | asset_url }}') format("woff"),
-       url('{{ "icons.ttf" | asset_url }}') format("truetype"),
-       url('{{ "icons.svg" | asset_url }}#timber-icons') format("svg");
+  src: url('{{ "icons.eot" | asset_url }}#iefix') format('embedded-opentype'),
+    url('{{ "icons.woff" | asset_url }}') format('woff'),
+    url('{{ "icons.ttf" | asset_url }}') format('truetype'),
+    url('{{ "icons.svg" | asset_url }}#timber-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -1574,40 +1713,33 @@ $socialIconFontStack: 'icons';
 }
 
 /*================ Icon mapping ================*/
-.icon-american_express:before { content: "\41"; }
-.icon-arrow-down:before { content: "\e607"; }
-.icon-arrow-left:before { content: "\e900"; }
-.icon-arrow-right:before { content: "\e901"; }
-.icon-bitcoin:before { content: "\42"; }
-.icon-cart:before { content: "\e600"; }
-.icon-cirrus:before { content: "\43"; }
-.icon-customer:before { content: "\e605"; }
-.icon-dankort:before { content: "\64"; }
-.icon-diners_club:before { content: "\63"; }
-.icon-discover:before { content: "\44"; }
-.icon-facebook:before { content: "\e609"; }
-.icon-fancy:before { content: "\46"; }
-.icon-google:before { content: "\67"; }
-.icon-google_wallet:before { content: "\47"; }
-.icon-hamburger:before { content: "\e601"; }
-.icon-instagram:before { content: "\69"; }
-.icon-interac:before { content: "\49"; }
-.icon-jcb:before { content: "\4a"; }
-.icon-maestro:before { content: "\6d"; }
-.icon-master:before { content: "\4d"; }
-.icon-minus:before { content: "\e602"; }
-.icon-paypal:before { content: "\50"; }
-.icon-pinterest:before { content: "\e608"; }
-.icon-plus:before { content: "\e603"; }
-.icon-rss:before { content: "\72"; }
-.icon-search:before { content: "\73"; }
-.icon-stripe:before { content: "\53"; }
-.icon-tumblr:before { content: "\74"; }
-.icon-twitter:before { content: "\54"; }
-.icon-vimeo:before { content: "\76"; }
-.icon-visa:before { content: "\56"; }
-.icon-x:before { content: "\e604"; }
-.icon-youtube:before { content: "\79"; }
+.icon-arrow-down:before { content:'\e607'; }
+.icon-arrow-left:before { content:'\e900'; }
+.icon-arrow-right:before { content:'\e901'; }
+.icon-cart:before { content:'\e600'; }
+.icon-customer:before { content:'\e605'; }
+.icon-facebook:before { content:'\e609'; }
+.icon-fancy:before { content:'\46'; }
+.icon-google_plus:before { content:'\e90a'; }
+.icon-hamburger:before { content:'\e601'; }
+.icon-instagram:before { content:'\e907'; }
+.icon-minus:before { content:'\e602'; }
+.icon-pause:before { content: "\e902"; }
+.icon-pin:before { content:'\e90d'; }
+.icon-pinterest:before { content:'\e608'; }
+.icon-play:before { content: "\e904"; }
+.icon-plus:before { content:'\e603'; }
+.icon-rss:before { content:'\72'; }
+.icon-saletag:before { content: "\e906"; }
+.icon-search:before { content:'\73'; }
+.icon-snapchat:before { content:'\e90b'; }
+.icon-slide-prev:before { content: "\e903"; }
+.icon-slide-next:before { content: "\e905"; }
+.icon-tumblr:before { content:'\74'; }
+.icon-twitter:before { content:'\54'; }
+.icon-vimeo:before { content:'\76'; }
+.icon-x:before { content:'\e604'; }
+.icon-youtube:before { content:'\79'; }
 
 .payment-icons {
   @include prefix('user-select', 'none');
@@ -1615,22 +1747,28 @@ $socialIconFontStack: 'icons';
   margin-bottom: 0;
 
   li {
-    margin: 0 ($gutter / 4) ($gutter / 4);
+    margin: 0 0 ($gutter / 4) ($gutter / 4);
     cursor: default;
-  }
-
-  .icon {
-    font-size: 30px;
-    line-height: 30px;
   }
 
   .fallback-text {
     text-transform: capitalize;
   }
+
+  .icon {
+    width: 38px;
+    height: 24px;
+  }
 }
+
+
 
 .social-icons .icon {
   padding-right: 4px;
+}
+
+.social-icons .icon-google_plus {
+  font-size: 0.8em;
 }
 
 /*================ Partials | Drawers ================*/
@@ -1665,9 +1803,9 @@ $socialIconFontStack: 'icons';
     }
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="number"],
+  input[type='text'],
+  input[type='email'],
+  input[type='number'],
   textarea {
     border-color: $colorDrawerBorder;
   }
@@ -1685,10 +1823,6 @@ $socialIconFontStack: 'icons';
   .js-drawer-open-left & {
     display: block;
     @include transform(translateX($drawerNavWidth));
-
-    .lt-ie9 & {
-      left: 0;
-    }
   }
 }
 
@@ -1708,18 +1842,11 @@ $socialIconFontStack: 'icons';
     @include at-query($min, $postSmall) {
       @include transform(translateX(-$drawerCartWidthLarge));
     }
-
-    .lt-ie9 & {
-      right: 0;
-    }
   }
 }
 
-#PageContainer {
-  overflow: hidden;
-}
-
-.is-moved-by-drawer {
+.page-container,
+.drawer__header-container {
   @include transition($drawerTransition);
 
   .js-drawer-open-left & {
@@ -1859,10 +1986,14 @@ $socialIconFontStack: 'icons';
 }
 
 .ajaxcart__product-name--wrapper {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .ajaxcart__product-name + .ajaxcart__product-meta {
+  padding-top: 3px;
+}
+
+.ajaxcart__discount {
   padding-top: 3px;
 }
 
@@ -1942,6 +2073,7 @@ $socialIconFontStack: 'icons';
 .ajaxcart__qty-adjust {
   @extend .js-qty__adjust;
   color: $colorDrawerText;
+  z-index: 1;
 
   &:hover {
     background-color: $colorDrawerBorder;
@@ -2130,7 +2262,7 @@ $socialIconFontStack: 'icons';
   }
 
   h2, h3 {
-    margin-top: 4em;
+    margin-top: 2.5em;
     margin-bottom: 2em;
   }
 
@@ -2235,20 +2367,35 @@ $socialIconFontStack: 'icons';
   a,
   a:hover {
     text-decoration: none;
+    color: $colorNavText;
   }
 
   a.site-header__logo-link {
     margin: 0 auto;
   }
 
-  a, img {
+  a,
+  img {
     display: block;
   }
 
   img {
     margin: 0 auto;
-    max-width: $logoMaxWidth;
   }
+}
+
+.announcement-bar {
+  display: block;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.announcement-bar__message {
+  display: block;
+  font-weight: $headerFontWeight;
+  padding: 10px $gutter;
+  margin: 0;
 }
 
 /*================ Module | Search Bar ================*/
@@ -2268,12 +2415,7 @@ $socialIconFontStack: 'icons';
 
 .search-bar--header {
   max-width: 300px;
-
-  .is-dark & {
-    input {
-      background-color: darken($colorInputBg, 5%);
-    }
-  }
+  background-color: $colorInputBg;
 }
 
 .search-bar--drawer {
@@ -2283,6 +2425,10 @@ $socialIconFontStack: 'icons';
 /*================ Module | Section Headers ================*/
 .section-header {
   margin-bottom: 30px;
+
+  .section-header__title {
+    letter-spacing: 0;
+  }
 
   @include at-query($min, $postSmall) {
     margin-bottom: 50px;
@@ -2297,6 +2443,7 @@ $socialIconFontStack: 'icons';
 @include at-query ($min, $large) {
   .section-header {
     display: table;
+    table-layout: fixed;
     width: 100%;
   }
 
@@ -2358,6 +2505,19 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.site-nav__dropdown-link {
+  .icon-arrow-down {
+    position: absolute;
+    top: 50%;
+    right: $gutter / 2;
+    font-size: 10px;
+    @include transform("translateY(-50%) rotate(-90deg)");
+  }
+  .site-nav__dropdown-grandchild & {
+    white-space: normal;
+  }
+}
+
 .site-nav__link--icon {
   padding-left: $gutter / 4;
   padding-right: $gutter / 4;
@@ -2375,17 +2535,39 @@ $socialIconFontStack: 'icons';
 
 /*================ Dropdowns ================*/
 .site-nav__dropdown {
-  display: none;
+  opacity: 0;
+  display: block;
   position: absolute;
   left: 0;
   margin: 0;
   z-index: $zindexNavDropdowns;
+  pointer-events: none;
 
-  .supports-no-touch .site-nav--has-dropdown:hover &,
-  .site-nav--has-dropdown.nav-hover &,
-  .nav-focus + & {
-    display: block;
+  a {
+    background-color: $colorNav;
+    text-align: left;
+
+    &:hover,
+    &:active {
+      background-color: darken($colorNav, 10%);
+    }
   }
+
+  &.nav-outside {
+    left: auto;
+    right: 0;
+  }
+}
+
+.site-nav__dropdown-grandchild {
+  position: absolute;
+  top: -10px; // Match dropdown padding
+  left: 100%;
+  width: 100%;
+  margin: 0;
+  z-index: $zindexNavDropdowns;
+  opacity: 0;
+  pointer-events: none;
 
   a {
     background-color: $colorNav;
@@ -2394,6 +2576,17 @@ $socialIconFontStack: 'icons';
     &:active {
       background-color: darken($colorNav, 10%);
     }
+  }
+
+  ul {
+    background-color: $colorNav;
+    padding: ($gutter / 3) 0;
+    // Grand children dropdown is 2px off parent dropdown
+    margin: 0 0 0 2px;
+  }
+
+  &.nav-outside {
+    left: -100%;
   }
 }
 
@@ -2423,7 +2616,7 @@ $socialIconFontStack: 'icons';
   }
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: $gutter / 2;
@@ -2436,10 +2629,13 @@ $socialIconFontStack: 'icons';
   }
 }
 
-// Login/logout links can't have a class on them, so style <a> element
 .mobile-nav__item a {
   display: block;
   font-size: 22px;
+  .mobile-nav__subsublist & {
+    padding-left: 45px;
+    font-size: 16px;
+  }
 }
 
 .mobile-nav__item a,
@@ -2448,11 +2644,9 @@ $socialIconFontStack: 'icons';
   padding: $gutter / 2;
   text-decoration: none;
 
-  &:active {
+  &:active,
+  &:focus {
     color: darken($colorDrawerText, 15%);
-  }
-
-  &:active {
     background-color: darken($colorDrawers, 5%);
   }
 }
@@ -2511,17 +2705,7 @@ $socialIconFontStack: 'icons';
 
 .mobile-nav__sublist {
   margin: 0;
-  max-height: 0;
-  visibility: hidden;
-  overflow: hidden;
-  @include backface(hidden);
-  @include transition(all 300ms cubic-bezier(0.57, 0.06, 0.05, 0.95));
-
-  .mobile-nav--expanded + & {
-    visibility: visible;
-    max-height: 700px;
-    @include transition(all 700ms cubic-bezier(0.57, 0.06, 0.05, 0.95));
-  }
+  display: none;
 
   .mobile-nav__item:after {
     top: 0;
@@ -2530,10 +2714,9 @@ $socialIconFontStack: 'icons';
 
   .mobile-nav__link {
     padding-left: $gutter;
-    font-weight: normal;
+    font-weight: $bodyFontWeight;
   }
 }
-
 
 /*================ Cart bubble for items in cart ================*/
 @include at-query($min, $large) {
@@ -2583,11 +2766,6 @@ $socialIconFontStack: 'icons';
     padding-bottom: $gutter / 2;
   }
 
-  &:last-child {
-    border-top: 1px solid $colorBorder;
-    padding-top: $gutter / 2;
-  }
-
   .js-qty {
     margin: 0 auto;
   }
@@ -2604,6 +2782,11 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.cart__row--last {
+  border-top: 1px solid $colorBorder;
+  padding-top: $gutter / 2;
+}
+
 .cart__row--table {
   display: table;
   table-layout: fixed;
@@ -2613,6 +2796,13 @@ $socialIconFontStack: 'icons';
     display: table-cell;
     vertical-align: middle;
     float: none;
+  }
+}
+
+.cart__row--table-with-discount {
+
+  .grid__item {
+    vertical-align: top;
   }
 }
 
@@ -2637,20 +2827,31 @@ $socialIconFontStack: 'icons';
     width: 100%;
     display: block;
   }
+}
+
+.cart__pricing {
 
   @include at-query($max, $medium) {
-    margin-bottom: $gutter / 2;
+    margin-top: $gutter;
   }
 }
 
 .cart__product-name {
   margin-bottom: 0;
+
+  @include at-query($min, $medium) {
+    width: 90%;
+  }
 }
 
 .cart__product-qty {
   text-align: center;
   margin: 0 auto;
   max-width: 80px;
+}
+
+.cart__note-container {
+  vertical-align: top !important;
 }
 
 .cart__note {
@@ -2661,6 +2862,24 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.cart__subtotal-container {
+  margin-top: 25px;
+
+  @include at-query($min, $large) {
+    margin: 0;
+  }
+}
+
+.cart__discounts {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $gutter / 2;
+
+  @include at-query($min, $large) {
+    justify-content: flex-end;
+  }
+}
+
 .cart__product-meta {
   margin-bottom: 0;
 }
@@ -2668,15 +2887,51 @@ $socialIconFontStack: 'icons';
 .additional_checkout_buttons {
   margin-left: -10px;
 
-  input[type="image"],
-  .google-wallet-button-holder {
-    margin-left: 10px;
+  & > *:not(script) {
+    padding: 15px 0 0 15px;
+    vertical-align: top;
+    line-height: 1;
+
+    @include at-query($max, $small) {
+      padding: 15px 0 0 5px;
+    }
+
+    &:first-child,
+    &:empty {
+      padding-left: 0px;
+    }
+  }
+}
+
+.cart--continue-browsing {
+  .cart--no-cookies & {
+    display: none;
+  }
+}
+
+.cart--empty-message {
+  .cart--no-cookies & {
+    display: none;
+  }
+}
+
+.cookie-message {
+  display: none;
+  padding-bottom: 25px;
+
+  .cart--no-cookies & {
+    display: block;
   }
 }
 
 /*================ Templates | Product Page ================*/
 .product-single {
   text-align: center;
+}
+
+.product-single__photos {
+  // prevent scroll anchoring within element
+  overflow-anchor: none;
 }
 
 .product-single__meta--wrapper {
@@ -2703,17 +2958,53 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.product-single__quantity {
+  margin-top: 10px;
+}
+
 .product-single__add-to-cart {
-  margin: 10px 0;
+  margin: 0 0 10px 0;
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+
+  &.default-product {
+    margin-top: 20px;
+  }
+}
+
+.product-single__form--no-variants {
+  margin-top: 30px;
+}
+
+.product-single__add-to-cart--full-width {
+  width: 100%;
+}
+
+.btn--add-to-cart {
+  margin: 10px 10px 0 0;
+  min-width: 155px;
+  flex: auto;
+
+  &.btn {
+    padding: 12px 30px;
+  }
+
+  .product-single__add-to-cart--full-width & {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
 }
 
 .product-single__description {
   margin-top: 40px;
-  {% comment %}
-  text-align: center;
-  font-family:sans-serif;
-  font-size: 120% 
-  {% endcomment %}
+  text-align: left;
+}
+
+.product-single__full-details {
+  cursor: pointer;
+  display: inline-block;
+  margin: 30px 0;
 }
 
 .product-single__variants {
@@ -2727,10 +3018,12 @@ $socialIconFontStack: 'icons';
 @include at-query($min, $postSmall) {
   .product-single__photo-wrapper {
     margin-bottom: $gutter / 2;
+  }
+}
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+@include at-query($min, $postSmall) {
+  .product-single__photo-wrapper--featured-product {
+    margin-bottom: 0;
   }
 }
 
@@ -2742,13 +3035,52 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.product-single__photo--flex-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.product-single__photo--flex {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -ms-flex-item-align: center;
+  -webkit-align-self: center;
+  align-self: center;
+}
+
+.product-single__photo--container {
+  margin: 0 auto;
+}
+
+.product-single__photo-wrapper {
+  position: relative;
+}
+
+.product-single__photo-wrapper--featured-product {
+  margin: 0 auto;
+}
+
 .product-single__photos,
 .product-single__thumbnails {
-  a, img {
+  a,
+  img {
     background-color: $colorProductBackground;
     display: block;
     margin: 0 auto;
-    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 }
 
@@ -2757,10 +3089,6 @@ $socialIconFontStack: 'icons';
     padding-right: $gutter;
     padding-left: $gutter / 2;
     margin: 0 ($gutter / 2);
-  }
-
-  .product-single__meta {
-    padding-top: 0;
   }
 }
 
@@ -2790,6 +3118,10 @@ $socialIconFontStack: 'icons';
   }
 }
 
+.visibility-hidden {
+  visibility: hidden;
+}
+
 .product-single__prices {
   margin-bottom: $gutter / 2;
 }
@@ -2797,7 +3129,7 @@ $socialIconFontStack: 'icons';
 .product-single__price,
 .product-single__price--compare-at {
   @include accentFontStack;
-  color: $colorTextBody;
+  color: $colorHeadings;
   font-size: em(18px);
   font-weight: $headerFontWeight;
 
@@ -2812,6 +3144,10 @@ $socialIconFontStack: 'icons';
   text-decoration: line-through;
 }
 
+.product-single__policies {
+  margin: 15px 0 25px 0;
+}
+
 .product-single__quantity {
   .js-quantity-selector,
   .js-qty {
@@ -2822,34 +3158,114 @@ $socialIconFontStack: 'icons';
 .product-single__quantity-label {
   margin-right: 10px;
 }
-.variantdes{
-  display: none;
+
+#shopify-product-reviews {
+  .spr-review-content-body,
+  .spr-review-header-byline,
+  .spr-form-label {
+    font-size: $baseFontSize;
+    line-height: 1.563;
+  }
+
+  .spr-form-label {
+    display: block;
+    text-align: left;
+  }
+
+  .spr-summary-actions-newreview {
+    float: none;
+  }
+
+  .spr-summary-caption,
+  .spr-summary-actions {
+    display: block;
+  }
 }
 
-/* Blog Studio by ShopPad */
-.studioengine {
-  margin-top: -60px !important;
+.product-single__thumbnails {
+  img,
+  a {
+    display: block;
+    position: relative;
+    background-color: transparent;
+  }
 }
 
-.studioengine a:link {
-  text-decoration: none !important;
-  text-decoration-line: none !important;
+.product-single__thumbnails {
+  img {
+    max-height: 85px;
+    width: auto;
+    overflow: hidden;
+  }
 }
 
-.studioengine .sse-btn,.studioeditor .sse-btn {
-    padding: 7px 25px;
-    font-size: 1em;
-    line-height: 2em;
-    border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    white-space: normal;
-    background-color: rgba(0,0,0,0.1)
+@include at-query($max, $small) {
+  .product-single__photo--container-thumb {
+    display: block !important;
+  }
+}
+
+.product-single__thumbnail {
+  display: block;
+
+  img {
+    border: 2px solid transparent;
+  }
+
+  &.active-thumb {
+    img {
+      border-color: $colorHeadings;
+    }
+  }
+}
+
+
+.shopify-payment-button {
+  margin: 10px 10px 0 0;
+  min-width: 155px;
+  flex: auto;
+
+  .product-single__add-to-cart--full-width & {
+    margin-right: 0;
+  }
+
+  .shopify-payment-button__button {
+    border-radius: $radius;
+  }
+
+  .shopify-payment-button__button--unbranded {
+    @extend .btn;
+    @include accentFontStack;
+    margin-right: 0;
+    width: 100%;
+    min-height: 44px;
+    font-size: em(13px);
+
+    &:hover,
+    &:focus {
+      background-color: $colorBtnSecondaryAccentHover !important;
+    }
+
+    &:active {
+      background-color: $colorBtnSecondaryAccentActive !important;
+    }
+  }
+
+  .shopify-payment-button__more-options {
+    font-size: em(14px);
+    color: $colorNavText;
+    white-space: nowrap;
+    text-decoration: underline;
+    padding: 0 15px;
+
+    &:hover,
+    &:focus {
+      color: lighten($colorNavText, 12%);
+    }
+
+    &:active {
+      color: adaptive-color($colorNavText, 24%);
+    }
+  }
 }
 

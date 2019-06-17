@@ -1,16 +1,19 @@
 [[# hasNoResults ]]
-  No result found
+  [[ translations.noResultFound ]]
 [[/ hasNoResults ]]
 
 [[# hasOneResult ]]
   <span class="ais-stats--nb-results">
-    1 résultat
+    [[ translations.oneResultFound ]]
   </span>
 [[/ hasOneResult ]]
 
 [[# hasManyResults ]]
+  [[# helpers.outOf ]] [[ start ]]-[[ end ]] [[/ helpers.outOf ]]
   <span class="ais-stats--nb-results">
     [[# helpers.formatNumber ]][[ nbHits ]][[/ helpers.formatNumber ]]
-    résultats
+    [[ translations.resultsFound ]]
   </span>
 [[/ hasManyResults ]]
+
+[[# helpers.in ]] [[ processingTimeS ]][[/ helpers.in ]]

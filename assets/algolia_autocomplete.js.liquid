@@ -10,37 +10,59 @@
     return algolia.client.initIndex('' + algolia.config.index_prefix + name);
   }
 
+  function addPositionToHits(hits, queryID) {
+    return hits.map(function (entry, index) {
+      entry._position = index + 1;
+      entry._queryID = queryID
+      return entry
+    })
+  }
+
   function autocompleteSection (section) {
     var params = autocomplete[section];
     if (params.enabled !== true) return null;
 
     var templates = {
       empty: function displayEmptyResultSet (props) {
-        return algolia.render(params.templates.empty, props);
+        return algolia.render(params.templates.empty, Object.assign({}, props, { translations: algolia.translations }));
       },
       suggestion: function displaySuggestion (hit) {
-        return algolia.render(params.templates.hit, hit);
+        return algolia.render(params.templates.hit, Object.assign({ _distinct: params.distinct }, hit, {translations: algolia.translations}));
       }
     };
 
     if (params.templates.footer) {
       templates.footer = function displayFooter (props, content) {
         if (content.nbHits <= params.hitsPerPage) return null;
+        if (!autocomplete.showFooter) return null;
 
         return algolia.render(params.templates.footer, {
           query: props.query,
-          nbHits: content.nbHits
+          nbHits: content.nbHits,
+          translations: algolia.translations,
+          helpers: algolia.helpers
         });
       }
+
     }
 
     return {
       name: section,
-      source: $.fn.autocomplete.sources.hits(params.index, {
-        hitsPerPage: params.hitsPerPage,
-        highlightPreTag: '<span class="aa-highlight">',
-        highlightPostTag: '</span>'
-      }),
+      source: function(query, callback) {
+        var searchOpts = {
+          clickAnalytics: true,
+          hitsPerPage: params.hitsPerPage,
+          highlightPreTag: '<span class="aa-highlight">',
+          highlightPostTag: '</span>',
+        };
+        if (params.distinct) {
+          searchOpts.distinct = true;
+        }
+        index(section).search(query, searchOpts).then(function(answer) {
+          var hits = addPositionToHits(answer.hits, answer.queryID);
+          callback(hits, answer);
+        });
+      },
       displayKey: 'title',
       templates: templates
     }
@@ -54,8 +76,11 @@
 
     var width = $this.outerWidth();
     var vpWidth = document.body.clientWidth;
-    var left = $this.offset().left;
+    var offset = $this.offset();
+    var left = offset.left;
     var right = vpWidth - width - left;
+    var top = offset.top;
+    var height = $this.outerHeight();
 
     var align = left < right ? 'left' : 'right';
     var dist = Math.min(left, right);
@@ -68,9 +93,17 @@
 
     var newWidth = vpWidth - 2 * dist;
 
+    // For big inputs, follow the input
+    if (width >= 600) {
+      align = 'left';
+      dist = left;
+      newWidth = width;
+    }
+
     $node
       .css('left', '')
       .css('right', '')
+      .css('top', (top + height + 8) + 'px')
       .css(align, dist)
       .css('width', '' + newWidth + 'px');
 
@@ -97,6 +130,15 @@
         hit: algolia.compileTemplate('autocomplete_article')
       }
     },
+    pages: {
+      enabled: algolia.config.index_pages,
+      hitsPerPage: algolia.config.pages_autocomplete_hits_per_page,
+      index: index('pages'),
+      templates: {
+        empty: algolia.compileTemplate('autocomplete_pages_empty'),
+        hit: algolia.compileTemplate('autocomplete_page')
+      }
+    },
     collections: {
       enabled: algolia.config.index_collections,
       hitsPerPage: algolia.config.collections_autocomplete_hits_per_page,
@@ -111,6 +153,7 @@
     poweredBy: algolia.config.powered_by,
     products: {
       enabled: algolia.config.index_products,
+      distinct: algolia.config.show_products,
       hitsPerPage: algolia.config.products_autocomplete_hits_per_page,
       index: index('products'),
       templates: {
@@ -120,6 +163,7 @@
       },
     },
     selector: algolia.config.input_selector + ', .algolia-shopify-autocomplete',
+    showFooter: algolia.config.instant_search_enabled,
     storeName: algolia.storeName,
     templates: {
       dropdown: algolia.compileTemplate('autocomplete'),
@@ -148,6 +192,8 @@
           with: {
             articles: autocomplete.articles.enabled,
             collections: autocomplete.collections.enabled,
+            pages: autocomplete.pages.enabled,
+            footer: autocomplete.showFooter,
             poweredBy: autocomplete.poweredBy,
             products: autocomplete.products.enabled
           }
@@ -157,12 +203,38 @@
     }, _.compact([
       autocompleteSection('collections'),
       autocompleteSection('articles'),
+      autocompleteSection('pages'),
       autocompleteSection('products')
     ]));
 
+    // Hack to handle buggy onclick event on iOS
+    autocomplete.$input.each(function () {
+      var data = $(this).data('aaAutocomplete');
+      var dropdown = data.dropdown;
+      var suggestionClass = '.' + dropdown.cssClasses.prefix + '-' + dropdown.cssClasses.suggestion;
+      var onSuggestionClick = dropdown._onSuggestionClick.bind(dropdown);
+
+      var touchmoved;
+      dropdown.$menu.on('touchend', suggestionClass, function (e) {
+        if(touchmoved === false) {
+          e.preventDefault();
+          e.stopPropagation();
+          onSuggestionClick.apply(this, arguments);
+        }
+      }).on('touchmove', function (){
+        touchmoved = true;
+      }).on('touchstart', function(){
+        touchmoved = false;
+      });
+    });
+
     autocomplete.$input.on('autocomplete:selected', function (obj, datum, name) {
+      if (algolia.config.analytics_enabled) {
+        window.aa('click', { objectID: datum.objectID, position: datum._position, queryID: datum._queryID });
+      }
       if (name === 'products') {
-        window.location.href = '/' + name + '/' + datum.handle + (datum.objectID !== datum.id ? '?variant=' + datum.objectID : '');
+        var addVariantId = !autocomplete.products.distinct && datum.objectID !== datum.id;
+        window.location.href = '/' + name + '/' + datum.handle + (addVariantId ? ('?variant=' + datum.objectID) : '');
       } else if (name === 'articles') {
         window.location.href = '/blogs/' + datum.blog.handle + '/' + datum.handle;
       } else {

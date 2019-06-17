@@ -1,5 +1,8 @@
 {
   "general": {
+    "accessibility": {
+      "refresh_page": "choosing a selection results in a full page refresh"
+    },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
       "page": "Page {{ page }}"
@@ -8,30 +11,36 @@
       "title": "404 Page Not Found",
       "subtext_html": "The page you were looking for does not exist. <a href=\"\/\" class=\"text-link\">Click here<\/a> to continue shopping."
     },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
     "password_page": {
-      "opening_soon": "Opening Soon",
-      "spread_the_word": "Spread the word:",
       "login_form_heading": "Enter store using password:",
       "login_form_password_label": "Password",
       "login_form_password_placeholder": "Your password",
       "login_form_submit": "Enter",
-      "signup_form_heading": "Find out when we open:",
       "signup_form_email_label": "Email",
-      "signup_form_email_placeholder": "Your email",
-      "signup_form_submit": "Submit",
       "signup_form_success": "We will send you an email right before we open!",
       "admin_link_html": "Are you the store owner? <a href=\"\/admin\" class=\"text-link\">Log in here<\/a>",
       "password_link": "Enter using password",
-      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}",
+      "close": "close (esc)"
     },
     "social": {
       "share_on_facebook": "Share",
       "share_on_twitter": "Tweet",
       "share_on_pinterest": "Pin it",
-      "share_on_fancy": "Fancy"
+      "alt_text": {
+        "share_on_facebook": "Share on Facebook",
+        "share_on_twitter": "Tweet on Twitter",
+        "share_on_pinterest": "Pin on Pinterest"
+      }
     },
     "newsletter_form": {
       "newsletter_email": "Sign up to our mailing list",
+      "newsletter_placeholder": "Your email",
+      "newsletter_confirmation": "Thanks for subscribing",
       "submit": "Subscribe"
     },
     "search": {
@@ -43,13 +52,19 @@
     },
     "drawers": {
       "navigation": "Site navigation",
-      "close_menu": "Close menu"
+      "close_menu": "Close menu",
+      "expand_submenu": "Expand submenu",
+      "collapse_submenu": "Collapse submenu"
+    },
+    "payment": {
+      "method": "Payment methods"
     }
   },
   "blogs": {
     "article": {
       "tags": "Tags",
       "read_more": "Continue reading",
+      "view_all": "View all",
       "back_to_blog": "Back to {{ title }}"
     },
     "comments": {
@@ -61,7 +76,7 @@
       "moderated": "Please note, comments must be approved before they are published",
       "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
       "success": "Your comment was posted successfully! Thank you!",
-      "comments_with_count": {
+      "with_count": {
         "one": "{{ count }} comment",
         "other": "{{ count }} comments"
       }
@@ -73,12 +88,19 @@
       "remove": "Remove",
       "note": "Special instructions for seller",
       "subtotal": "Subtotal",
-      "shipping_at_checkout": "Shipping and taxes calculated at checkout",
+      "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping<\/a> calculated at checkout",
+      "taxes_included_but_shipping_at_checkout": "Tax included and shipping calculated at checkout",
+      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping<\/a> calculated at checkout.",
       "update": "Update Cart",
       "checkout": "Check Out",
       "empty": "Your cart is currently empty.",
       "continue_browsing_html": "Continue browsing <a href=\"\/collections\/all\">here<\/a>.",
-      "close_cart": "Close Cart"
+      "close_cart": "Close Cart",
+      "savings_html": "You're saving {{ savings }}",
+      "reduce_quantity": "Reduce item quantity by one",
+      "increase_quantity": "Increase item quantity by one",
+      "cookies_required": "Enable cookies to use the shopping cart"
     },
     "label": {
       "quantity": "Quantity",
@@ -89,16 +111,12 @@
     "general": {
       "catalog_title": "Catalog",
       "all_of_collection": "All",
-      "no_matches": "Sorry, there are no products in this collection",
-      "items_with_count": {
-        "one": "{{ count }} item",
-        "other": "{{ count }} items"
-      }
+      "no_matches": "Sorry, there are no products in this collection."
     },
-    "onboarding": {
-      "modal_title": "This page will show all of your store's products",
-      "no_products_html": "There are no products yet, but once you begin adding them they will show up here regardless if they are in a collection.",
-      "add_product": "Add Product"
+    "sorting": {
+      "title": "Sort by",
+      "title_tags": "Filter by",
+      "all_of_collection": "All {{ collection }}"
     }
   },
   "contact": {
@@ -185,7 +203,8 @@
       "quantity": "Quantity",
       "total": "Total",
       "fulfilled_at": "Fulfilled {{ date }}",
-      "subtotal": "Subtotal"
+      "subtotal": "Subtotal",
+      "track_shipment": "Track shipment"
     },
     "recover_password": {
       "title": "Reset your password",
@@ -213,18 +232,28 @@
     }
   },
   "home_page": {
-    "sections": {
-      "featured_products": "Featured Products",
-      "featured_collections": "Featured Collections"
+    "slideshow": {
+      "navigation_instructions": "Use left\/right arrows to navigate the slideshow or swipe left\/right if using a mobile device",
+      "next_slide": "Next slide",
+      "previous_slide": "Previous slide",
+      "play": "Play slideshow",
+      "pause": "Pause slideshow",
+      "load_slide": "Load slide {{ slide_number }}",
+      "active_slide": "Slide {{ slide_number }}, current"
     },
     "onboarding": {
-      "modal_title": "Almost there...",
-      "no_products_html": "You have no products in your Frontpage collection. This placeholder will appear until you <a href=\"\/admin\/collections?tutorial=Frontpage\">add a product to this collection<\/a>.",
-      "add_product": "Add a Product",
+      "product_vendor": "Product vendor",
       "product_title": "Example Product Title",
-      "no_collections_html": "You don't have any collections to show here. <a href=\"\/admin\/custom_collections\">Add some collections<\/a> to go along with the default Frontpage.",
-      "add_collection": "Add a Collection",
-      "collection_title": "Example Collection Title"
+      "collection_title": "Example Collection Title",
+      "blog_title": "Your post's title",
+      "blog_excerpt": "Your store hasn’t published any blog posts yet. A blog can be used to talk about new product launches, tips, or other news you want to share with your customers. You can check out Shopify’s ecommerce blog for inspiration and advice for your own store and blog.",
+      "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
+    },
+    "map": {
+      "address_error": "Error looking up that address",
+      "address_no_results": "No results for that address",
+      "address_query_limit_html": "You have exceeded the Google API usage limit. Consider upgrading to a <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium Plan<\/a>.",
+      "auth_error_html": "There was a problem authenticating your Google Maps account."
     }
   },
   "layout": {
@@ -246,14 +275,17 @@
       "save_html": "Save<br \/>{{ saved_amount }}",
       "collection_return": "Back to {{ collection }}",
       "sale_price": "Sale price",
-      "regular_price": "Regular price"
+      "regular_price": "Regular price",
+      "include_taxes": "Tax included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping<\/a> calculated at checkout."
     },
     "product": {
       "sold_out": "Sold Out",
       "sold_out_html": "Sold<br \/> Out",
       "unavailable": "Unavailable",
       "quantity": "Quantity",
-      "add_to_cart": "Add to Cart"
+      "add_to_cart": "Add to Cart",
+      "full_details": "Full details"
     },
     "zoom": {
       "next": "Next (Right arrow key)",
@@ -273,8 +305,5 @@
       "print": "Print",
       "add_to_apple_wallet": "Add to Apple Wallet"
     }
-  },
-  "date_formats": {
-    "month_day_year": "%b %d, %Y"
   }
 }

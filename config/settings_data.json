@@ -1,208 +1,418 @@
 {
   "current": {
     "color_body_bg": "#ffffff",
-    "color_body_text": "#1c1d1d",
+    "color_headings": "#222323",
+    "color_body_text": "#222323",
     "color_borders": "#1c1d1d",
-    "color_primary": "#008a4d",
-    "color_secondary": "#1e824c",
-    "color_product_background": "#ffffff",
+    "color_button_text": "#ffffff",
+    "color_primary": "#1c1d1d",
+    "color_secondary": "#a26b25",
+    "color_product_background": "#f7f7f7",
     "color_sale_tag": "#990000",
     "color_input": "#f6f6f6",
     "color_newsletter": "#f6f6f6",
     "color_drawer_background": "#1c1d1d",
     "color_drawer_text": "#ffffff",
     "color_drawer_border": "#343535",
-    "color_drawer_button": "#1e824c",
+    "color_drawer_button": "#a26b25",
     "color_drawer_button_text": "#ffffff",
-    "type_header_family": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
-    "type_header_base_size": "32px",
+    "type_header_family": "old_standard_tt_n4",
+    "type_header_base_size": "30px",
     "type_header_border_thickness": "1px",
-    "type_accent_family": "Google_Open+Sans_700_sans",
+    "type_accent_family": "montserrat_n6",
     "type_accent_transform": true,
     "type_accent_spacing": true,
-    "type_base_family": "Google_Arapey_400_serif",
+    "type_accent_subheadings": true,
+    "type_base_family": "arapey_n4",
     "type_base_size": "16px",
-    "type_base_italize_titles": false,
-    "logo_use_image": true,
-    "logo_use_inverted": false,
-    "logo_max_width": "150",
-    "favicon_enable": true,
-    "home_section_1": "hero",
-    "home_section_2": "featured-products",
-    "home_section_3": "home-content",
-    "home_section_4": "",
-    "hero_home_auto": true,
-    "home_hero_auto_speed": "5000",
-    "hero_slide_1_enable": true,
-    "hero_slide_1_text_color": "is-light",
-    "hero_slide_1_subheading": "",
-    "hero_slide_1_heading": "",
-    "hero_slide_1_cta": "Montrez-moi",
-    "hero_slide_1_link": "https:\/\/www.parispousse.fr\/search?q=&hPP=140&idx=shopify_products&p=0&fR%5Btags%5D%5B0%5D=Effet%20jungle&is_v=1",
-    "hero_slide_2_enable": true,
-    "hero_slide_2_text_color": "is-dark",
-    "hero_slide_2_subheading": "",
-    "hero_slide_2_heading": "",
-    "hero_slide_2_cta": "Faites votre choix !",
-    "hero_slide_2_link": "https:\/\/www.parispousse.fr\/search?q=&hPP=140&idx=shopify_products_title_asc&p=0&hFR%5Bproduct_type%5D%5B0%5D=Plante%20%26%20Pot&is_v=1",
-    "hero_slide_3_enable": true,
-    "hero_slide_3_text_color": "is-dark",
-    "hero_slide_3_subheading": "",
-    "hero_slide_3_heading": "",
-    "hero_slide_3_cta": "Je veux mon lierre !",
-    "hero_slide_3_link": "https:\/\/www.parispousse.fr\/products\/lierre-hedera-helix?variant=9318334529572",
-    "hero_slide_4_enable": false,
-    "hero_slide_4_text_color": "is-dark",
-    "hero_slide_4_subheading": "",
-    "hero_slide_4_heading": "",
-    "hero_slide_4_cta": "Je prépare mes kdo 🎁",
-    "hero_slide_4_link": "https:\/\/www.parispousse.fr\/collections\/noel",
-    "hero_slide_5_enable": false,
-    "hero_slide_5_text_color": "is-light",
-    "hero_slide_5_subheading": "",
-    "hero_slide_5_heading": "",
-    "hero_slide_5_cta": "Devis",
-    "hero_slide_5_link": "https:\/\/www.parispousse.fr\/pages\/paysagisme",
-    "home_featured_collections_sort": "manual",
-    "collection_1": "",
-    "collection_2": "",
-    "collection_3": "",
-    "collection_4": "",
-    "collection_5": "",
-    "collection_6": "",
-    "collection_7": "",
-    "collection_8": "",
-    "collection_9": "",
-    "home_featured_products": "nouveautes-plantes",
-    "home_page_content": "accueil",
-    "product_zoom_enable": true,
-    "collection_products_grid": "grid",
-    "collection_tags_enable": false,
-    "product_vendor_enable": false,
+    "type_base_italize_titles": true,
     "cart_type": "drawer",
-    "cart_notes_enable": true,
-    "footer_newsletter_enable": true,
-    "newsletter_form_action": "\/\/parispousse.us14.list-manage.com\/subscribe\/post?u=f89d2b0018555252f0f44e2be&amp;id=b85d3996b5",
-    "social_facebook_link": "https:\/\/www.facebook.com\/parispousse\/",
-    "social_twitter_link": "",
-    "social_pinterest_link": "",
-    "social_instagram_link": "https:\/\/www.instagram.com\/paris_pousse\/",
-    "social_google_plus_link": "",
-    "social_tumblr_link": "",
-    "social_youtube_link": "",
-    "social_vimeo_link": "",
-    "social_fancy_link": "",
-    "social_sharing_products": false,
-    "social_sharing_blog": false,
-    "share_facebook": false,
-    "share_twitter": false,
-    "share_pinterest": false,
-    "share_fancy": false,
-    "share_google": false,
-    "checkout_header_image": "",
-    "checkout_use_storefront_logo": true,
-    "checkout_logo_image": "",
-    "checkout_logo_position": "left",
-    "checkout_logo_size": "small",
-    "checkout_body_background_image": "",
-    "checkout_body_background_color": "#fff",
-    "checkout_input_background_color_mode": "white",
-    "checkout_sidebar_background_image": "",
-    "checkout_sidebar_background_color": "#fafafa",
-    "checkout_heading_font": "Open Sans",
-    "checkout_body_font": "Open Sans",
-    "checkout_accent_color": "#3b834c",
+    "cart_notes_enable": false,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "checkout_accent_color": "#a26b25",
     "checkout_button_color": "#000000",
-    "checkout_error_color": "#ff6d6d",
-    "checkout_use_header_image": false,
-    "checkout_logo": "",
-    "checkout_use_body_background_image": false,
-    "checkout_use_sidebar_background_image": false,
     "checkout_banner_background_color": "#fff",
-    "checkout_call_to_action_color": "#c7ac7f",
-    "collection_sort_enable": false,
+    "checkout_call_to_action_color": "#a26b25",
+    "checkout_use_header_image": false,
+    "collection_products_grid": "collage",
     "customer_layout": "customer_area",
-    "footer_quicklinks_enable": true,
-    "home_featured_products_grid": "collage",
+    "favicon_enable": false,
+    "product_vendor_enable": false,
     "social_sharing_style": "clean",
-    "content_for_index": []
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "show_announcement": true,
+          "color_bg": "#1c1d1d",
+          "color_text": "#ffffff"
+        }
+      },
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slideshow-0": {
+            "type": "slide",
+            "settings": {}
+          },
+          "slideshow-1": {
+            "type": "slide",
+            "settings": {}
+          }
+        },
+        "block_order": [
+          "slideshow-0",
+          "slideshow-1"
+        ],
+        "settings": {}
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "home_featured_products": "frontpage"
+        }
+      },
+      "featured-content": {
+        "type": "featured-content",
+        "settings": {}
+      },
+      "featured-collections": {
+        "type": "featured-collections",
+        "blocks": {
+          "featured-collections-0": {
+            "type": "collection",
+            "settings": {}
+          },
+          "featured-collections-1": {
+            "type": "collection",
+            "settings": {}
+          },
+          "featured-collections-2": {
+            "type": "collection",
+            "settings": {}
+          }
+        },
+        "block_order": [
+          "featured-collections-0",
+          "featured-collections-1",
+          "featured-collections-2"
+        ],
+        "settings": {}
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "featured-content",
+      "featured-collections",
+      "featured-products",
+      "newsletter"
+    ]
   },
   "presets": {
-    "Brooklyn": {
+    "Classic": {
       "cart_type": "drawer",
       "cart_notes_enable": false,
-      "checkout_accent_color": "#c7ac7f",
+      "checkout_accent_color": "#a26b25",
       "checkout_banner_background_color": "#fff",
       "checkout_button_color": "#000000",
-      "checkout_call_to_action_color": "#c7ac7f",
+      "checkout_call_to_action_color": "#a26b25",
       "checkout_use_header_image": false,
       "collection_products_grid": "collage",
-      "collection_sort_enable": false,
-      "collection_tags_enable": true,
       "color_body_bg": "#ffffff",
-      "color_body_text": "#1c1d1d",
+      "color_body_text": "#222323",
       "color_borders": "#1c1d1d",
+      "color_button_text": "#ffffff",
       "color_drawer_background": "#1c1d1d",
       "color_drawer_border": "#343535",
-      "color_drawer_button": "#c7ac7f",
+      "color_drawer_button": "#a26b25",
       "color_drawer_button_text": "#ffffff",
       "color_drawer_text": "#ffffff",
+      "color_headings": "#222323",
       "color_input": "#f6f6f6",
       "color_newsletter": "#f6f6f6",
       "color_primary": "#1c1d1d",
       "color_product_background": "#f7f7f7",
       "color_sale_tag": "#990000",
-      "color_secondary": "#c7ac7f",
+      "color_secondary": "#a26b25",
       "customer_layout": "customer_area",
       "favicon_enable": false,
-      "footer_newsletter_enable": true,
-      "footer_quicklinks_enable": true,
-      "hero_home_auto": true,
-      "hero_slide_1_cta": "Shop now",
-      "hero_slide_1_enable": true,
-      "hero_slide_1_heading": "Hero Banner",
-      "hero_slide_1_link": "\/collections\/",
-      "hero_slide_1_subheading": "An introductory",
-      "hero_slide_1_text_color": "is-dark",
-      "hero_slide_2_enable": false,
-      "hero_slide_2_text_color": "is-dark",
-      "hero_slide_3_enable": false,
-      "hero_slide_3_text_color": "is-dark",
-      "hero_slide_4_enable": false,
-      "hero_slide_4_text_color": "is-dark",
-      "hero_slide_5_enable": false,
-      "hero_slide_5_text_color": "is-dark",
-      "home_featured_collections_sort": "auto",
-      "home_featured_products": "frontpage",
-      "home_featured_products_grid": "collage",
-      "home_hero_auto_speed": "7000",
-      "home_page_content": "frontpage",
-      "home_section_1": "hero",
-      "home_section_2": "home-content",
-      "home_section_3": "featured-collections",
-      "home_section_4": "featured-products",
-      "logo_max_width": "180",
-      "logo_use_image": false,
-      "logo_use_inverted": false,
       "product_vendor_enable": false,
-      "product_zoom_enable": true,
       "share_facebook": true,
-      "share_fancy": true,
-      "share_google": true,
       "share_pinterest": true,
       "share_twitter": true,
-      "social_sharing_blog": true,
-      "social_sharing_products": true,
       "social_sharing_style": "clean",
-      "type_accent_family": "Google_Montserrat_400_sans",
+      "type_accent_family": "montserrat_n6",
       "type_accent_spacing": true,
       "type_accent_transform": true,
-      "type_base_family": "Google_Arapey_400_serif",
+      "type_accent_subheadings": true,
+      "type_base_family": "arapey_n4",
       "type_base_italize_titles": true,
       "type_base_size": "16px",
       "type_header_base_size": "30px",
       "type_header_border_thickness": "1px",
-      "type_header_family": "Google_Old+Standard+TT_400_serif"
+      "type_header_family": "old_standard_tt_n4",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "show_announcement": true,
+            "color_bg": "#1c1d1d",
+            "color_text": "#ffffff"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "slide",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "featured-products": {
+          "type": "featured-products",
+          "settings": {
+            "home_featured_products": "frontpage"
+          }
+        },
+        "featured-content": {
+          "type": "featured-content",
+          "settings": {}
+        },
+        "featured-collections": {
+          "type": "featured-collections",
+          "blocks": {
+            "featured-collections-0": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-2": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-collections-0",
+            "featured-collections-1",
+            "featured-collections-2"
+          ],
+          "settings": {}
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-content",
+        "featured-collections",
+        "featured-products",
+        "newsletter"
+      ]
+    },
+    "Playful": {
+      "color_body_bg": "#ffffff",
+      "color_body_text": "#565656",
+      "color_borders": "#5dd2b4",
+      "color_button_text": "#ffffff",
+      "color_primary": "#7737BD",
+      "color_secondary": "#058677",
+      "color_product_background": "#fff4f6",
+      "color_sale_tag": "#e80970",
+      "color_input": "#f6f6f6",
+      "color_newsletter": "#bde9f2",
+      "color_drawer_background": "#360f5f",
+      "color_drawer_text": "#ffffff",
+      "color_drawer_border": "#50297a",
+      "color_drawer_button": "#7737BD",
+      "color_drawer_button_text": "#ffffff",
+      "color_headings": "#321863",
+      "type_header_family": "quicksand_n7",
+      "type_header_base_size": "38px",
+      "type_header_border_thickness": "1px",
+      "type_accent_family": "roboto_n7",
+      "type_accent_transform": true,
+      "type_accent_spacing": true,
+      "type_accent_subheadings": false,
+      "type_base_family": "helvetica_n4",
+      "type_base_size": "17px",
+      "type_base_italize_titles": false,
+      "cart_type": "drawer",
+      "cart_notes_enable": true,
+      "social_facebook_link": "",
+      "social_twitter_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_snapchat_link": "",
+      "social_google_plus_link": "",
+      "social_tumblr_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "social_fancy_link": "",
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#fff4f6",
+      "checkout_heading_font": "Helvetica Neue",
+      "checkout_body_font": "Roboto",
+      "checkout_accent_color": "#7737BD",
+      "checkout_button_color": "#7737BD",
+      "checkout_error_color": "#f01130",
+      "checkout_banner_background_color": "#fff",
+      "checkout_call_to_action_color": "#a26b25",
+      "checkout_use_header_image": false,
+      "collection_products_grid": "collage",
+      "customer_layout": "customer_area",
+      "favicon_enable": false,
+      "product_vendor_enable": false,
+      "social_sharing_style": "clean",
+      "sections": {
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "1495823280244": {
+              "type": "slide",
+              "settings": {
+                "slide_text_color": "#ffffff",
+                "slide_button_label_color": "#003B34",
+                "slide_button_background_color": "#84D1B2"
+              }
+            }
+          },
+          "block_order": [
+            "1495823280244"
+          ],
+          "settings": {
+            "hero_home_auto": false,
+            "home_hero_auto_speed": 5
+          }
+        },
+        "featured-products": {
+          "type": "featured-products",
+          "settings": {
+            "home_featured_products": "frontpage",
+            "collection_products_grid": "collage"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_max_width": "260",
+            "search": "modal",
+            "main_menu_link_list": "main-menu",
+            "show_announcement": false,
+            "color_bg": "#290c49",
+            "color_text": "#ffffff"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "settings": {
+            "footer_link_list": "footer"
+          }
+        },
+        "collection-template": {
+          "type": "collection-template",
+          "settings": {
+            "collection_products_grid": "grid",
+            "collection_tags_enable": false,
+            "product_vendor_enable": false
+          }
+        },
+        "1494860348200": {
+          "type": "featured-row",
+          "settings": {
+            "layout": "right"
+          }
+        },
+        "1494894035034": {
+          "type": "featured-row",
+          "settings": {
+            "layout": "left"
+          }
+        },
+        "product-template": {
+          "type": "product-template",
+          "settings": {
+            "zoom_enable": false,
+            "social_sharing_products": true,
+            "product_vendor_enable": false
+          }
+        },
+        "1496078102297": {
+          "type": "advanced-content",
+          "blocks": {
+            "1496078102297-0": {
+              "type": "html",
+              "settings": {
+                "code": "<div style=\"text-align:center;\">\n<h1 class=\"h1\">Use HTML to format your text so it can be easily read.<\/h1>This text can be used to share information about your brand with customers.<\/div>",
+                "width": "100%",
+                "alignment": "top-middle"
+              }
+            }
+          },
+          "block_order": [
+            "1496078102297-0"
+          ],
+          "settings": {}
+        },
+        "1496177901425": {
+          "type": "advanced-content",
+          "blocks": {
+            "1496177901425-0": {
+              "type": "html",
+              "settings": {
+                "code": "<div style=\"width:745px;text-align: center; margin: 0 auto;\">This text can be used to share information about your brand with customers.<\/div>",
+                "width": "100%",
+                "alignment": "top-middle"
+              }
+            }
+          },
+          "block_order": [
+            "1496177901425-0"
+          ],
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "1496177901425",
+        "featured-products",
+        "newsletter",
+        "1496078102297",
+        "1494860348200",
+        "1494894035034"
+      ]
     }
   }
 }

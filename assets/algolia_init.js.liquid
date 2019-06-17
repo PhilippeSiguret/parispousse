@@ -1,9 +1,10 @@
 (function (algolia, $, _, Shopify) {
   'use strict';
 
-  if (algolia.config.powered_by) {
-    console.log("Bienvenue à toi jeune hacker amateur de green ;) ");
-  }
+ {% comment %} if (algolia.config.powered_by) {
+    console.log("You're using Algolia !\n" +
+      'Visit https://www.algolia.com/ for more insight about what we do.');
+  }{% endcomment %}
 
   /* No conflict */
   algolia.$ = algolia.jQuery = $.noConflict(true);
@@ -17,6 +18,8 @@
   algolia.templates = {};
   algolia.indices = {};
   algolia.full_results = window.location.href.match(/\/search/);
+  // we want to match /collections/<handle> but only if handle != 'all'
+  algolia.is_collection_results_page = !!window.location.pathname.match(/^\/collections\/(?!all$)([^/]+)[/]*$/);
 
   /* We use Hogan as our templating engine with a custom delimiter: [[ ... ]] */
   algolia.hoganOptions = { delimiters: '[[ ]]' };
@@ -45,13 +48,28 @@
 
   /* Here because we need to ensure we have a fallback with '$ {{ amount }}'. */
   algolia.money_format = algolia.getTemplate('money_format').replace(/^\s+|\s+$/g, '');
-  algolia.formatMoney = function formatMoney (cents, format) {
+  algolia.formatMoney = function formatMoney (cents) {
+    var val = (cents / 100.0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var format = algolia.money_format;
+
+    // Not necessary, but allows for more risk tolerance if Shopify.formatMoney doesn't work as we want
+    var regexp = /^([^{}]*)\{\{amount\}\}([^{}]*)$/;
+    if (format.match(regexp)) {
+      return format.replace(regexp, "$1" + val + "$2");
+    }
+
+    regexp = /^([^{}]*)\{\{amount_with_comma_separator\}\}([^{}]*)$/;
+    if (format.match(regexp)) {
+      let money = val.replace(/[.]/, '|');
+      money = money.replace(/[,]/, '.');
+      money = money.replace(/[|]/, ',');
+      return format.replace(regexp, "$1" + money + "$2");
+    }
+
     if (!_.isUndefined(Shopify) && !_.isUndefined(Shopify.formatMoney)) {
       return Shopify.formatMoney(cents, format);
     }
-    if (!_.isUndefined(format)) {
-      console.log('Algolia: Warning: `format` option of algolia.formatMoney wasn\'t taken into account because we could\`t find the `Shopify.formatMoney` method');
-    }
-    return '$' + (cents / 100.0).toFixed(2);
+
+    return '$' + val;
   };
 }(algoliaShopify, $, _, Shopify));

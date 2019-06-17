@@ -2,7 +2,7 @@
   Collection template, used on collection.liquid and collection.image.liquid
 {% endcomment %}
 
-{% paginate collection.products by 48 %}
+{% paginate collection.products by 12 %}
 
 <header class="section-header text-center">
   <h1>{{ collection.title }}</h1>
@@ -16,33 +16,18 @@
       </div>
     </div>
   {% endif %}
-<div>
-  <label for="sort-by">Trier par </label> 
-  <select id="sort-by">
-    <option value="price-ascending">Prix : croissant</option>
-    <option value="price-descending">Prix : décroissant</option>
-    <option value="best-selling">Meilleures ventes </option>
-  </select>
-</div>
-<script>
-Shopify.queryParams = {};
-if (location.search.length) {
-  for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
-    aKeyValue = aCouples[i].split('=');
-    if (aKeyValue.length > 1) {
-      Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
-    }
-  }
-}
-jQuery('#sort-by')
-  .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
-  .bind('change', function() {
-    Shopify.queryParams.sort_by = jQuery(this).val();
-    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
-  });
-</script>
-  {% if settings.collection_tags_enable %}
+
+    <div class="grid--full collection-sorting{% if section.settings.collection_sort_enable %} collection-sorting--enabled{% endif %}">
+      {% if section.settings.collection_sort_enable %}
+        {% include 'collection-sorting' %}
+      {% endif %}
+    </div>
+
+  {% if section.settings.collection_tags_enable %}
     {% if collection.all_tags.size > 0 %}
+      {% if section.settings.collection_sort_enable %}
+        <hr class="hr--small">
+      {% endif %}
       {% comment %}
         To provide a 'catch-all' link at the top of the list,
         check against the collection.handle, product type, and vendor.
@@ -94,12 +79,12 @@ jQuery('#sort-by')
     {% endif %}
   {% endif %}
 
-  {% if settings.collection_tags_enable %}
+  {% if section.settings.collection_tags_enable %}
     <hr class="hr--small hr--clear">
   {% endif %}
 </header>
 
-{% if settings.collection_products_grid == 'collage' %}
+{% if section.settings.collection_products_grid == 'collage' %}
   <div class="grid grid-collage">
     {% comment %}
       Loop through our products in the current collection.
@@ -110,39 +95,29 @@ jQuery('#sort-by')
     {% endcomment %}
     {% assign is_reverse_row__product = false %}
     {% assign three_row_index__product = 0 %}
-    {% assign collection_product_count__product = collection.products_count %}
+    {% assign collection_product_count__product = collection.products.size %}
     {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
     {% for product in collection.products %}
       {% include 'product-grid-collage' %}
     {% else %}
 
       {% if shop.products_count == 0 %}
-
         {% comment %}
           Add default products to help with onboarding for collections/all only
         {% endcomment %}
-        {% unless emptyState %}
-          {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-          {% assign emptyState = true %}
-        {% endunless %}
-
-        {% include 'onboarding-empty-collection' %}
-
+        {% include 'onboarding-featured-products' %}
       {% else %}
-
         {% comment %}
           If collection exists but is empty, display message
         {% endcomment %}
         <div class="grid__item text-center">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
-
       {% endif %}
-
     {% endfor %}
 
   </div>
-{% elsif settings.collection_products_grid == 'grid' %}
+{% elsif section.settings.collection_products_grid == 'grid' %}
   <div class="grid-uniform">
     {% assign grid_item_width = 'medium--one-half large--one-third' %}
     {% for product in collection.products %}
@@ -152,32 +127,21 @@ jQuery('#sort-by')
         {% comment %}
           Add default products to help with onboarding for collections/all only
         {% endcomment %}
-        {% unless emptyState %}
-          {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-          {% assign emptyState = true %}
-        {% endunless %}
-
-        {% include 'onboarding-empty-collection' %}
-
+        {% include 'onboarding-featured-products' %}
       {% else %}
-
         {% comment %}
           If collection exists but is empty, display message
         {% endcomment %}
         <div class="grid__item text-center">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
-
       {% endif %}
     {% endfor %}
   </div>
 {% endif %}
 
-
 {% if paginate.pages > 1 %}
-  <div class="pagination">
-    {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
-  </div>
+  {% include 'pagination' %}
 {% endif %}
 
 {% endpaginate %}

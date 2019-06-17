@@ -1,17 +1,6 @@
 <!-- /templates/blog.liquid -->
 {% paginate blog.articles by 5 %}
 
-<style type="text/css">
-  .tags span {
-    font-family: "Big Caslon","Book Antiqua","Palatino Linotype",Georgia,serif;
-    font-weight: 700;
-    font-style: normal;
-    letter-spacing: 0.1em;
-    font-size: 1.8125em;
-  }
-
-</style>
-
 <div class="grid">
 
   <div class="grid__item large--five-sixths push--large--one-twelfth">
@@ -25,52 +14,46 @@
         {% endif %}
         <a href="{{ shop.url }}{{ blog.url }}.atom" class="icon-fallback-text rss-link">
           <span class="icon icon-rss" aria-hidden="true"></span>
-          <span class="fallback-text">RSS</span> 
+          <span class="fallback-text">RSS</span>
         </a>
       </h1>
-
-      <!-- /snippets/tags-article.liquid -->
-          {% for tag in blog.all_tags %}
-            <span class="tags">
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="text-link">{{ tag }}</a>
-            </span>
-          {% endfor %}
-
       <hr class="hr--small">
-
-
     </header>
 
     {% for article in blog.articles %}
 
       {% assign article_content = article.excerpt_or_content %}
-      {% assign featured_image_src = '' %}
-
-      {% if article.image %}
-        {% assign featured_image_src = article | img_url: '1024x1024' %}
-      {% elsif article_content contains '<img' %}
-        {% assign featured_image_src = article_content | split: 'src="' %}
-        {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
-      {% endif %}
 
       <article class="article grid small--text-center">
 
-        {% unless featured_image_src == blank %}
+        {% unless article.image == blank %}
           <div class="grid__item">
-            <a class="article__featured-image" href="{{ article.url }}">
-              {{ featured_image_src | img_tag: article.title }}
+            <a class="article__featured-image-link" href="{{ article.url }}">
+              <noscript>
+                {{ article.image | img_url: '2048x2048' | img_tag: article.title | escape }}
+              </noscript>
+              <div class="article__featured-image-wrapper" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+                {% assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img class="article__featured-image lazyload"
+                  src="{{ article.image | img_url: '300x300' }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                  data-aspectratio="{{ article.image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ article.title | escape }}">
+              </div>
             </a>
           </div>
         {% endunless %}
 
         <div class="grid__item large--two-tenths push--large--one-tenth">
-          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" class="date">{{ article.published_at | date: format: 'month_day_year' }}</time>
+          <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}" class="date">{{ article.published_at | date: format: 'date' }}</time>
           <hr class="hr--small hr--left small--hide">
         </div>
         <div class="grid__item large--six-tenths push--large--one-tenth">
-          <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+          <h2 class="h3"><a class="article__heading-link" href="{{ article.url }}">{{ article.title }}</a></h2>
           <div class="rte rte--indented-images">
-            {{ article_content | strip_html | truncatewords: 30 }}
+            {{ article_content | strip_html | truncatewords: 120 }}
           </div>
 
           <p>
@@ -90,9 +73,7 @@
     {% endfor %}
 
     {% if paginate.pages > 1 %}
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
-      </div>
+      {% include 'pagination' %}
     {% endif %}
 
   </div>
